@@ -1,7 +1,7 @@
 import express                          from 'express';
 import React                            from 'react';
 import { Router }                       from 'react-router';
-import Location                         from 'react-router/lib/location';
+import Location                         from 'react-router/lib/Location';
 import routes                           from 'routes';
 import { applyMiddleware }              from 'redux';
 import promiseMiddleware                from 'lib/promiseMiddleware'
@@ -31,21 +31,21 @@ app.use((req, res) => {
     const initialState = store.getState();
     const HTML = `
     <!DOCTYPE html>
-    <html>
-      <head>
-        <meta charset="utf-8">
-        <title>Chore Split App</title>
+      <html>
+        <head>
+          <meta charset="utf-8">
+          <title>Chore Split App</title>
 
-        <script type="application/javascript">
-          window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
-        </script>
-      </head>
-      <body>
-        <div id="react-view">${componentHTML}</div>
-        <script type="application/javascript" src="/bundle.js"></script>
-      </body>
-  </html>    
-`
+          <script type="application/javascript">
+            window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
+          </script>
+        </head>
+        <body>
+          <div id="react-view">${componentHTML}</div>
+          <script type="application/javascript" src="/bundle.js"></script>
+        </body>
+      </html>    
+    `
     res.end(HTML);
   });
 });
