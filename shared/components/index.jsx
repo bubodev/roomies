@@ -1,13 +1,11 @@
 import React from 'react';
 
-export default class AppView extends React.component {
+export default class AppView extends React.Component {
   render() {
     return(
       <div id="app-view">
-        <h1>Chore split Top level component</h1>
-
+        <h1>Chore split (Top level Component)</h1>
         <hr />
-
         {this.props.children}
       </div>
     );
