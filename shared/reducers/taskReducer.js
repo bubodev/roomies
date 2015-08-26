@@ -2,6 +2,7 @@ import Immutable from 'Immutable'
 
 const defaultState = new Immutable.List();
 
+//Temporary actions with immutable.js until API is setup
 export default function taskReducer(state=defaultState, action) {
   switch(action.type) {
     case 'GET_TASK':
