@@ -1,17 +1,17 @@
 import request from 'axios';
 
-const BACKEND_URL = /* NEED BACKEND URL HERE */
+const BACKEND_URL = /* PUT BACKEND URL HERE */
 
 export function getTasks() {
   return {
-    type: 'GET_TASKS',
+    type: 'GET_TASK',
     promise: request.get(BACKEND_URL)
   }
 }
 
 export function createTask(description, startDate, endDate, frequency, members) {
   return {
-    type: 'CREATE_CHORE',
+    type: 'CREATE_TASK',
     description,
     startDate,
     endDate,
@@ -29,13 +29,6 @@ export function editTask(id, description, startDate, endDate, frequency, members
     endDate,
     frequency,
     members
-  }
-}
-
-export function markTaskCompleted(id) {
-  return {
-    type: 'COMPLETE_TASK',
-    id
   }
 }
 

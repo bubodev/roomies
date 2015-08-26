@@ -4,17 +4,13 @@ const defaultState = new Immutable.List();
 
 export default function taskReducer(state=defaultState, action) {
   switch(action.type) {
+    case 'GET_TASK':
+      return state.concat(action.res.data);
     case 'CREATE_TASK':
-      //create task action
-      return 
+      return state.concat(action.description)
     case 'EDIT_TASK':
-      //edit task actions
-      return
-    case 'COMPLETE_TASK':
-      //mark complete actions
-      return
+      return  state.set(action.id, action.description)
     case 'DELETE_TASK':
-      //delete task action
       return state.delete(action.id)
     default:
       return state;
