@@ -1,8 +1,10 @@
-import express     from 'express';
-import React       from 'react';
-import { Router }  from 'react-router';
-import Location    from 'react-router/lib/location';
-import routes      from 'routes';
+import express             from 'express';
+import React               from 'react';
+import { Router }          from 'react-router';
+import Location            from 'react-router/lib/location';
+import routes              from 'routes';
+import { applyMiddleware } from 'redux';
+import promiseMiddleware   from 'lib/promiseMiddleware'
 
 const app = express();
 
