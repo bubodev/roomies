@@ -1,13 +1,14 @@
-import express from 'express';
-import React from 'react';
-import { Router } from 'react-router';
-import Location from 'react-router/lib/location';
-import routes from 'routes';
+import express     from 'express';
+import React       from 'react';
+import { Router }  from 'react-router';
+import Location    from 'react-router/lib/location';
+import routes      from 'routes';
 
 const app = express();
 
 app.use((req, res) => {
   const location = new Location(req.path, req.query);
+
   Router.run(routes, location, (err, routeState) => {
     if (err) return console.error(err);
     if (!routeState) return res.status(404).end('404');
@@ -21,7 +22,7 @@ app.use((req, res) => {
     <html>
       <head>
         <meta charset="utf-8">
-        <title>Isomorphic Redux Demo</title>
+        <title>Chore Split App</title>
       </head>
       <body>
         <div id="react-view">${componentHTML}</div>
