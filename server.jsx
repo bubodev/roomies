@@ -1,4 +1,5 @@
 import express                          from 'express';
+import session                          from 'express-session';
 import React                            from 'react';
 import { Router }                       from 'react-router';
 import Location                         from 'react-router/lib/Location';
@@ -26,7 +27,7 @@ passport.deserializeUser( (obj, done) => {
 passport.use(new GoogleStrategy.OAuth2Strategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://127.0.0.1:3000/auth/google/callback"
+    callbackURL: "http://127.0.0.1:8080/auth/google/callback"
   },
   function(accessToken, refreshToken, profile, done) {
     process.nextTick(function () {
@@ -34,6 +35,28 @@ passport.use(new GoogleStrategy.OAuth2Strategy({
     });
   }
 ));
+
+app.use(session({ 
+  secret: 'keyboard cat' 
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get('/auth/google',
+  passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }),
+  function(req, res){
+  });
+
+app.get('/auth/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/');
+  });
+
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
 
 app.use((req, res) => {
   const location = new Location(req.path, req.query);
@@ -75,5 +98,10 @@ app.use((req, res) => {
     res.end(HTML);
   });
 });
+
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) { return next(); }
+  res.redirect('/login');
+}
 
 export default app;
