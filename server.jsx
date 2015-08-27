@@ -35,9 +35,6 @@ app.use((req, res) => {
   const reducer = combineReducers(reducers);
   const store = createStore(reducer);
 
-
-
-
   Router.run(routes, location, (err, routeState) => {
     if (err) return console.error(err);
     if (!routeState) return res.status(404).end('404');
