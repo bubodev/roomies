@@ -8,27 +8,32 @@ import promiseMiddleware                from 'lib/promiseMiddleware'
 import { createStore, combineReducers } from 'redux';
 import { Provider }                     from 'react-redux';
 import passport                         from 'passport';
-import GoogleStrategy                   from 'passport-google';
+import GoogleStrategy                   from 'passport-google-oauth';
 import * as reducers                    from 'reducers';
 
 const app = express();
+const GOOGLE_CLIENT_ID = "383967035892-o6a59blu65vkoona58ui7f8ekaltio4c.apps.googleusercontent.com";
+const GOOGLE_CLIENT_SECRET = "6NMV0DQn6n2qxpm5M81mUqiN";
 
-passport.use(new GoogleStrategy.Strategy({
-   returnURL: 'http://www.example.com/auth/google/return',
-   realm: 'http://www.example.com/'
- },
- function(identifier, profile, done) {
-   User.findOrCreate({ openId: identifier }, function(err, user) {
-     done(err, user);
-   });
- }
+passport.serializeUser( (user, done) => {
+  done(null, user);
+})
+
+passport.deserializeUser( (obj, done) => {
+  done(null, obj);
+}
+
+passport.use(new GoogleStrategy.OAuth2Strategy({
+    clientID: GOOGLE_CLIENT_ID,
+    clientSecret: GOOGLE_CLIENT_SECRET,
+    callbackURL: "http://127.0.0.1:3000/auth/google/callback"
+  },
+  function(accessToken, refreshToken, profile, done) {
+    process.nextTick(function () {
+      return done(null, profile);
+    });
+  }
 ));
-
-app.get('/auth/google', passport.authenticate('google'));
-
-app.get('/auth/google/return',
-  passport.authenticate('google', { successRedirect: '/',
-                                    failureRedirect: '/login'}));
 
 app.use((req, res) => {
   const location = new Location(req.path, req.query);

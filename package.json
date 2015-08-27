@@ -16,6 +16,7 @@
     "object-assign": "^3.0.0",
     "passport": "^0.3.0",
     "passport-google": "^0.3.0",
+    "passport-google-oauth": "^0.2.0",
     "react": "^0.13.3",
     "react-redux": "^0.8.0",
     "react-router": "^1.0.0-beta3",
