@@ -5,7 +5,7 @@ import routes                           from 'routes';
 import { createStore, combineReducers } from 'redux';
 import { Provider }                     from 'react-redux';
 import * as reducers                    from 'reducers';
-import { fromJS }                       from 'immutable';
+import { fromJS }                       from 'Immutable';
 
 let initialState = window.__INITIAL_STATE__;
 

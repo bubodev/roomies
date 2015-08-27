@@ -1,21 +1,17 @@
-import request from 'axios';
-
-const BACKEND_URL = /* PUT BACKEND URL HERE */
-
 export function load() {
   return {
-    type: 'AUTH_LOAD',
-    promise: request.get('/loadAuth')
+    types: ['AUTH_LOAD', 'AUTH_LOAD_SUCCESS', 'AUTH_LOAD_FAIL'],
+    promise: (client) => client.get('/loadAuth')
   };
 }
 
-export function login(name, password) {
+export function login(credentials) {
+  console.log("hitting login action");
   return {
-    type: 'AUTH_LOGIN',
-    promise: request.post('/login', {
+    types: ['AUTH_LOGIN', 'AUTH_LOGIN_SUCCESS', 'AUTH_LOGIN_FAIL'],
+    promise: (client) => client.post('/login', {
       data: {
-        name: name
-        password: password
+        credentials: credentials
       }
     })
   };
@@ -23,7 +19,7 @@ export function login(name, password) {
 
 export function logout() {
   return {
-    type: 'AUTH_LOGOUT',
-    promise: request.get('/logout')
+    types: ['AUTH_LOGOUT', 'AUTH_LOGOUT_SUCCESS', 'AUTH_LOGOUT_FAIL'],
+    promise: (client) => client.get('/logout')
   };
 }

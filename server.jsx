@@ -11,6 +11,10 @@ import * as reducers                    from 'reducers';
 
 const app = express();
 
+app.use('/api', (req, res) => {
+  res.send("hit api server");
+});
+
 app.use((req, res) => {
   const location = new Location(req.path, req.query);
   const reducer = combineReducers(reducers);
@@ -29,16 +33,18 @@ app.use((req, res) => {
     );
     const componentHTML = React.renderToString(InitialComponent);
     const initialState = store.getState();
+    
     const HTML = `
     <!DOCTYPE html>
       <html>
         <head>
           <meta charset="utf-8">
           <title>Chore Split App</title>
-
+          <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
           <script type="application/javascript">
-            window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
-          </script>
+            window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};  
+            window.__TEST__ = "TEST";        
+            </script>
         </head>
         <body>
           <div id="react-view">${componentHTML}</div>
