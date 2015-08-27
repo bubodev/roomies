@@ -7,9 +7,9 @@ import { applyMiddleware }              from 'redux';
 import promiseMiddleware                from 'lib/promiseMiddleware'
 import { createStore, combineReducers } from 'redux';
 import { Provider }                     from 'react-redux';
-import * as reducers                    from 'reducers';
 import passport                         from 'passport';
 import GoogleStrategy                   from 'passport-google';
+import * as reducers                    from 'reducers';
 
 const app = express();
 
