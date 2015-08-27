@@ -32,8 +32,8 @@ class Login extends React.Component {
   render() {
     return(
       <form onSubmit={this.handleSubmit.bind(this)}>
-        <input type="text" ref="username"/>
-        <input type="password" ref="password"/>
+        <input type="text" placeholder="username" ref="username"/>
+        <input type="password" placeholder="password" ref="password"/>
         <input type="submit" onClick={this.handleSubmit.bind(this)}/>
       </form>
     );
