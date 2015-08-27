@@ -39,17 +39,29 @@ passport.use(new GoogleStrategy.OAuth2Strategy({
     callbackURL: "http://127.0.0.1:8080/auth/google/callback"
   },
   function(accessToken, refreshToken, profile, done) {
-    let user = new User({ 
-      googleId: profile.id,
-      name: profile.displayName,
-      token: accessToken
-    });
+    var user;
 
-    user.save((err) => {
-      if(err)
-        console.log(err)
-    console.log("logged in");
-    return done(null, profile);
+    User.findOne({ googleId: profile.id }, function(err, foundUser) {
+      user = foundUser;
+
+      if(!user) {
+        console.log("creating new user...");
+        user = new User({ 
+          googleId: profile.id,
+          name: profile.displayName,
+          token: accessToken
+        });
+
+        user.save((err) => {
+          if(err)
+            console.log(err)
+          console.log("succesfully created new user");
+        })
+      } else {
+        console.log("user found!");
+      }
+
+      return done(null, user)
     });
   }
 ));
@@ -60,13 +72,18 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.get('/test', ensureAuthenticated, function(req, res) {
+  console.log(req.user);
+  res.redirect('/');
+})
+
 app.get('/auth/google',
   passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }),
   function(req, res){
   });
 
 app.get('/auth/google/callback', 
-  passport.authenticate('google', { failureRedirect: '/login' }),
+  passport.authenticate('google', { failureRedirect: '/auth/google' }),
   function(req, res) {
     res.redirect('/');
   });
@@ -76,7 +93,14 @@ app.get('/logout', function(req, res){
   res.redirect('/');
 });
 
-app.use((req, res) => {
+app.get('/login', function(req, res){
+  const HTML=`
+    <a href="/auth/google"> Click here to login with google </a>
+    `;
+  res.end(HTML);
+})
+
+app.use(ensureAuthenticated, (req, res) => {
   const location = new Location(req.path, req.query);
   const reducer = combineReducers(reducers);
   const store = createStore(reducer);
@@ -94,7 +118,6 @@ app.use((req, res) => {
     );
     const componentHTML = React.renderToString(InitialComponent);
     const initialState = store.getState();
-
     const HTML = `
     <!DOCTYPE html>
       <html>
@@ -104,7 +127,6 @@ app.use((req, res) => {
           <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
           <script type="application/javascript">
             window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
-            window.__TEST__ = "TEST";
             </script>
         </head>
         <body>
