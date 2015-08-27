@@ -11,10 +11,19 @@ import { Provider }                     from 'react-redux';
 import passport                         from 'passport';
 import GoogleStrategy                   from 'passport-google-oauth';
 import * as reducers                    from 'reducers';
+import mongoose                         from 'mongoose';
+
+import { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } from './secrets'
+
+mongoose.connect('mongodb://localhost/test'); 
+
+const User = mongoose.model('User', { 
+  googleId: String,
+  name: String,
+  token: String,
+});
 
 const app = express();
-const GOOGLE_CLIENT_ID = "383967035892-o6a59blu65vkoona58ui7f8ekaltio4c.apps.googleusercontent.com";
-const GOOGLE_CLIENT_SECRET = "6NMV0DQn6n2qxpm5M81mUqiN";
 
 passport.serializeUser( (user, done) => {
   done(null, user);
@@ -30,6 +39,14 @@ passport.use(new GoogleStrategy.OAuth2Strategy({
     callbackURL: "http://127.0.0.1:8080/auth/google/callback"
   },
   function(accessToken, refreshToken, profile, done) {
+    let user = new User({ 
+      googleId: profile.id,
+      name: profile.displayName,
+      token: 
+    });
+
+    user.save()
+
     process.nextTick(function () {
       return done(null, profile);
     });
