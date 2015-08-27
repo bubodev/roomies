@@ -42,13 +42,14 @@ passport.use(new GoogleStrategy.OAuth2Strategy({
     let user = new User({ 
       googleId: profile.id,
       name: profile.displayName,
-      token: 
+      token: accessToken
     });
 
-    user.save()
-
-    process.nextTick(function () {
-      return done(null, profile);
+    user.save((err) => {
+      if(err)
+        console.log(err)
+    console.log("logged in");
+    return done(null, profile);
     });
   }
 ));

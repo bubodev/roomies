@@ -12,23 +12,6 @@ class Login extends React.Component {
     logout: React.PropTypes.func
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    const inputName = this.refs.username.getDOMNode()
-    const inputPassword = this.refs.password.getDOMNode()
-    const credentials = {
-      username: inputName.value,
-      password: inputPassword.value
-    }
-    this.props.login(credentials)
-    inputName.value = '';
-    inputPassword.value = '';
-  }
-
-  initialize() {
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
   render() {
     return(
       <a href="/auth/google"> Click here to login with google </a>
