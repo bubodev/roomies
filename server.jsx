@@ -13,7 +13,7 @@ import * as reducers                    from 'reducers';
 
 const app = express();
 
-passport.use(new GoogleStrategy({
+passport.use(new GoogleStrategy.Strategy({
    returnURL: 'http://www.example.com/auth/google/return',
    realm: 'http://www.example.com/'
  },
