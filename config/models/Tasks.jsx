@@ -1,9 +1,11 @@
 import mongoose from 'mongoose';
 
-var Schema = mongoose.Schema;
-var taskSchema = new Schema({
+let Schema = mongoose.Schema;
+let taskSchema = new Schema({
   name: String,
   date: Date
 });
 
-export taskSchema;
+const Task = mongoose.model('Task', taskSchema)
+
+module.exports = Task;

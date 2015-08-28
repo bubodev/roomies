@@ -1,11 +1,12 @@
 import mongoose from 'mongoose';
 import Tasks    from '/Tasks.js';
 
-var Schema = mongoose.Schema;
-
-var homeSchema = new Schema({
+let Schema = mongoose.Schema;
+let homeSchema = new Schema({
   name: String,
   tasks: [Tasks]
 });
 
-export const User = mongoose.model('User', homeSchema); 
+const Home = mongoose.model('Home', homeSchema); 
+
+module.exports = Home;
