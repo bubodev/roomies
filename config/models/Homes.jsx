@@ -8,4 +8,4 @@ var homeSchema = new Schema({
   tasks: [Tasks]
 });
 
-mongoose.model('User', homeSchema);
+export const User = mongoose.model('User', homeSchema); 

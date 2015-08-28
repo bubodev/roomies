@@ -1,70 +1,17 @@
-import express                          from 'express';
-import session                          from 'express-session';
-import React                            from 'react';
-import { Router }                       from 'react-router';
-import Location                         from 'react-router/lib/Location';
-import routes                           from 'routes';
-import { applyMiddleware }              from 'redux';
-import promiseMiddleware                from 'lib/promiseMiddleware'
-import { createStore, combineReducers } from 'redux';
-import { Provider }                     from 'react-redux';
-import passport                         from 'passport';
-import GoogleStrategy                   from 'passport-google-oauth';
-import * as reducers                    from 'reducers';
-import mongoose                         from 'mongoose';
-
-import { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } from './secrets'
-
-mongoose.connect('mongodb://localhost/test'); 
-
-const User = mongoose.model('User', { 
-  googleId: String,
-  name: String,
-  token: String,
-});
+import express                                    from 'express';
+import session                                    from 'express-session';
+import React                                      from 'react';
+import { Router }                                 from 'react-router';
+import Location                                   from 'react-router/lib/Location';
+import routes                                     from 'routes';
+import { applyMiddleware }                        from 'redux';
+import promiseMiddleware                          from 'lib/promiseMiddleware'
+import { createStore, combineReducers }           from 'redux';
+import { Provider }                               from 'react-redux';
+import * as reducers                              from 'reducers';
+import passport                                   from './server/passport';
 
 const app = express();
-
-passport.serializeUser( (user, done) => {
-  done(null, user);
-})
-
-passport.deserializeUser( (obj, done) => {
-  done(null, obj);
-})
-
-passport.use(new GoogleStrategy.OAuth2Strategy({
-    clientID: GOOGLE_CLIENT_ID,
-    clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://127.0.0.1:8080/auth/google/callback"
-  },
-  function(accessToken, refreshToken, profile, done) {
-    var user;
-
-    User.findOne({ googleId: profile.id }, function(err, foundUser) {
-      user = foundUser;
-
-      if(!user) {
-        console.log("creating new user...");
-        user = new User({ 
-          googleId: profile.id,
-          name: profile.displayName,
-          token: accessToken
-        });
-
-        user.save((err) => {
-          if(err)
-            console.log(err)
-          console.log("succesfully created new user");
-        })
-      } else {
-        console.log("user found!");
-      }
-
-      return done(null, user)
-    });
-  }
-));
 
 app.use(session({ 
   secret: 'keyboard cat' 
@@ -72,10 +19,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/test', ensureAuthenticated, function(req, res) {
-  console.log(req.user);
-  res.redirect('/');
-})
+/** AUTH ROUTES **/
 
 app.get('/auth/google',
   passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }),
@@ -99,6 +43,13 @@ app.get('/login', function(req, res){
     `;
   res.end(HTML);
 })
+
+
+/** API ROUTES **/
+
+app.use('/api', require('./server/api'));
+
+/** REACT ROUTER **/
 
 app.use(ensureAuthenticated, (req, res) => {
   const location = new Location(req.path, req.query);
