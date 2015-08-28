@@ -23,12 +23,14 @@ export default class Login extends Component {
   render() {
     return(
       <div style={[styles.base, styles[this.state.workShow]]} className="container text-center">
-        <div style={styles.catchPhrase}>
-          <h1>be better <span style={{color:accentColor}}>roomies</span></h1>
-          <button onClick={::this.handleClick} style={styles.button}> how it works </button>
-        </div>
-        <div style={styles.loginButton}>
-          <GoogleSignInButton />
+        <div className="row">
+          <div className="col-sm-6" style={styles.catchPhrase}>
+            <h1>be better <span style={{color:accentColor}}>roomies</span></h1>
+            <button onClick={::this.handleClick} style={styles.button}> how it works </button>
+          </div>
+          <div className="col-sm-6" style={styles.loginButton}>
+            <GoogleSignInButton />
+          </div>
         </div>
       </div>
     )
@@ -54,18 +56,11 @@ var styles = {
   },
 
   catchPhrase: {
-    float: 'left',
-    position: 'absolute',
-    marginTop: '30vh',
-    marginLeft: '10vw',
-    color: 'white',
+    paddingTop: '30vh'
   },
 
   loginButton: {
-    position: 'relative',
-    float: 'right',
-    top: '40vh',
-    right: '10vw'
+    paddingTop: '30vh'
   },
 
   button: {

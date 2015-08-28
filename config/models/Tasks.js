@@ -3,7 +3,8 @@ import mongoose from 'mongoose';
 let Schema = mongoose.Schema;
 let taskSchema = new Schema({
   name: String,
-  date: Date
+  date: Date,
+  completed: Boolean
 });
 
 const Task = mongoose.model('Task', taskSchema)

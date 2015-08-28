@@ -1,5 +1,6 @@
 import express                                    from 'express';
 import session                                    from 'express-session';
+import bodyParser                                 from 'body-parser';
 import React                                      from 'react';
 import { Router }                                 from 'react-router';
 import Location                                   from 'react-router/lib/Location';
@@ -18,6 +19,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(bodyParser.json());
 
 /** AUTH ROUTES **/
 
