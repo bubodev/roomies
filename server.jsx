@@ -29,7 +29,7 @@ app.get('/auth/google',
 app.get('/auth/google/callback', 
   passport.authenticate('google', { failureRedirect: '/auth/google' }),
   function(req, res) {
-    res.redirect('/');
+    res.redirect('/home');
   });
 
 app.get('/logout', function(req, res){
