@@ -22,17 +22,22 @@ export default class Login extends Component {
 
   render() {
     return(
-      <div style={[styles.base, styles[this.state.workShow]]} className="container text-center">
-        <div className="row">
-          <div className="col-sm-6" key="catchPhrase" style={styles.catchPhrase}>
-            <h1>be better <span style={{color:accentColor}}>roomies</span></h1>
-            <button onClick={::this.handleClick} style={styles.button}> how it works </button>
-          </div>
-          <div className="col-sm-6" key="loginButton" style={styles.loginButton}>
-            <span style={styles.loginLabel}>Sign in with: </span>
-            <GoogleSignInButton />
-            or
-            <GoogleSignInButton />
+      <div>
+        <div key="howItWorks" style={styles.howItWorks}>
+          <h1><span key="closeButton" style={styles.closeButton} className="pull-right glyphicon glyphicon-remove btn" onClick={::this.handleClick} /></h1>
+        </div>
+        <div style={[styles.base, styles[this.state.workShow]]} key="base" className="container text-center">
+          <div className="row">
+            <div className="col-sm-6" key="catchPhrase" style={styles.catchPhrase}>
+              <h1>be better <span style={{color:accentColor}}>roomies</span></h1>
+              <button onClick={::this.handleClick} style={styles.button}> how it works </button>
+            </div>
+            <div className="col-sm-6" key="loginButton" style={styles.loginButton}>
+              <span style={styles.loginLabel}>Sign in with: </span>
+              <GoogleSignInButton />
+              or
+              <GoogleSignInButton />
+            </div>
           </div>
         </div>
       </div>
@@ -52,10 +57,34 @@ var styles = {
     left: '0',
     position: 'relative',
     transition: 'left .5s ease',
+    '@media (max-width: 1000px)': {
+      top: '0',
+      transition: 'top .5s ease'
+    }
+  },
+
+  howItWorks: {
+    backgroundColor: accentColor,
+    paddingTop: '51px',
+    position: 'fixed',
+    width: '70vw',
+    height: '100vh',
+    '@media (max-width: 1000px)': {
+      width:'100vw',
+      height: '70vh',
+    }
   },
 
   workShow: {
-    left: '50%', 
+    left: '70vw',
+    '@media (max-width: 1000px)': {
+      left: '0',
+      top: '70vh'
+    }
+  },
+
+  closeButton: {
+    color: 'white'
   },
 
   catchPhrase: {
