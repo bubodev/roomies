@@ -1,15 +1,16 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
-import Home from './Home';
+import Login from './Login';
+
+let indexStyle = {
+}
 
 export default class AppView extends React.Component {
   render() {
     return(
-      <div id="app-view">
+      <div id="app-view" style={indexStyle}>
         <Navbar />
-        <h1>Chore split (Top level Component)</h1>
-        <hr />
-        {this.props.children || <Home />}
+        {this.props.children || <Login />}
       </div>
     );
   }
