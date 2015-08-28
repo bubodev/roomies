@@ -24,7 +24,26 @@ export default class Login extends Component {
     return(
       <div>
         <div key="howItWorks" style={styles.howItWorks}>
-          <h1><span key="closeButton" style={styles.closeButton} className="pull-right glyphicon glyphicon-remove btn" onClick={::this.handleClick} /></h1>
+          <div className="">
+            <div className="row">
+              <span 
+                key="closeButton" 
+                style={styles.closeButton} 
+                className="glyphicon glyphicon-remove btn" 
+                onClick={::this.handleClick} />
+            </div>
+            <div className="row">
+              <div className="col-md-4 text-center">
+                <h3>Split tasks</h3>
+              </div>
+              <div className="col-md-4 text-center">
+                <h3>Bills</h3>
+              </div>
+              <div className="col-md-4 text-center">
+                <h3>Share</h3>
+              </div>
+            </div>
+          </div>
         </div>
         <div style={[styles.base, styles[this.state.workShow]]} key="base" className="container text-center">
           <div className="row">
@@ -64,6 +83,7 @@ var styles = {
   },
 
   howItWorks: {
+    color: 'white',
     backgroundColor: accentColor,
     paddingTop: '51px',
     position: 'fixed',
@@ -84,7 +104,11 @@ var styles = {
   },
 
   closeButton: {
-    color: 'white'
+    color: 'white',
+    fontSize: 'larger',
+    float: 'right',
+    position: 'relative',
+    right: '2vw'
   },
 
   catchPhrase: {
