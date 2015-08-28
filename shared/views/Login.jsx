@@ -8,6 +8,10 @@ export default class Login extends Component {
   render() {
     return(
       <div style={styles.base} className="container text-center">
+        <div style={styles.catchPhrase}>
+          <h1>be better <span style={{color:'#00DFFF'}}>roomies</span></h1>
+          <button style={styles.button}> how it works </button>
+        </div>
         <GoogleSignInButton />
       </div>
     )
@@ -23,5 +27,20 @@ var styles = {
     height: '100vh',
     width: '100vw',
     color: 'white'
+  },
+
+  catchPhrase: {
+    float: 'left',
+    position: 'absolute',
+    marginTop: '30vh',
+    marginLeft: '10vw',
+    color: 'white',
+  },
+
+  button: {
+    padding: '10px',
+    backgroundColor: 'rgba(0,0,0,0)',
+    border: '2px solid white',
+    fontWeight: 'bold',
   }
 }
