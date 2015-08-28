@@ -1,29 +1,30 @@
-Chore splitting app
-To do: 
+# Roomies
+## A universal javascript web application to help you be a better roommate
 
-    1. Timeline
-    2. Learn stuff + Find resources
-Features:
+# Description:
 
-    Minimum Viable Product:
-        1. CRUD - Chores
-        2. CRUD - Groups - Users join groups?
-        3. Email weekly chores at the beginning of the week
-        4. Shared expenses, based off Dan's spreadsheet
-        5. Auth - Passport
-    Extra Features:
-        1. Rate chore quality - Develop algorithim to trend towards poorly received 
-           reviewed chores (anonymous comments/reviews)    
-        
-Possible Tech Stack:
+###Minimum Viable Product:
+1. CRUD (Homes, Tasks)
+2. Email weekly chores at the beginning of the week
+3. Shared expenses
+4. Auth - Passport
 
-    Backend:
-        Node.js (Express)
+###Extra Features:
+    1. Rate chore quality - Develop algorithim to trend towards poorly received 
+       reviewed chores (anonymous comments/reviews)
+      2. Venmo/paypal integration
         
-    DB:
-        MongoDB
-        
-    Frontend stuff:
-        React + Separate ORM (mongoose)
-            pros: New tech, more relevant
-            cons: ?
+#Current Tech Stack:
+###Backend
+- [Express](http://expressjs.com/) server stuff
+- [Mongoose](http://mongoosejs.com/) ODM for mongoDB integration
+- [Passport](http://passportjs.org/) for auth middleware
+
+###Frontend
+- [React.js](http://facebook.github.io/react/) for our v
+- [Redux](https://github.com/rackt/redux) for flux implementation
+- [Radium](http://projects.formidablelabs.com/radium/) for inline styles
+
+###Misc
+- [Immutable.js](https://facebook.github.io/immutable-js/) for data structures
+- [React Router](https://github.com/rackt/react-router) for routing
