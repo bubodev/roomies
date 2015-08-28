@@ -37,21 +37,13 @@ app.get('/logout', function(req, res){
   res.redirect('/');
 });
 
-app.get('/login', function(req, res){
-  const HTML=`
-    <a href="/auth/google"> Click here to login with google </a>
-    `;
-  res.end(HTML);
-})
-
-
 /** API ROUTES **/
 
 app.use('/api', require('./server/api'));
 
 /** REACT ROUTER **/
 
-app.use(ensureAuthenticated, (req, res) => {
+app.use( (req, res) => {
   const location = new Location(req.path, req.query);
   const reducer = combineReducers(reducers);
   const store = createStore(reducer);
