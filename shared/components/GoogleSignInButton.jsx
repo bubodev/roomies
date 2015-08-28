@@ -6,7 +6,6 @@ export default class extends React.Component {
   render() {
     return (
       <div>
-        <span style={styles.span.label}>Sign in with: </span>
         <a href="/auth/google">
           <div style={styles.customBtn}>
             <span style={styles.span.icon}></span>

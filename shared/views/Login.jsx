@@ -24,11 +24,14 @@ export default class Login extends Component {
     return(
       <div style={[styles.base, styles[this.state.workShow]]} className="container text-center">
         <div className="row">
-          <div className="col-sm-6" style={styles.catchPhrase}>
+          <div className="col-sm-6" key="catchPhrase" style={styles.catchPhrase}>
             <h1>be better <span style={{color:accentColor}}>roomies</span></h1>
             <button onClick={::this.handleClick} style={styles.button}> how it works </button>
           </div>
-          <div className="col-sm-6" style={styles.loginButton}>
+          <div className="col-sm-6" key="loginButton" style={styles.loginButton}>
+            <span style={styles.loginLabel}>Sign in with: </span>
+            <GoogleSignInButton />
+            or
             <GoogleSignInButton />
           </div>
         </div>
@@ -56,11 +59,18 @@ var styles = {
   },
 
   catchPhrase: {
-    paddingTop: '30vh'
+    paddingTop: '30vh',
   },
 
   loginButton: {
-    paddingTop: '30vh'
+    paddingTop: '30vh',
+    '@media (max-width: 768px)': {
+      paddingTop: '15vh'
+    }
+  },
+
+  loginLabel: {
+    fontSize: '16px'
   },
 
   button: {
