@@ -1,18 +1,35 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
-
 import GoogleSignInButton from '../components/GoogleSignInButton';
+
+const accentColor = '#00DFFF';
 
 @Radium
 export default class Login extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      workShow: ''
+    }
+  }
+
+  handleClick(e) {
+    e.preventDefault();
+    let workShow = this.state.workShow;
+    workShow = (workShow) === "workShow" ? '' : "workShow";
+    this.setState({workShow: workShow});
+  }
+
   render() {
     return(
-      <div style={styles.base} className="container text-center">
+      <div style={[styles.base, styles[this.state.workShow]]} className="container text-center">
         <div style={styles.catchPhrase}>
-          <h1>be better <span style={{color:'#00DFFF'}}>roomies</span></h1>
-          <button style={styles.button}> how it works </button>
+          <h1>be better <span style={{color:accentColor}}>roomies</span></h1>
+          <button onClick={::this.handleClick} style={styles.button}> how it works </button>
         </div>
-        <GoogleSignInButton />
+        <div style={styles.loginButton}>
+          <GoogleSignInButton />
+        </div>
       </div>
     )
   }
@@ -21,12 +38,19 @@ export default class Login extends Component {
 var styles = {
   base: {
     paddingTop: '51px',
-    backgroundImage: 'url("http://onwardstate.com/wp-content/uploads/2012/04/2008_step_brothers_0091.jpeg")',
+    backgroundColor: 'grey',
     backgroundSize: 'cover',
     backgroundPositionX: 'center',
     height: '100vh',
     width: '100vw',
-    color: 'white'
+    color: 'white',
+    left: '0',
+    position: 'relative',
+    transition: 'left .5s ease',
+  },
+
+  workShow: {
+    left: '50%', 
   },
 
   catchPhrase: {
@@ -37,10 +61,23 @@ var styles = {
     color: 'white',
   },
 
+  loginButton: {
+    position: 'relative',
+    float: 'right',
+    top: '40vh',
+    right: '10vw'
+  },
+
   button: {
     padding: '10px',
     backgroundColor: 'rgba(0,0,0,0)',
-    border: '2px solid white',
+    color: 'rgba(255,255,255,0.8)',
+    border: '2px solid rgba(255,255,255,0.8)',
     fontWeight: 'bold',
+    transition: 'all .5s ease',
+    ':hover': {
+      color: 'white',
+      border: '2px solid ' + accentColor
+    }
   }
 }

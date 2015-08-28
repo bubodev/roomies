@@ -5,8 +5,8 @@ import Radium from 'radium';
 export default class extends React.Component {
   render() {
     return (
-      <div className="pull-right" style={styles.googleButton}>
-        <span style={styles.span.label}>Sign in with:</span>
+      <div>
+        <span style={styles.span.label}>Sign in with: </span>
         <a href="/auth/google">
           <div style={styles.customBtn}>
             <span style={styles.span.icon}></span>
@@ -19,12 +19,6 @@ export default class extends React.Component {
 }
 
 var styles = {
-  googleButton: {
-    bottom: '50%',
-    position: 'absolute',
-    right: '50px'
-  },
-
   customBtn: {
     display: 'inline-block',
     background: '#4285f4',
