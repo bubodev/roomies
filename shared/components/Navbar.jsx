@@ -17,12 +17,12 @@ export default class Navbar extends React.Component {
 
   handleClick = (e) => {
     e.preventDefault();
-    this.context.router.transitionTo('/');
+    this.context.router.transitionTo('/home');
   };
 
   render() {
     return (
-      <nav className="navbar test navbar-fixed-top" style={styles.navBar}>
+      <nav className="navbar navbar-fixed-top" style={styles.navBar}>
         <div className="container-fluid">
           <div className="navbar-header">
             <div onClick={this.handleClick} style={styles.brand} className="navbar-brand">

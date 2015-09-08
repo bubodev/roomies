@@ -1,6 +1,7 @@
 import express                                    from 'express';
 import session                                    from 'express-session';
 import bodyParser                                 from 'body-parser';
+import cookieParser                               from 'cookie-parser';
 import React                                      from 'react';
 import { Router }                                 from 'react-router';
 import Location                                   from 'react-router/lib/Location';
@@ -11,11 +12,23 @@ import { createStore, combineReducers }           from 'redux';
 import { Provider }                               from 'react-redux';
 import * as reducers                              from 'reducers';
 import passport                                   from './server/passport';
-
+import mongoose from 'mongoose';
 const app = express();
 
+import Login from './shared/views/Login';
+
+var MongoStore = require('connect-mongo')(session);
+
 app.use(session({ 
-  secret: 'keyboard cat' 
+  secret:'keyboard cat',
+  cookie: {
+    maxAge: new Date(Date.now() + 3600000),
+  },
+  store: new MongoStore({
+    url: 'mongodb://localhost/test'
+  }),
+  resave: false,
+  saveUnitialized: false
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -41,11 +54,11 @@ app.get('/logout', function(req, res){
 
 /** API ROUTES **/
 
-app.use('/api', require('./server/api'));
+app.use('/api', ensureAuthenticated, require('./server/api'));
 
 /** REACT ROUTER **/
 
-app.use( (req, res) => {
+app.use((req, res) => {
   const location = new Location(req.path, req.query);
   const reducer = combineReducers(reducers);
   const store = createStore(reducer);
@@ -72,7 +85,7 @@ app.use( (req, res) => {
           <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
           <script type="application/javascript">
             window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
-            </script>
+          </script>
         </head>
         <body>
           <div id="react-view">${componentHTML}</div>
@@ -85,8 +98,11 @@ app.use( (req, res) => {
 });
 
 function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) { return next(); }
-  res.redirect('/login');
+  if (req.isAuthenticated() || req.session.username) { 
+    return next();
+  } else {
+    res.redirect('/login');
+  }
 }
 
 export default app;

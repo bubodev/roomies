@@ -17,28 +17,20 @@ passport.use(new GoogleStrategy.OAuth2Strategy({
   callbackURL: "http://127.0.0.1:8080/auth/google/callback"
   },
   function(accessToken, refreshToken, profile, done) {
-    let user;
-
-    User.findOne({ googleId: profile.id }, function(err, foundUser) {
-      user = foundUser;
-
+    User.findOne({ googleId: profile.id }, function(err, user) {
       if(!user) {
-        console.log("creating new user...");
         user = new User({ 
           googleId: profile.id,
           name: profile.displayName,
-          token: accessToken
         });
 
         user.save((err) => {
-          if(err)
+          if(err){
             console.log(err)
-          console.log("succesfully created new user");
+            done(null, false)
+          }
         })
-      } else {
-        console.log("user found!");
-      }
-
+      } 
       return done(null, user)
     });
   }

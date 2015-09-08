@@ -3,8 +3,7 @@ import mongoose from 'mongoose';
 let Schema = mongoose.Schema;
 let userSchema = new Schema({
   googleId: String,
-  name: String,
-  token: String
+  name: String
 });
 
 const User = mongoose.model('User', userSchema);
