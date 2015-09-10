@@ -96,11 +96,11 @@ app.use((req, res) => {
 });
 
 function ensureAuthenticated(req, res, next) {
-  // if (req.isAuthenticated() || req.session.username) { 
+  if (req.isAuthenticated() || req.session.username) { 
     next();
-  // } else {
-    // res.redirect('/login');
-  // }
+  } else {
+    res.redirect('/login');
+  }
 }
 
 export default app;

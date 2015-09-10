@@ -2,8 +2,9 @@ import mongoose from 'mongoose';
 
 let Schema = mongoose.Schema;
 let taskSchema = new Schema({
-  name: String,
-  date: Date,
+  taskName: String,
+  startDate: Date,
+  endDate: Date,
   completed: Boolean
 });
 

@@ -12,19 +12,24 @@ export default class Sidebar extends React.Component {
   render() {
     let tasks;
     if(this.props.tasks){
-      tasks = this.props.tasks.map(function(task, i) {
+      tasks = this.props.tasks.map(function(task) {
         return (
-          <div key={i} style={styles.sideBarItem}>
-            THIS IS A TASK
-            {task.description}
+          <div key={task._id} style={styles.sideBarItem}>
+            task: {task.taskName}
+            <br />
+            start: {task.startDate}
+            <br />
+            end: {task.endDate}
+            <br />
           </div>
         )
       })
     }
+
+    console.log(this.props.tasks);
     return (
       <div className="col-sm-3" style={styles.sideBar}>
-        THIS IS THE SIDEBAR COMPONENT
-        {tasks}
+        { tasks }
       </div>
     )
   };

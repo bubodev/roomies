@@ -1,5 +1,6 @@
 import React from 'react';
 import Radium from 'radium';
+import { Link } from 'react-router';
 
 const accentColor = '#00DFFF';
 
@@ -15,9 +16,12 @@ export default class Navbar extends React.Component {
     super(props, context);
   }
 
-  handleClick = (e) => {
-    e.preventDefault();
-    this.context.router.transitionTo('/home');
+  debuggerToggle() {
+    debugger;
+  }
+
+  handleClick = (path) => {
+    this.context.router.transitionTo(path);
   };
 
   render() {
@@ -25,10 +29,17 @@ export default class Navbar extends React.Component {
       <nav className="navbar navbar-fixed-top" style={styles.navBar}>
         <div className="container-fluid">
           <div className="navbar-header">
-            <div onClick={this.handleClick} style={styles.brand} className="navbar-brand">
+            <div onClick={this.handleClick.bind(this, '/home')} style={styles.brand} className="navbar-brand">
               <h4><span className="glyphicon glyphicon-home"/> roomies</h4>
             </div>
+            <button style={styles.debug} onClick={::this.debuggerToggle}>debug button here</button>
+
           </div>
+
+          <ul className="nav navbar-nav navbar-right">
+            <Link to="about"> About </Link>
+            <a href="/logout"> Logout </a>
+          </ul>
         </div>
       </nav>
     )
@@ -42,6 +53,11 @@ var styles = {
       color: accentColor,
       cursor: 'pointer'
     }
+  },
+
+  debug: {
+    position: 'fixed',
+    top: 0,
   }
 }
 

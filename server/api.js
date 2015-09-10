@@ -47,7 +47,6 @@ router.get('/tasks', function(req, res) {
     if(err)
       res.send(err);
     res.json(tasks);
-    console.log(tasks);
   })
 })
 
@@ -77,7 +76,6 @@ router.put('/tasks/:id', function(req, res) {
 })
 
 router.post('/tasks', function(req, res) {
-  debugger;
   let newTask = new Task(req.body.taskParams);
 
   newTask.save(function(err) {

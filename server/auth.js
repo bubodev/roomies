@@ -17,7 +17,7 @@ auth.get('/auth/google/callback',
 auth.get('/logout', function(req, res){
   req.logout();
   console.log("logging out...");
-  res.redirect('/');
+  res.redirect('/login');
 });
 
 module.exports = auth;

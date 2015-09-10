@@ -1,25 +1,15 @@
 import React, { Component, PropTypes } from 'react';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import * as authActions from '../actions/AuthActions';
 import * as taskActions from '../actions/TaskActions';
 
 import Sidebar from '../components/Sidebar';
+import NewTaskForm from '../components/NewTaskForm'
 
 class Home extends Component {
-  debuggerToggle() {
-    debugger;
-  }
 
-  createTask() {
-    this.props.createTask({
-      name: 'Test',
-      date: Date.now(),
-      completed: false
-    });
-  }
-
-  getTasks() {
+  componentDidMount() {
     this.props.getTasks();
   }
 
@@ -27,13 +17,9 @@ class Home extends Component {
     return(
       <div className="container-fluid" style={styles.base}>
         <div className="row">
-          <button onClick={::this.debuggerToggle}>debug button here</button>
-          <button onClick={::this.createTask}>Add task</button>
-          <button onClick={::this.getTasks}>Get tasks</button>
-          
+          <NewTaskForm />
           <Sidebar key="sideBar" tasks={this.props.tasks} />
           <div style={styles.mainSection} className="col-sm-9">
-            main section
           </div>
         </div>
       </div>
@@ -60,7 +46,7 @@ export default
 class HomeContainer {
   static propTypes = {
     auth: PropTypes.object,
-    task: PropTypes.object,
+    tasks: PropTypes.object,
     dispatch: PropTypes.func.isRequired
   }
 
