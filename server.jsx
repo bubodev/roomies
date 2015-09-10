@@ -1,13 +1,12 @@
 import express                                    from 'express';
+import cookieParser                               from 'cookie-parser';
 import session                                    from 'express-session';
 import bodyParser                                 from 'body-parser';
-import cookieParser                               from 'cookie-parser';
 import React                                      from 'react';
 import { Router }                                 from 'react-router';
 import Location                                   from 'react-router/lib/Location';
 import routes                                     from 'routes';
 import { applyMiddleware }                        from 'redux';
-import promiseMiddleware                          from 'lib/promiseMiddleware'
 import { createStore, combineReducers }           from 'redux';
 import { Provider }                               from 'react-redux';
 import * as reducers                              from 'reducers';
@@ -18,17 +17,16 @@ const app = express();
 import Login from './shared/views/Login';
 
 var MongoStore = require('connect-mongo')(session);
-
-app.use(session({ 
-  secret:'keyboard cat',
-  cookie: {
-    maxAge: new Date(Date.now() + 3600000),
-  },
-  store: new MongoStore({
-    url: 'mongodb://localhost/test'
-  }),
-  resave: false,
-  saveUnitialized: false
+app.use(cookieParser());
+app.use(session({ secret:'keyboard cat',
+                  cookie: {
+                    maxAge: new Date(Date.now() + 3600000),
+                  },
+                  store: new MongoStore({
+                    url: 'mongodb://localhost/test'
+                  }),
+                  resave: false,
+                  saveUnitialized: false
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -36,21 +34,7 @@ app.use(bodyParser.json());
 
 /** AUTH ROUTES **/
 
-app.get('/auth/google',
-  passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }),
-  function(req, res){
-  });
-
-app.get('/auth/google/callback', 
-  passport.authenticate('google', { failureRedirect: '/auth/google' }),
-  function(req, res) {
-    res.redirect('/home');
-  });
-
-app.get('/logout', function(req, res){
-  req.logout();
-  res.redirect('/');
-});
+app.use(require('./server/auth'));
 
 /** API ROUTES **/
 
@@ -58,10 +42,31 @@ app.use('/api', ensureAuthenticated, require('./server/api'));
 
 /** REACT ROUTER **/
 
+app.use(function(req, res, next) {
+  console.log(req.session);
+  console.log('--------------');
+  console.log(req.user);
+  next();
+})
+
+import promiseMiddleware from 'shared/lib/promiseMiddleware';
+
 app.use((req, res) => {
+
+  const logger = store => next => action => {
+    console.log('dispatching', action);
+    let result = next(action);
+    console.log('next state', store.getState());
+    return result;
+  };
+
+
   const location = new Location(req.path, req.query);
   const reducer = combineReducers(reducers);
-  const store = createStore(reducer);
+  let createStoreWithMiddleware = applyMiddleware(promiseMiddleware, logger)(createStore);
+  const store = createStoreWithMiddleware(reducer);
+
+  
 
   Router.run(routes, location, (err, routeState) => {
     if (err) return console.error(err);
@@ -98,11 +103,11 @@ app.use((req, res) => {
 });
 
 function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated() || req.session.username) { 
-    return next();
-  } else {
-    res.redirect('/login');
-  }
+  // if (req.isAuthenticated() || req.session.username) { 
+    next();
+  // } else {
+    // res.redirect('/login');
+  // }
 }
 
 export default app;

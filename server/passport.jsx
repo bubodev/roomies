@@ -3,14 +3,6 @@ import GoogleStrategy                             from 'passport-google-oauth';
 import { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } from './secrets';
 import User from '../config/models/Users';
 
-passport.serializeUser( (user, done) => {
-  done(null, user);
-})
-
-passport.deserializeUser( (obj, done) => {
-  done(null, obj);
-})
-
 passport.use(new GoogleStrategy.OAuth2Strategy({
   clientID: GOOGLE_CLIENT_ID,
   clientSecret: GOOGLE_CLIENT_SECRET,
@@ -36,4 +28,15 @@ passport.use(new GoogleStrategy.OAuth2Strategy({
   }
 ));
 
+passport.serializeUser( (user, done) => {
+  done(null, user.id);
+})
+
+passport.deserializeUser( (id, done) => {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+})
+
 module.exports = passport;
+

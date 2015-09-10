@@ -1,17 +1,23 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import Radium from 'radium';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import * as authActions from '../actions/AuthActions';
 
 @Radium
-export default class extends React.Component {
+class SignInButton extends React.Component {
+  handleClick() {
+    this.props.login();
+    console.log(this.props.auth.user);
+  }
+
   render() {
     return (
       <div>
-        <a href="/auth/google">
-          <div style={styles.customBtn}>
-            <span style={styles.span.icon}></span>
-            <span style={styles.span.buttonText}>Google</span>
-          </div>
-        </a>
+        <div onClick={::this.handleClick} style={styles.customBtn}>
+          <span style={styles.span.icon}></span>
+          <span style={styles.span.buttonText}>Google</span>
+        </div>
       </div>
     );
   }
@@ -52,3 +58,21 @@ var styles = {
     }
   }
 }
+
+@connect(state => ({
+  auth: state.auth,
+}))
+
+export default 
+class SearchFormContainer {
+  static propTypes = {
+    auth: PropTypes.object,
+    dispatch: PropTypes.func.isRequired
+  }
+
+  render() {
+    const { auth, dispatch } = this.props;
+    return <SignInButton auth={auth} {...bindActionCreators(authActions, dispatch)} />;
+  }
+}
+

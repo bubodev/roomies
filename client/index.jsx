@@ -2,10 +2,12 @@ import React                            from 'react';
 import { Router }                       from 'react-router';
 import { history }                      from 'react-router/lib/BrowserHistory';
 import routes                           from 'routes';
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider }                     from 'react-redux';
 import * as reducers                    from 'reducers';
 import { fromJS }                       from 'Immutable';
+import promiseMiddleware from '../shared/lib/promiseMiddleware';
+import logger from '../shared/lib/promiseMiddleware';
 
 let initialState = window.__INITIAL_STATE__;
 
@@ -16,7 +18,8 @@ Object
   });
 
 const reducer = combineReducers(reducers);
-const store = createStore(reducer, initialState);
+let createStoreWithMiddleware = applyMiddleware(promiseMiddleware)(createStore);
+const store = createStoreWithMiddleware(reducer, initialState);
 
 React.render(
   <Provider store={store}>

@@ -68,6 +68,7 @@ var styles = {
   base: {
     paddingTop: '51px',
     backgroundColor: 'grey',
+    backgroundImage: 'url("http://res.cloudinary.com/bitebox/image/upload/c_scale,w_1400/v1441754983/2008_step_brothers_0091_wv50ar.jpg")',
     backgroundSize: 'cover',
     backgroundPositionX: 'center',
     height: '100vh',

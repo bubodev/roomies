@@ -1,13 +1,33 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import * as authActions from '../actions/AuthActions';
+import * as taskActions from '../actions/TaskActions';
 
-export default class Home extends Component {
+import Sidebar from '../components/Sidebar';
+
+class Home extends Component {
+  debuggerToggle() {
+    debugger;
+  }
+
+  createTask() {
+    this.props.createTask('test');
+  }
+
+  getTasks() {
+    this.props.getTasks();
+  }
+
   render() {
     return(
       <div className="container-fluid" style={styles.base}>
         <div className="row">
-          <div key="sideBar" style={styles.sideBar} className="col-sm-3">
-            side bar
-          </div>
+          <button onClick={::this.debuggerToggle}>debug button here</button>
+          <button onClick={::this.createTask}>Add task</button>
+          <button onClick={::this.getTasks}>Get tasks</button>
+          
+          <Sidebar key="sideBar" tasks={this.props.tasks} />
           <div style={styles.mainSection} className="col-sm-9">
             main section
           </div>
@@ -23,19 +43,25 @@ var styles = {
     backgroundColor: 'lightgrey'
   },
 
-  sideBar: {
-    backgroundColor: 'white',
-    paddingLeft: '0 !important',
-    paddingRight: '0 !important',
-  },
-
   mainSection: {
   },
+}
 
-  sideBarItem: {
-    width: '100%',
-    padding: '30px',
-    textAlign: 'center',
-    border: '1px solid black'
+@connect(state => ({
+  auth: state.auth,
+  tasks: state.tasks
+}))
+
+export default 
+class HomeContainer {
+  static propTypes = {
+    auth: PropTypes.object,
+    task: PropTypes.object,
+    dispatch: PropTypes.func.isRequired
+  }
+
+  render() {
+    const { auth, tasks, dispatch } = this.props;
+    return <Home auth={auth} tasks={tasks} {...bindActionCreators(taskActions, dispatch)} {...bindActionCreators(authActions, dispatch)} />;
   }
 }

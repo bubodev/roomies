@@ -1,10 +1,10 @@
 import request from 'axios';
 
-const BACKEND_URL = /* PUT BACKEND URL HERE */
+const BACKEND_URL = '/api/tasks'
 
 export function getTasks() {
   return {
-    type: 'GET_TASK',
+    types: ['GET_TASKS', 'GET_TASKS_SUCCESS', 'GET_TASKS_FAILURE'],
     promise: request.get(BACKEND_URL)
   }
 }

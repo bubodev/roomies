@@ -8,6 +8,7 @@ mongoose.connect('mongodb://localhost/test');
 let router = express.Router();
 
 router.get('/', function(req, res) {
+  console.log("hit api server");
   res.json({
     message: "Welcome to the api server"
   });

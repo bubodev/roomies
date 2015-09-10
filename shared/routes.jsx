@@ -10,6 +10,10 @@ export default (
   <Route name="app" component={App} path="/">
     <Route path="login" component={Login} />
     <Route path="home" component={Home} />
-    <Route path="about" component={About} />
+    <Route path="about" component={About} onEnter={requireAuth} />
   </Route>
 )
+
+function requireAuth(nextState, transition) {
+  debugger;
+}
