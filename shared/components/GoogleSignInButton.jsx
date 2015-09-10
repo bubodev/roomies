@@ -13,12 +13,14 @@ class SignInButton extends React.Component {
 
   render() {
     return (
-      <div>
-        <div onClick={::this.handleClick} style={styles.customBtn}>
+      <a href='/auth/google'>
+        <div>
+        <div style={styles.customBtn}>
           <span style={styles.span.icon}></span>
           <span style={styles.span.buttonText}>Google</span>
         </div>
-      </div>
+        </div>
+      </a>
     );
   }
 }

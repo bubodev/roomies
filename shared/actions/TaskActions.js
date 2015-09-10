@@ -9,14 +9,12 @@ export function getTasks() {
   }
 }
 
-export function createTask(description, startDate, endDate, frequency, members) {
+export function createTask(taskParams) {
   return {
-    type: 'CREATE_TASK',
-    description,
-    startDate,
-    endDate,
-    frequency,
-    members
+    types: ['CREATE_TASK','CREATE_TASK_SUCCESS','CREATE_TASK_FAILURE'],
+    promise: request.post(BACKEND_URL, {
+      taskParams: taskParams,
+    })
   }
 }
 

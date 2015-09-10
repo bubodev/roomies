@@ -12,7 +12,11 @@ class Home extends Component {
   }
 
   createTask() {
-    this.props.createTask('test');
+    this.props.createTask({
+      name: 'Test',
+      date: Date.now(),
+      completed: false
+    });
   }
 
   getTasks() {

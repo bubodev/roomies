@@ -43,8 +43,11 @@ router.delete('/users', function(req, res) {
 
 /** TASKS **/
 router.get('/tasks', function(req, res) {
-  res.json({
-    message: "GET to tasks"
+  Task.find({}, function(err, tasks) {
+    if(err)
+      res.send(err);
+    res.json(tasks);
+    console.log(tasks);
   })
 })
 
@@ -74,6 +77,7 @@ router.put('/tasks/:id', function(req, res) {
 })
 
 router.post('/tasks', function(req, res) {
+  debugger;
   let newTask = new Task(req.body.taskParams);
 
   newTask.save(function(err) {

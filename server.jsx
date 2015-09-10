@@ -42,13 +42,6 @@ app.use('/api', ensureAuthenticated, require('./server/api'));
 
 /** REACT ROUTER **/
 
-app.use(function(req, res, next) {
-  console.log(req.session);
-  console.log('--------------');
-  console.log(req.user);
-  next();
-})
-
 import promiseMiddleware from 'shared/lib/promiseMiddleware';
 
 app.use((req, res) => {
