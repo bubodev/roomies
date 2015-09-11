@@ -88,7 +88,7 @@ app.use((req, res) => {
         </body>
       </html>
     `
-    res.end(HTML, { test: 'hello' });
+    res.end(HTML);
   });
 });
 

@@ -1,6 +1,6 @@
 import React                            from 'react';
 import { Router }                       from 'react-router';
-import { history }                      from 'react-router/lib/BrowserHistory';
+import { history } from 'react-router/lib/BrowserHistory';
 import routes                           from 'routes';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider }                     from 'react-redux';
