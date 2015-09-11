@@ -2,10 +2,16 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as transactionActions from '../actions/TransactionActions';
+import NewTransactionForm from '../components/NewTransactionForm';
+
 let ReactD3 = require('react-d3-components');
 let PieChart = ReactD3.PieChart;
 
 class Finances extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     var data = {
       label: 'somethingA',
@@ -46,12 +52,14 @@ class Finances extends Component {
         <div className="row">
           <div className="col-sm-4">
             Household costs
-          </div>
-          <div className="col-sm-4">
-            Borrowing
+            <NewTransactionForm _submitNewTransaction={this.props.createTransaction} />
           </div>
           <div className="col-sm-4">
             Lending
+            <NewTransactionForm _submitNewTransaction={this.props.createTransaction} />
+          </div>
+          <div className="col-sm-4">
+            Borrowing
           </div>
         </div>
       </div>
