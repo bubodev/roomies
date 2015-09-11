@@ -6,7 +6,6 @@ import Home from './views/Home';
 import About from './views/About';
 import Chores from './views/Chores';
 import Finances from './views/Finances';
-import NewTaskForm from './components/NewTaskForm'
 
 export default (
   <Route name="app" component={App} path="/">
