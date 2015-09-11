@@ -25,8 +25,7 @@ export default class Sidebar extends React.Component {
         )
       })
     }
-
-    console.log(this.props.tasks);
+    
     return (
       <div className="col-sm-3" style={styles.sideBar}>
         { tasks }

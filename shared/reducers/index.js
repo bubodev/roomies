@@ -1,2 +1,2 @@
-export { default as tasks } from './TaskReducer';
-export { default as auth } from './AuthReducer';
+export { default as tasks } from './taskReducer';
+export { default as auth } from './authReducer';

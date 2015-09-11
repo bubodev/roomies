@@ -14,13 +14,12 @@ passport.use(new GoogleStrategy.OAuth2Strategy({
         user = new User({ 
           googleId: profile.id,
           name: profile.displayName,
+          hasHome: false,
         });
 
         user.save((err) => {
-          if(err){
-            console.log(err)
+          if(err)
             done(null, false)
-          }
         })
       } 
       return done(null, user)

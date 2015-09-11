@@ -8,7 +8,6 @@ import * as authActions from '../actions/AuthActions';
 class SignInButton extends React.Component {
   handleClick() {
     this.props.login();
-    console.log(this.props.auth.user);
   }
 
   render() {

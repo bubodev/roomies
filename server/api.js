@@ -15,23 +15,12 @@ router.get('/', function(req, res) {
 });
 
 /** USERS **/
-router.get('/users', function(req, res) {
-  User.findOne({}, (err, user) => {
-    res.json({
-      message: "GET to users",
-    })
-  });
-})
+router.get('/users/:id', function(req, res) {
+  User.findById(req.params.id, function(err, user) {
+    if(err)
+      res.send(err);
 
-router.put('/users', function(req, res) {
-  res.json({
-    message: "PUT to users"
-  })
-})
-
-router.post('/users', function(req, res) {
-  res.json({
-    message: "POST to users"
+    res.json(user);
   })
 })
 

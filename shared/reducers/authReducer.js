@@ -1,30 +1,23 @@
 const defaultState = {
   loaded: false,
-  user: null
+  user: null,
+  hasHome: false
 }
 
 export default function authReducer(state = defaultState, action = {}) {
   switch(action.type) {
-    case 'LOGIN':
+    case 'GET_USER':
       return {
         ...state,
-        loggingIn: true
+        loading: true,
       }
-    case 'LOGIN_SUCCESS':
+    case 'GET_USER_SUCCESS':
       return {
         ...state,
-        loggingIn: false,
-        user: 'testing user'
-      }
-    case 'LOGIN_FAIL':
-      return {
-        ...state,
-        loggingIn: false,
-        loginError: action.error
-      }
-    case 'LOGOUT':
-      return {
-        ...state,
+        loaded: true,
+        loading: false,
+        user: action.res.data,
+        hasHome: action.res.data.hasHome
       }
     default:
       return state;

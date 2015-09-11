@@ -11,12 +11,13 @@ auth.get('/auth/google',
 auth.get('/auth/google/callback', 
   passport.authenticate('google', { failureRedirect: '/auth/google' }),
   function(req, res) {
+    res.cookie('userId', req.user._id, { maxAge: 2592000000 });
     res.redirect('/home');
   });
 
 auth.get('/logout', function(req, res){
   req.logout();
-  console.log("logging out...");
+  res.clearCookie('userId');
   res.redirect('/login');
 });
 

@@ -45,7 +45,6 @@ app.use('/api', ensureAuthenticated, require('./server/api'));
 import promiseMiddleware from 'shared/lib/promiseMiddleware';
 
 app.use((req, res) => {
-
   const logger = store => next => action => {
     console.log('dispatching', action);
     let result = next(action);
@@ -58,8 +57,6 @@ app.use((req, res) => {
   const reducer = combineReducers(reducers);
   let createStoreWithMiddleware = applyMiddleware(promiseMiddleware, logger)(createStore);
   const store = createStoreWithMiddleware(reducer);
-
-  
 
   Router.run(routes, location, (err, routeState) => {
     if (err) return console.error(err);
@@ -91,16 +88,16 @@ app.use((req, res) => {
         </body>
       </html>
     `
-    res.end(HTML);
+    res.end(HTML, { test: 'hello' });
   });
 });
 
 function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated() || req.session.username) { 
+  // if (req.isAuthenticated() || req.session.username) { 
     next();
-  } else {
-    res.redirect('/login');
-  }
+  // } else {
+    // res.redirect('/login');
+  // }
 }
 
 export default app;

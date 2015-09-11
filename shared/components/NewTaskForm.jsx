@@ -6,6 +6,10 @@ import * as taskActions from '../actions/TaskActions';
 
 @Radium
 class NewTaskForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { errors: [] }
+  }
 
   createTask(e) {
     e.preventDefault();
@@ -13,6 +17,19 @@ class NewTaskForm extends Component {
     let startDate = this.refs.startDate.getDOMNode();
     let endDate = this.refs.endDate.getDOMNode();
 
+    let errors = [];
+    if(!taskName.value.length)
+      errors.push('Must input a task name!');
+    if(!startDate.value.length)
+      errors.push('Must input a start date!');
+
+    if(errors.length){
+      this.setState({
+        errors: errors
+      })
+      return;
+    }
+   
     this.props.createTask({
       taskName: taskName.value,
       startDate: startDate.value,
@@ -23,11 +40,19 @@ class NewTaskForm extends Component {
     taskName.value = "";
     startDate.value = "";
     endDate.value = "";
+    this.setState({errors: []})
   }
 
   render() {
+    let errorList = this.state.errors.map(function(err) {
+      return <li>{err}</li>
+    })
+
     return(
       <form onSubmit={::this.createTask} className="form">
+        <ul className="errors">
+          {errorList}
+        </ul>
         <label for="taskName">Enter a task</label>
         <input className="form-control" type='text' placeholder="Washing the dishes, clean the bathroom..." ref="taskName" id="taskName"/>
         <label for="startDate">Start Date</label>

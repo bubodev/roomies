@@ -2,26 +2,32 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as authActions from '../actions/AuthActions';
-import * as taskActions from '../actions/TaskActions';
 
 import Sidebar from '../components/Sidebar';
 import NewTaskForm from '../components/NewTaskForm'
 
+import cookie from 'react-cookie';
+
 class Home extends Component {
 
+  constructor(props) {
+    super(props);
+  }
+
   componentDidMount() {
+    let userId = cookie.load('userId')
+    userId && this.props.loadUser(userId.slice(3,-1));
     this.props.getTasks();
+  }
+
+  debug() {
+    debugger;
   }
 
   render() {
     return(
       <div className="container-fluid" style={styles.base}>
-        <div className="row">
-          <NewTaskForm />
-          <Sidebar key="sideBar" tasks={this.props.tasks} />
-          <div style={styles.mainSection} className="col-sm-9">
-          </div>
-        </div>
+        {this.props.children}    
       </div>
     )
   }
@@ -51,7 +57,7 @@ class HomeContainer {
   }
 
   render() {
-    const { auth, tasks, dispatch } = this.props;
-    return <Home auth={auth} tasks={tasks} {...bindActionCreators(taskActions, dispatch)} {...bindActionCreators(authActions, dispatch)} />;
+    const { auth, children, dispatch } = this.props;
+    return <Home auth={auth} children={children} {...bindActionCreators(authActions, dispatch)} />;
   }
 }

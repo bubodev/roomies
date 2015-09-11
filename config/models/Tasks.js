@@ -5,7 +5,7 @@ let taskSchema = new Schema({
   taskName: String,
   startDate: Date,
   endDate: Date,
-  completed: Boolean
+  completed: Boolean,
 });
 
 const Task = mongoose.model('Task', taskSchema)

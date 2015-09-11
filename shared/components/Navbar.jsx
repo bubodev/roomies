@@ -16,10 +16,6 @@ export default class Navbar extends React.Component {
     super(props, context);
   }
 
-  debuggerToggle() {
-    debugger;
-  }
-
   handleClick = (path) => {
     this.context.router.transitionTo(path);
   };
@@ -32,12 +28,13 @@ export default class Navbar extends React.Component {
             <div onClick={this.handleClick.bind(this, '/home')} style={styles.brand} className="navbar-brand">
               <h4><span className="glyphicon glyphicon-home"/> roomies</h4>
             </div>
-            <button style={styles.debug} onClick={::this.debuggerToggle}>debug button here</button>
-
           </div>
 
           <ul className="nav navbar-nav navbar-right">
-            <Link to="about"> About </Link>
+            <Link to="/home/about"> About </Link>
+            <Link to="/home/chores"> Chores </Link>
+            <Link to="/home/finances"> Finances </Link>
+
             <a href="/logout"> Logout </a>
           </ul>
         </div>
