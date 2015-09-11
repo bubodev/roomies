@@ -29,12 +29,10 @@ export default class Navbar extends React.Component {
               <h4><span className="glyphicon glyphicon-home"/> roomies</h4>
             </div>
           </div>
-
           <ul className="nav navbar-nav navbar-right">
             <Link to="/home/about"> About </Link>
             <Link to="/home/chores"> Chores </Link>
             <Link to="/home/finances"> Finances </Link>
-
             <a href="/logout"> Logout </a>
           </ul>
         </div>

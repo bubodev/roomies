@@ -53,11 +53,11 @@ class NewTaskForm extends Component {
         <ul className="errors">
           {errorList}
         </ul>
-        <label for="taskName">Enter a task</label>
+        <label htmlFor="taskName">Enter a task</label>
         <input className="form-control" type='text' placeholder="Washing the dishes, clean the bathroom..." ref="taskName" id="taskName"/>
-        <label for="startDate">Start Date</label>
+        <label htmlFor="startDate">Start Date</label>
         <input className="form-control" type='date' placeholder="this is a test" id="startDate" ref="startDate"/>
-        <label for="endDate">End Date</label>
+        <label htmlFor="endDate">End Date</label>
         <input className="form-control" type='date' placeholder="this is a test" id="endDate" ref="endDate"/>
         <input onSubmit={::this.createTask} type="submit"/>
       </form>

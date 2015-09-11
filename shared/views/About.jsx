@@ -12,7 +12,6 @@ export default class About extends Component {
 
 var styles = {
   base: {
-    paddingTop: '51px',
     background: 'lightgrey'
   }
 }

@@ -4,7 +4,15 @@ export default class Finances extends Component {
   render() {
     return(
       <div style={styles.base}>
-        <h1> Finances PAGE </h1>
+        <div className="col-sm-4">
+          Household costs
+        </div>
+        <div className="col-sm-4">
+          Borrowing
+        </div>
+        <div className="col-sm-4">
+          Lending
+        </div>
       </div>
     )
   }
@@ -12,7 +20,6 @@ export default class Finances extends Component {
 
 var styles = {
   base: {
-    paddingTop: '51px',
     background: 'lightgrey'
   }
 }

@@ -7,6 +7,10 @@ import Sidebar from '../components/Sidebar';
 import NewTaskForm from '../components/NewTaskForm';
 
 class Chores extends Component {
+  componentDidMount() {
+    this.props.getTasks();
+  }
+
   render() {
     return(
       <div className="row" style={styles.base}>
@@ -21,7 +25,6 @@ class Chores extends Component {
 
 var styles = {
   base: {
-    paddingTop: '51px',
     background: 'lightgrey'
   }
 }
