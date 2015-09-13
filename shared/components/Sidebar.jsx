@@ -1,37 +1,49 @@
-import React from 'react';
-import Radium from 'radium';
+import React, { Component } from 'react';
+import { Link } from 'react-router';
 
-const accentColor = '#00DFFF';
-
-@Radium
-export default class Sidebar extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-  }
-
-  render() {
-    let tasks;
-    if(this.props.tasks){
-      tasks = this.props.tasks.map(function(task) {
-        return (
-          <div key={task._id} style={styles.sideBarItem}>
-            task: {task.taskName}
-            <br />
-            start: {task.startDate}
-            <br />
-            end: {task.endDate}
-            <br />
-          </div>
-        )
-      })
-    }
-    
+export default class SideBar extends Component {
+  render () {
     return (
-      <div className="col-sm-3" style={styles.sideBar}>
-        { tasks }
+      <div style={styles.sidebar}>
+        Navigation
+          <ul className="list-group text-center">
+          <Link to="/home/dashboard"> 
+            <li className="list-group-item">
+              <span className="fa fa-tachometer" /> Dashboard
+            </li> 
+          </Link>
+          <Link to="/home/chores"> 
+            <li className="list-group-item">
+              <span className="fa fa-tasks" /> Chores
+            </li> 
+          </Link>
+          <Link to="/home/finances"> 
+            <li className="list-group-item">
+              <span className="fa fa-money" /> Finances
+            </li> 
+          </Link>
+          <Link to="/home/shopping"> 
+            <li className="list-group-item">
+              <span className="fa fa-cart-arrow-down" /> Shopping List
+            </li> 
+          </Link>
+          </ul>
+        Account
+          <ul className="list-group text-center">
+            <Link to="/home/finances"> 
+              <li className="list-group-item">
+                <span className="fa fa-cog" /> Settings
+              </li> 
+            </Link>
+            <a href="/logout"> 
+              <li className="list-group-item">
+                <span className="fa fa-sign-out" /> Logout
+              </li> 
+            </a>
+          </ul>
       </div>
     )
-  };
+  }
 }
 
 var styles = {

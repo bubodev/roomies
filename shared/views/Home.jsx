@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as authActions from '../actions/AuthActions';
+import SideBar from '../components/SideBar';  
 import cookie from 'react-cookie';
 
 class Home extends Component {
@@ -18,7 +19,12 @@ class Home extends Component {
   render() {
     return(
       <div className="container-fluid" style={styles.base}>
-        {this.props.children}    
+        <div className="col-sm-3">
+          <SideBar />
+        </div>
+        <div className="col-sm-9">
+          {this.props.children}
+        </div>
       </div>
     )
   }
@@ -27,7 +33,7 @@ class Home extends Component {
 var styles = {
   base: {
     paddingTop: '65px',
-    backgroundColor: 'lightgrey'
+    backgroundColor: 'gainsboro'
   },
 
   mainSection: {

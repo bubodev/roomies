@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as taskActions from '../actions/TaskActions';
 
-import Sidebar from '../components/Sidebar';
+import TaskList from '../components/TaskList';
 import NewTaskForm from '../components/NewTaskForm';
 
 class Chores extends Component {
@@ -14,7 +14,7 @@ class Chores extends Component {
   render() {
     return(
       <div className="row" style={styles.base}>
-        <Sidebar key="sideBar" tasks={this.props.tasks} />
+        <TaskList key="sideBar" tasks={this.props.tasks} />
         <div style={styles.mainSection} className="col-sm-9">
         <NewTaskForm/>
         </div>
@@ -25,7 +25,6 @@ class Chores extends Component {
 
 var styles = {
   base: {
-    background: 'lightgrey'
   }
 }
 

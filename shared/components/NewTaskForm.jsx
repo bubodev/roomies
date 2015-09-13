@@ -3,6 +3,8 @@ import Radium from 'radium';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as taskActions from '../actions/TaskActions';
+import RadioButtons from './RadioButtons';
+
 
 @Radium
 class NewTaskForm extends Component {
@@ -57,12 +59,8 @@ class NewTaskForm extends Component {
         <input className="form-control" type='text' placeholder="Washing the dishes, clean the bathroom..." ref="taskName" id="taskName"/>
         <label htmlFor="startDate">Start Date</label>
         <input className="form-control" type='date' placeholder="this is a test" id="startDate" ref="startDate"/>
-        
-        <select name="states">
-        <option name="Pendiente">Pendiente</option>
-        <option name="Frenada">Frenada</option>
-        <option name="Finalizada">Finalizada</option>
-        </select>
+        <label htmlFor="repeat">Repeats</label>
+        <RadioButtons values={[1,2,3,4,5]} />
 
         <input onSubmit={::this.createTask} type="submit"/>
       </form>
