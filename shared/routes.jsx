@@ -10,8 +10,8 @@ import Finances from './views/Finances';
 export default (
   <Route name="app" component={App} path="/">
     <Route path="login" component={Login} />
+    <Route path="about" component={About} />
     <Route path="home" component={Home} onEnter={checkAuth}>
-      <Route path="about" component={About} />
       <Route path="chores" component={Chores} />
       <Route path="finances" component={Finances} />
     </Route>

@@ -4,7 +4,7 @@ const defaultState = new Immutable.List();
 
 export default function transactionReducer(state=defaultState, action) {
   switch(action.type) {
-    case 'GET_TRANSACTION_SUCCESS':
+    case 'GET_TRANSACTIONS_SUCCESS':
       return state.concat(action.res.data);
     case 'CREATE_TRANSACTION_SUCCESS':
       return state.concat(action.res.data)

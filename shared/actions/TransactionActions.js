@@ -11,7 +11,7 @@ export function getTransactions() {
 
 export function createTransaction(transactionParams) {
   return {
-    types: ['CREATE_TRANSACTIONS','CREATE_TRANSACTIONS_SUCCESS','CREATE_TRANSACTIONS_FAILURE'],
+    types: ['CREATE_TRANSACTION','CREATE_TRANSACTION_SUCCESS','CREATE_TRANSACTION_FAILURE'],
     promise: request.post(BACKEND_URL, {
       transactionParams: transactionParams,
     })
@@ -20,7 +20,7 @@ export function createTransaction(transactionParams) {
 
 export function deleteTransaction(id) {
   return {
-    type: 'DELETE_TRANSACTIONS',
+    type: 'DELETE_TRANSACTION',
     id
   }
 }

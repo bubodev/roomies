@@ -12,13 +12,16 @@ class Finances extends Component {
     super(props);
   }
 
-  render() {
-    var data = {
-      label: 'somethingA',
-      values: [{x: 'SomethingA', y: 10}, {x: 'SomethingB', y: 4}, {x: 'SomethingC', y: 3}]
-    };
+  componentDidMount() {
+    this.props.getTransactions();
+  }
 
-    var sort;
+  render() {
+    let data = {
+      label: 'somethingA',
+      values: [{x: 'somethingA', y: 10}, {x: 'SomethingB', y: 4}, {x: 'SomethingC', y: 3}]
+    };
+    let sort;
 
     return(
       <div style={styles.base}>
@@ -52,14 +55,35 @@ class Finances extends Component {
         <div className="row">
           <div className="col-sm-4">
             Household costs
+            {this.props.transactions.map(function(transaction){
+              if(transaction.type === 'HOUSE'){
+                return <div key={transaction._id}> {transaction.description} {transaction.amount} </div>
+              } else {
+                return null
+              }
+            })}
             <NewTransactionForm _submitNewTransaction={this.props.createTransaction} />
           </div>
           <div className="col-sm-4">
             Lending
+            {this.props.transactions.map(function(transaction){
+              if(transaction.type === 'IN'){
+                return <div key={transaction._id}> {transaction.description} {transaction.amount} </div>
+              } else {
+                return null
+              }
+            })}
             <NewTransactionForm _submitNewTransaction={this.props.createTransaction} />
           </div>
           <div className="col-sm-4">
             Borrowing
+            {this.props.transactions.map(function(transaction){
+              if(transaction.type === 'OUT'){
+                return <div key={transaction._id}> {transaction.description} {transaction.amount} </div>
+              } else {
+                return null
+              }
+            })}
           </div>
         </div>
       </div>
@@ -73,7 +97,6 @@ var styles = {
   },
 
   charts: {
-    height: '30vh',
     background: 'darkgrey'
   }
 }

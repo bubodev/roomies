@@ -119,7 +119,7 @@ router.put('/transactions/:id', function(req, res) {
 
 router.post('/transactions', function(req, res) {
   let newTransaction = new Transaction(req.body.transactionParams);
-
+  console.log(req.body.transactionParams);
   newTransaction.save(function(err) {
     if(err)
       res.json(err);

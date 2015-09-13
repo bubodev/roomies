@@ -57,8 +57,13 @@ class NewTaskForm extends Component {
         <input className="form-control" type='text' placeholder="Washing the dishes, clean the bathroom..." ref="taskName" id="taskName"/>
         <label htmlFor="startDate">Start Date</label>
         <input className="form-control" type='date' placeholder="this is a test" id="startDate" ref="startDate"/>
-        <label htmlFor="endDate">End Date</label>
-        <input className="form-control" type='date' placeholder="this is a test" id="endDate" ref="endDate"/>
+        
+        <select name="states">
+        <option name="Pendiente">Pendiente</option>
+        <option name="Frenada">Frenada</option>
+        <option name="Finalizada">Finalizada</option>
+        </select>
+
         <input onSubmit={::this.createTask} type="submit"/>
       </form>
     )

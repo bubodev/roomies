@@ -26,11 +26,11 @@ export default class Navbar extends React.Component {
         <div className="container-fluid">
           <div className="navbar-header">
             <div onClick={this.handleClick.bind(this, '/home')} style={styles.brand} className="navbar-brand">
-              <h4><span className="glyphicon glyphicon-home"/> roomies</h4>
+              <h4><span className="fa fa-home"/> roomies</h4>
             </div>
           </div>
           <ul className="nav navbar-nav navbar-right">
-            <Link to="/home/about"> About </Link>
+            <Link to="/about"> About </Link>
             <Link to="/home/chores"> Chores </Link>
             <Link to="/home/finances"> Finances </Link>
             <a href="/logout"> Logout </a>

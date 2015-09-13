@@ -4,7 +4,7 @@ import User from './Users';
 let Schema = mongoose.Schema;
 let transactionSchema = new Schema({
   type: String,
-  name: String,
+  description: String,
   date: Date,
   amount: Number,
   spender: Schema.Types.ObjectId,

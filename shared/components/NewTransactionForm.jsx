@@ -17,9 +17,9 @@ export default class NewTransactionForm extends Component {
     let transParams = {};
     transParams.name = this.refs.name.getDOMNode().value;
     transParams.date = this.refs.date.getDOMNode().value;
-    transParams.amount = this.refs.amount.getDOMNode().value;
-    debugger;
-    this.props._submitNewTransaction();
+    transParams.amount = parseInt(this.refs.amount.getDOMNode().value);
+    transParams.type = this.refs.type.getDOMNode().value;
+    this.props._submitNewTransaction(transParams);
     this.setState({
       hidden: true
     })
@@ -43,6 +43,10 @@ export default class NewTransactionForm extends Component {
             <div className="input-group">
               <span className="input-group-addon">$</span>
               <input ref="amount" type="text" className="form-control" />
+            </div>
+            <div className="input-group">
+              <span className="input-group-addon">type</span>
+              <input ref="type" type="text" className="form-control" />
             </div>
             <div className="input-group">
               <span className="input-group-addon">date</span>
