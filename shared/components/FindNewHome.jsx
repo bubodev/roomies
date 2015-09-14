@@ -1,0 +1,92 @@
+import React, { Component, PropTypes } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import cookie from 'react-cookie';
+
+import * as HomeActions from '../actions/HomeActions';
+
+class FindNewHome extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      selected: null
+    }
+  }
+
+  chooseState(choice) {
+    this.setState({
+      selected: choice
+    })
+  }
+
+  submitExistingHouse() {
+
+  }
+
+  createNewHouse(e) {
+    e.preventDefault();
+    let homeParams = {
+      name: this.refs.HouseName,
+      description: this.refs.desc,
+    }
+
+    let userId = cookie.load('userId').slice(3,-1);
+
+    this.props.createHome(homeParams, userId);
+  }
+
+  render() {
+    let showComponent;
+
+    if(this.state.selected === "NEW") {
+      showComponent = (
+        <div>
+          <form onSubmit={::this.createNewHouse}>
+            <input type="text" ref="houseName" placeholder="House name" className="form-control" />
+            <input type="text" ref="houseDesc" placeholder="House description" className="form-control" />
+            <input type="submit" className="form-control" />
+          </form>
+          <button onClick={this.chooseState.bind(this, null)}>Back</button>
+        </div>
+      )
+    } else if(this.state.selected === "EXISTING") {
+      showComponent = (
+        <div>
+          <input type="text" placeholder="enter house code" />
+          <button onClick={this.chooseState.bind(this, null)}>Back</button>
+        </div>  
+      )
+    } else {
+      showComponent = (
+        <div>
+          <button onClick={this.chooseState.bind(this, "NEW")}>Create new home</button>
+          <button onClick={this.chooseState.bind(this, "EXISTING")}>I have a home</button>
+        </div>
+      )
+    }
+
+
+    return(
+      <div>
+        {this.state.selected}
+        {showComponent}
+      </div>
+    )
+  }
+}
+
+@connect(state => ({
+  home: state.home
+}))
+
+export default class FindNewHomeContainer {
+  static propTypes = {
+    home: PropTypes.object,
+    dispatch: PropTypes.func.isRequired
+  }
+
+  render() {
+    const { home, dispatch } = this.props;
+    return <FindNewHome home={home} {...bindActionCreators(HomeActions, dispatch)}/>
+  }
+}

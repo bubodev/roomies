@@ -17,7 +17,7 @@ export default function authReducer(state = defaultState, action = {}) {
         loaded: true,
         loading: false,
         user: action.res.data,
-        hasHome: action.res.data.hasHome
+        hasHome: action.res.data.homeId
       }
     default:
       return state;

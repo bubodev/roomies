@@ -2,6 +2,7 @@ import express  from 'express';
 import mongoose from 'mongoose';
 import User from '../config/models/Users';
 import Task from '../config/models/Tasks';
+import Home from '../config/models/Homes';
 import Transaction from '../config/models/Transactions';
 
 
@@ -77,9 +78,22 @@ router.post('/tasks', function(req, res) {
 })
 
 /** HOMES **/
+router.get('/homes/:id', function(req, res) {
+  Home.findById(req.params.id, function(err, home) {
+    if(err)
+      res.send(err);
+
+    res.json(home);
+  })
+})
+
 router.post('/homes', function(req, res) {
-  res.json({
-    message: "posted to the homes resource"
+  let newHome = new Home(req.body.homeParams);
+
+  newHome.save(function(err) {
+    if(err)
+      res.json(err);
+    res.json(newHome);
   })
 })
 

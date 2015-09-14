@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as authActions from '../actions/AuthActions';
 import SideBar from '../components/SideBar';  
+import Dashboard from './Dashboard';
 import cookie from 'react-cookie';
 
 class Home extends Component {
@@ -23,7 +24,7 @@ class Home extends Component {
           <SideBar />
         </div>
         <div className="col-sm-9">
-          {this.props.children}
+          {this.props.children || <Dashboard/>}
         </div>
       </div>
     )

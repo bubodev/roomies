@@ -14,7 +14,7 @@ passport.use(new GoogleStrategy.OAuth2Strategy({
         user = new User({ 
           googleId: profile.id,
           name: profile.displayName,
-          hasHome: false,
+          homeId: null
         });
 
         user.save((err) => {
