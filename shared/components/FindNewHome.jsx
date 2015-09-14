@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import cookie from 'react-cookie';
 
 import * as HomeActions from '../actions/HomeActions';
+import * as AuthActions from '../actions/AuthActions';
 
 class FindNewHome extends Component {
   constructor(props) {
@@ -32,7 +33,9 @@ class FindNewHome extends Component {
 
     let userId = cookie.load('userId').slice(3,-1);
 
-    this.props.createHome(homeParams, userId);
+    this.props.createHome(homeParams, userId).then(home => {
+      this.props.loadUser(userId);
+    });
   }
 
   render() {
@@ -76,17 +79,19 @@ class FindNewHome extends Component {
 }
 
 @connect(state => ({
-  home: state.home
+  home: state.home,
+  auth: state.auth,
 }))
 
 export default class FindNewHomeContainer {
   static propTypes = {
     home: PropTypes.object,
+    auth: PropTypes.object,
     dispatch: PropTypes.func.isRequired
   }
 
   render() {
-    const { home, dispatch } = this.props;
-    return <FindNewHome home={home} {...bindActionCreators(HomeActions, dispatch)}/>
+    const { home, auth, dispatch } = this.props;
+    return <FindNewHome auth={auth} home={home} {...bindActionCreators(AuthActions, dispatch)} {...bindActionCreators(HomeActions, dispatch)}/>
   }
 }

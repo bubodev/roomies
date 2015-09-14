@@ -24,7 +24,7 @@ class Home extends Component {
           <SideBar />
         </div>
         <div className="col-sm-9">
-          {this.props.children || <Dashboard/>}
+          {this.props.children || <Dashboard />}
         </div>
       </div>
     )

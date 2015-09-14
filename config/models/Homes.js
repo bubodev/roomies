@@ -6,8 +6,8 @@ let Schema = mongoose.Schema;
 let homeSchema = new Schema({
   name: String,
   description: String,
-  tasks: [Tasks],
-  users: [Users],
+  tasks: [ Tasks.schema ],
+  users: [ Users.schema ],
 });
 
 const Home = mongoose.model('Home', homeSchema); 

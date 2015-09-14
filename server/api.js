@@ -90,10 +90,19 @@ router.get('/homes/:id', function(req, res) {
 router.post('/homes', function(req, res) {
   let newHome = new Home(req.body.homeParams);
 
-  newHome.save(function(err) {
+  User.findById(req.body.userId, function(err, user) {
     if(err)
       res.json(err);
-    res.json(newHome);
+    newHome.users.push(user)
+    newHome.save(function(err) {
+      if(err)
+        res.json(err);
+      user.homeId = newHome._id;
+      console.log(newHome);
+      user.save(function(){
+        res.json(newHome);
+      });
+    })
   })
 })
 
