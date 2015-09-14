@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as authActions from '../actions/AuthActions';
+import * as homeActions from '../actions/HomeActions';
+
 
 import Overview from '../components/Overview';
 import FindNewHome from '../components/FindNewHome';
@@ -15,8 +16,10 @@ class Dashboard extends Component {
     }
   }
 
-  debug() {
-    debugger;
+  componentDidMount() {
+    if(this.props.auth && this.props.auth.user) {
+      this.props.auth.user.homeId && this.props.getHome(this.props.auth.user.homeId);
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -35,18 +38,23 @@ class Dashboard extends Component {
     }
   }
 
+  debug() {
+    debugger;
+  }
+
   render() {
     let comp;
 
     if(this.state.show === "OVERVIEW") {
-      comp = <Overview />
+      comp = <Overview auth={this.props.auth} home={this.props.home}/>
     } else if(this.state.show === "NEW") {
       comp = <FindNewHome />
+    } else {
+      comp = <LoadingScreen />
     }
 
     return(
       <div>
-        <button onClick={::this.debug} />
         <h1>Dashboard</h1>
         { comp }
       </div>
@@ -67,6 +75,6 @@ export default class DashboardContainer {
 
   render() {
     const { auth, home, dispatch } = this.props;
-    return <Dashboard auth={auth} home={home} {...bindActionCreators(authActions, dispatch)} />;
+    return <Dashboard auth={auth} home={home} {...bindActionCreators(homeActions, dispatch)}/>;
   }
 }

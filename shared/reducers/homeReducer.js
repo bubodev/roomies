@@ -4,7 +4,6 @@ const defaultState = {
 }
 
 export default function homeReducer(state = defaultState, action = {}) {
-  console.log(action.type);
   if(action.type === 'CREATE_HOME_FAILURE')
     console.log(action);
   switch(action.type) {

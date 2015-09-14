@@ -87,7 +87,6 @@ router.get('/homes/:id', function(req, res) {
 })
 
 router.post('/homes', function(req, res) {
-  console.log("hit home creation api");
   let newHome = new Home(req.body.homeParams);
   User.findById(req.body.userId, function(err, user) {
     if(err)
