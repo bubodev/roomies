@@ -11,7 +11,6 @@ mongoose.connect('mongodb://localhost/test');
 let router = express.Router();
 
 router.get('/', function(req, res) {
-  console.log("hit api server");
   res.json({
     message: "Welcome to the api server"
   });
@@ -88,20 +87,38 @@ router.get('/homes/:id', function(req, res) {
 })
 
 router.post('/homes', function(req, res) {
+  console.log("hit home creation api");
   let newHome = new Home(req.body.homeParams);
-
   User.findById(req.body.userId, function(err, user) {
     if(err)
       res.json(err);
-    newHome.users.push(user)
+    newHome.users.push(user);
     newHome.save(function(err) {
       if(err)
         res.json(err);
       user.homeId = newHome._id;
-      console.log(newHome);
-      user.save(function(){
+      user.save(function() {
         res.json(newHome);
       });
+    })
+  })
+})
+
+
+router.put('/homes', function(req,res) {
+  Home.findById(req.body.houseCode, function(err, home) {
+    if(err)
+      res.send(err);
+
+    User.findById(req.body.userId, function(err, user) {
+      home.users.push(user)
+      user.homeId = home._id;
+
+      user.save(function(err) {
+        if(err)
+          res.json(err);
+        res.json(home);
+      })
     })
   })
 })
@@ -142,7 +159,6 @@ router.put('/transactions/:id', function(req, res) {
 
 router.post('/transactions', function(req, res) {
   let newTransaction = new Transaction(req.body.transactionParams);
-  console.log(req.body.transactionParams);
   newTransaction.save(function(err) {
     if(err)
       res.json(err);

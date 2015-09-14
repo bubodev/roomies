@@ -20,15 +20,21 @@ class FindNewHome extends Component {
     })
   }
 
-  submitExistingHouse() {
+  submitExistingHouse(e) {
+    e.preventDefault();
 
+    let userId = cookie.load('userId').slice(3,-1);
+
+    this.props.addUserToHome(this.refs.houseCode, userId).then(home => {
+      this.props.loadUser(userId);
+    })
   }
 
   createNewHouse(e) {
     e.preventDefault();
     let homeParams = {
-      name: this.refs.HouseName,
-      description: this.refs.desc,
+      name: this.refs.houseName.getDOMNode().value,
+      description: this.refs.houseDesc.getDOMNode().value,
     }
 
     let userId = cookie.load('userId').slice(3,-1);
@@ -55,7 +61,9 @@ class FindNewHome extends Component {
     } else if(this.state.selected === "EXISTING") {
       showComponent = (
         <div>
-          <input type="text" placeholder="enter house code" />
+          <form onSubmit={::this.submitExistingHouse}>
+            <input type="text" ref="houseCode" placeholder="enter house code" />
+          </form>
           <button onClick={this.chooseState.bind(this, null)}>Back</button>
         </div>  
       )

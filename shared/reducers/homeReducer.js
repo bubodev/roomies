@@ -4,6 +4,9 @@ const defaultState = {
 }
 
 export default function homeReducer(state = defaultState, action = {}) {
+  console.log(action.type);
+  if(action.type === 'CREATE_HOME_FAILURE')
+    console.log(action);
   switch(action.type) {
     case 'GET_HOME':
       return {
@@ -27,6 +30,26 @@ export default function homeReducer(state = defaultState, action = {}) {
         ...state,
         loading: false,
         loaded: true,
+        home: action.res.data
+      }
+    case 'CREATE_HOME_FAILURE':
+      return {
+        ...state,
+        loading: false,
+        loaded: false,
+        err: action.res.data
+      }
+    case 'ADD_USER':
+      return {
+        ...state,
+        loading: true,
+        loaded: false,
+      }
+    case 'ADD_USER_SUCCESS':
+      return {
+        ...state,
+        loaded: true,
+        loading: false,
         home: action.res.data
       }
     default:

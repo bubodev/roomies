@@ -15,9 +15,9 @@ class NewTaskForm extends Component {
 
   createTask(e) {
     e.preventDefault();
-    let taskName = this.refs.taskName.getDOMNode();
-    let startDate = this.refs.startDate.getDOMNode();
-    let endDate = this.refs.endDate.getDOMNode();
+    let taskName = this.refs.taskName.getDOMNode().value;
+    let startDate = this.refs.startDate.getDOMNode().value;
+    let endDate = this.refs.endDate.getDOMNode().value;
 
     let errors = [];
     if(!taskName.value.length)

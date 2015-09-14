@@ -15,6 +15,10 @@ class Dashboard extends Component {
     }
   }
 
+  debug() {
+    debugger;
+  }
+
   componentWillReceiveProps(nextProps) {
     if(nextProps.auth){
       if(nextProps.auth.user) {
@@ -31,10 +35,6 @@ class Dashboard extends Component {
     }
   }
 
-  debug(){
-    debugger;
-  }
-
   render() {
     let comp;
 
@@ -46,8 +46,8 @@ class Dashboard extends Component {
 
     return(
       <div>
+        <button onClick={::this.debug} />
         <h1>Dashboard</h1>
-        <button onClick={::this.debug}/>
         { comp }
       </div>
     )

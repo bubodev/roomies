@@ -11,7 +11,7 @@ export function getHome() {
 
 export function createHome(homeParams, userId) {
   return {
-    types: ['CREATE_HOME','CREATE_HOME_SUCCESS','CREATE_HOME_FAILURE'],
+    types: ['CREATE_HOME', 'CREATE_HOME_SUCCESS', 'CREATE_HOME_FAILURE'],
     promise: request.post(BACKEND_URL, {
       homeParams: homeParams,
       userId: userId
