@@ -1,4 +1,4 @@
-import Immutable from 'Immutable'
+import Immutable from 'immutable'
 
 const defaultState = new Immutable.List();
 
