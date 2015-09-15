@@ -14,7 +14,7 @@ export default class SideBarItem extends Component {
       checkActive = "active"
     }
     return(
-      <Link to={this.props.route} style={styles.base}> 
+      <Link onClick={this.props.closeSideBar} to={this.props.route} style={styles.base}> 
         <li key="dashboard" style={[styles.listItem, styles[checkActive]]}>
           <span className={"pull-left fa fa-lg fa-" + this.props.faGlyph} /> 
           <span> {this.props.label} </span>
@@ -42,7 +42,10 @@ const styles = {
     textAlign: 'center',
     border: 'none',
     '@media (max-width: 767px)': {
-      padding: '15px'
+      padding: '15px',
+      ':hover': {
+        color: 'black'
+      }
     },
     ':hover': {
       color: 'white'

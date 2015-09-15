@@ -28,30 +28,32 @@ export default class SideBar extends Component {
   render () {
     let currentRoute = this.context.router.state.location.pathname;
     return (
-      <div style={[styles.base, styles[this.state.sideBarShow], styles[this.props.status]]} key="sideBar">
-        <ul className="list-group text-center">
-          <div style={styles.thumbnail} >
-            <img style={styles.image} src="http://res.cloudinary.com/bitebox/image/upload/c_scale,w_150/v1434495985/default-avatar_oxtmnu.png" />
-            <div className="caption">
-              <h4> Example User </h4>
+      <div>
+        <div style={[styles.base, styles[this.state.sideBarShow], styles[this.props.status]]} key="sideBar">
+          <ul className="list-group text-center">
+            <div style={styles.thumbnail} >
+              <img style={styles.image} src="http://res.cloudinary.com/bitebox/image/upload/c_scale,w_150/v1434495985/default-avatar_oxtmnu.png" />
+              <div className="caption">
+                <h4> Example User </h4>
+              </div>
             </div>
-          </div>
-          <br />
-          <SideBarItem label="Dashboard" route="/home/dashboard" faGlyph="tachometer" currentRoute={currentRoute}>
-            <span className="badge alert-danger">4</span>
-          </SideBarItem>
-          <SideBarItem label="Chores" route="/home/chores" faGlyph="tasks" currentRoute={currentRoute} />
-          <SideBarItem label="Finances" route="/home/finances" faGlyph="money" currentRoute={currentRoute} />
-          <SideBarItem label="Shopping List" route="/home/shopping" faGlyph="cart-arrow-down" currentRoute={currentRoute} />
-        </ul>
-        <ul className="list-group text-center">
-          <SideBarItem label="Settings" route="/home/settings" faGlyph="cog" currentRoute={currentRoute} />
-          <a href="/logout" style={styles.linkItem}> 
-            <li className="list-group-item" key="signout" style={styles.logOutButton}>
-              <span className="fa fa-lg fa-sign-out" /> Logout
-            </li> 
-          </a>
-        </ul>
+            <br />
+            <SideBarItem closeSideBar={::this.toggleSideBar} label="Dashboard" route="/home/dashboard" faGlyph="tachometer" currentRoute={currentRoute}>
+              <span className="badge alert-danger">4</span>
+            </SideBarItem>
+            <SideBarItem closeSideBar={::this.toggleSideBar} label="Chores" route="/home/chores" faGlyph="tasks" currentRoute={currentRoute} />
+            <SideBarItem closeSideBar={::this.toggleSideBar} label="Finances" route="/home/finances" faGlyph="money" currentRoute={currentRoute} />
+            <SideBarItem closeSideBar={::this.toggleSideBar} label="Shopping List" route="/home/shopping" faGlyph="cart-arrow-down" currentRoute={currentRoute} />
+          </ul>
+          <ul className="list-group text-center">
+            <SideBarItem closeSideBar={::this.toggleSideBar} label="Settings" route="/home/settings" faGlyph="cog" currentRoute={currentRoute} />
+            <a href="/logout" style={styles.linkItem}> 
+              <li className="list-group-item" key="signout" style={styles.logOutButton}>
+                <span className="fa fa-lg fa-sign-out" /> Logout
+              </li> 
+            </a>
+          </ul>
+        </div>
         <button className="btn btn-default" style={styles.sideBarToggle} key="sideBarToggle" onClick={::this.toggleSideBar} >
           <span className="fa fa-bars" />  
         </button>
@@ -78,11 +80,14 @@ const styles = {
       padding: '10px',
       width: '100%',
       zIndex: 1,
-      background: 'white',
+      background: '40474E',
       transition: 'top .5s ease',
       borderBottom: '1px solid lightgrey',
       overflowY: 'scroll',
-    }
+    },
+    '@media (min-width: 1200px)': {
+      width: '16.66667%',
+    },
   },
 
   sideBarHide: {
@@ -92,7 +97,7 @@ const styles = {
   },
 
   sideBarShow: {
-    top: '51px'
+    top: '0px'
   },
 
   sideBarToggle: {
