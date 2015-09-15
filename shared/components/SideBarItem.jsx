@@ -15,9 +15,10 @@ export default class SideBarItem extends Component {
     }
     return(
       <Link to={this.props.route} style={styles.base}> 
-        <li className={"list-group-item " + checkActive} key="dashboard" style={styles.listItem}>
-          {this.props.children || null}
-          <span className={"fa fa-" + this.props.faGlyph} /> {this.props.label}
+        <li key="dashboard" style={[styles.listItem, styles[checkActive]]}>
+          <span className={"pull-left fa fa-lg fa-" + this.props.faGlyph} /> 
+          <span> {this.props.label} </span>
+          <span className="pull-right"> {this.props.children || null} </span>
         </li> 
       </Link>
     )
@@ -28,9 +29,11 @@ const styles = {
   base: {
     textDecoration: 'none',
     color: 'darkgrey',
-    ':hover': {
-      color: 'black',
-    }
+  },
+
+  active: {
+    background: '#53595F',
+    color: 'white',
   },
 
   listItem: {
@@ -42,7 +45,7 @@ const styles = {
       padding: '15px'
     },
     ':hover': {
-      color: 'black'
+      color: 'white'
     }
   },
 }

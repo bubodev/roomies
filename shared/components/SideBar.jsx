@@ -36,7 +36,7 @@ export default class SideBar extends Component {
               <h4> Example User </h4>
             </div>
           </div>
-          <hr/>
+          <br />
           <SideBarItem label="Dashboard" route="/home/dashboard" faGlyph="tachometer" currentRoute={currentRoute}>
             <span className="badge alert-danger">4</span>
           </SideBarItem>
@@ -47,8 +47,8 @@ export default class SideBar extends Component {
         <ul className="list-group text-center">
           <SideBarItem label="Settings" route="/home/settings" faGlyph="cog" currentRoute={currentRoute} />
           <a href="/logout" style={styles.linkItem}> 
-            <li className="list-group-item" key="signout" style={styles.sideBarItem}>
-              <span className="fa fa-sign-out" /> Logout
+            <li className="list-group-item" key="signout" style={styles.logOutButton}>
+              <span className="fa fa-lg fa-sign-out" /> Logout
             </li> 
           </a>
         </ul>
@@ -66,11 +66,15 @@ SideBar.contextTypes = {
 
 const styles = {
   base: {
-    borderRight: '1px dashed lightgrey',
-    padding: '10px',
+    background: '#40474E',
+    position: 'fixed',
+    left: 0,
+    top: 0,
+    width: '25%',
+    height: '100vh',
+    overflowY: 'scroll',
     '@media (max-width: 767px)': {
       position: 'fixed',
-      left: 0,
       padding: '10px',
       width: '100%',
       zIndex: 1,
@@ -82,7 +86,9 @@ const styles = {
   },
 
   sideBarHide: {
-    top: '-800px'
+    '@media (max-width: 767px)': {
+      top: '-800px'
+    }
   },
 
   sideBarShow: {
@@ -105,6 +111,17 @@ const styles = {
     }
   },
 
+  logOutButton: {
+    position: 'relative',
+    bottom: '-20px',
+    background: 'lightcoral',
+    color: 'white',
+    border: 'none',
+    ':hover': {
+      background: 'rgb(234, 89, 89)'
+    }
+  },
+
   linkItem: {
     textDecoration: 'none',
     color: 'darkgrey',
@@ -118,13 +135,12 @@ const styles = {
   },
 
   thumbnail: {
-    border: '1px solid grey',
-    color: 'grey',
+    color: 'white',
     width: 'auto',
-    paddingTop: '7px',
+    paddingTop: '60px',
     marginLeft: 'auto',
     marginRight: 'auto',
-    maxWidth: '200px'
+    maxWidth: '200px',
   },
 
   image: {
