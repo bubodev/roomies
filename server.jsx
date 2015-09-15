@@ -16,6 +16,11 @@ const app = express();
 
 import Login from './shared/views/Login';
 
+import fs from 'fs';
+app.use('/bundle.js', function (req, res) {
+  return fs.createReadStream('./dist/bundle.js').pipe(res);
+});
+
 var MongoStore = require('connect-mongo')(session);
 app.use(cookieParser());
 app.use(session({ secret:'keyboard cat',
@@ -46,9 +51,7 @@ import promiseMiddleware from 'shared/lib/promiseMiddleware';
 
 app.use((req, res) => {
   const logger = store => next => action => {
-    console.log('dispatching', action);
     let result = next(action);
-    console.log('next state', store.getState());
     return result;
   };
 

@@ -25,7 +25,7 @@ class FindNewHome extends Component {
 
     let userId = cookie.load('userId').slice(3,-1);
 
-    this.props.addUserToHome(this.refs.houseCode, userId).then(home => {
+    this.props.addUserToHome(this.refs.houseCode.getDOMNode().value, userId).then(home => {
       this.props.loadUser(userId);
     })
   }

@@ -9,6 +9,15 @@ export function getHome(homeId) {
   }
 }
 
+export function addUserToHome(houseCode, userId) {
+  return {
+    types: ['ADD_USER', 'ADD_USER_SUCCESS', 'ADD_USER_FAILURE'],
+    promise: request.put(BACKEND_URL + '/' + houseCode, {
+      userId: userId
+    })
+  }
+}
+
 export function createHome(homeParams, userId) {
   return {
     types: ['CREATE_HOME', 'CREATE_HOME_SUCCESS', 'CREATE_HOME_FAILURE'],

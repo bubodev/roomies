@@ -3,6 +3,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as authActions from '../actions/AuthActions';
 import SideBar from '../components/SideBar';  
+import LoadingScreen from '../components/LoadingScreen';  
+
 import Dashboard from './Dashboard';
 import cookie from 'react-cookie';
 
@@ -18,10 +20,19 @@ class Home extends Component {
   }
 
   render() {
+    let sideBarShow;
+    if(this.props.auth.loading) {
+      sideBarShow = <LoadingScreen />
+    } else if(this.props.auth.user) {
+      sideBarShow = <SideBar />
+    } else {
+      sideBarShow = <SideBar disabled={true} />
+    }
+
     return(
       <div className="container-fluid" style={styles.base}>
         <div className="col-sm-3">
-          <SideBar />
+          { sideBarShow }
         </div>
         <div className="col-sm-9">
           {this.props.children || <Dashboard />}
@@ -34,7 +45,7 @@ class Home extends Component {
 var styles = {
   base: {
     paddingTop: '65px',
-    backgroundColor: 'gainsboro'
+    backgroundColor: 'white'
   },
 
   mainSection: {

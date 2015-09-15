@@ -104,8 +104,8 @@ router.post('/homes', function(req, res) {
 })
 
 
-router.put('/homes', function(req,res) {
-  Home.findById(req.body.houseCode, function(err, home) {
+router.put('/homes/:id', function(req,res) {
+  Home.findById(req.params.id, function(err, home) {
     if(err)
       res.send(err);
 

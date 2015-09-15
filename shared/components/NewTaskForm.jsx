@@ -15,9 +15,8 @@ class NewTaskForm extends Component {
 
   createTask(e) {
     e.preventDefault();
-    let taskName = this.refs.taskName.getDOMNode().value;
-    let startDate = this.refs.startDate.getDOMNode().value;
-    let endDate = this.refs.endDate.getDOMNode().value;
+    let taskName = this.refs.taskName.getDOMNode();
+    let startDate = this.refs.startDate.getDOMNode();
 
     let errors = [];
     if(!taskName.value.length)
@@ -35,7 +34,6 @@ class NewTaskForm extends Component {
     this.props.createTask({
       taskName: taskName.value,
       startDate: startDate.value,
-      endDate: endDate.value,
       completed: false
     });
 
@@ -47,7 +45,7 @@ class NewTaskForm extends Component {
 
   render() {
     let errorList = this.state.errors.map(function(err) {
-      return <li>{err}</li>
+      return <li className="alert alert-danger">{err}</li>
     })
 
     return(
