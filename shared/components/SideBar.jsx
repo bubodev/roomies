@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import Radium from 'radium';
+import SideBarItem from './SideBarItem';
 
 @Radium
 export default class SideBar extends Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
     this.state = {
       sideBarShow: 'sideBarHide'
     }
@@ -25,42 +26,26 @@ export default class SideBar extends Component {
   }
 
   render () {
+    let currentRoute = this.context.router.state.location.pathname;
     return (
-      <div style={[styles.sideBar, styles[this.state.sideBarShow], styles[this.props.status]]} key="sideBar">
+      <div style={[styles.base, styles[this.state.sideBarShow], styles[this.props.status]]} key="sideBar">
         <ul className="list-group text-center">
-        <div style={styles.thumbnail} >
-          <img src="http://res.cloudinary.com/bitebox/image/upload/c_scale,w_150/v1434495985/default-avatar_oxtmnu.png" />
-          <div className="caption">
-            <h4> Example User </h4>
+          <div style={styles.thumbnail} >
+            <img style={styles.image} src="http://res.cloudinary.com/bitebox/image/upload/c_scale,w_150/v1434495985/default-avatar_oxtmnu.png" />
+            <div className="caption">
+              <h4> Example User </h4>
+            </div>
           </div>
-        </div>
-        <Link to="/home/dashboard" style={styles.linkItem}> 
-          <li className="list-group-item" key="dashboard" style={styles.sideBarItem}>
-            <span className="fa fa-tachometer" /> Dashboard
-          </li> 
-        </Link>
-        <Link to="/home/chores" style={styles.linkItem}> 
-          <li className="list-group-item" key="chores" style={styles.sideBarItem}>
-            <span className="fa fa-tasks" /> Chores
-          </li> 
-        </Link>
-        <Link to="/home/finances" style={styles.linkItem}> 
-          <li className="list-group-item" key="finances" style={styles.sideBarItem}>
-            <span className="fa fa-money" /> Finances
-          </li> 
-        </Link>
-        <Link to="/home/shopping" style={styles.linkItem}> 
-          <li className="list-group-item" key="shopping" style={styles.sideBarItem}>
-            <span className="fa fa-cart-arrow-down" /> Shopping List
-          </li> 
-        </Link>
+          <hr/>
+          <SideBarItem label="Dashboard" route="/home/dashboard" faGlyph="tachometer" currentRoute={currentRoute}>
+            <span className="badge alert-danger">4</span>
+          </SideBarItem>
+          <SideBarItem label="Chores" route="/home/chores" faGlyph="tasks" currentRoute={currentRoute} />
+          <SideBarItem label="Finances" route="/home/finances" faGlyph="money" currentRoute={currentRoute} />
+          <SideBarItem label="Shopping List" route="/home/shopping" faGlyph="cart-arrow-down" currentRoute={currentRoute} />
         </ul>
         <ul className="list-group text-center">
-          <Link to="/home/finances" style={styles.linkItem}> 
-            <li className="list-group-item" key="settings" style={styles.sideBarItem}>
-              <span className="fa fa-cog" /> Settings
-            </li> 
-          </Link>
+          <SideBarItem label="Settings" route="/home/settings" faGlyph="cog" currentRoute={currentRoute} />
           <a href="/logout" style={styles.linkItem}> 
             <li className="list-group-item" key="signout" style={styles.sideBarItem}>
               <span className="fa fa-sign-out" /> Logout
@@ -75,8 +60,14 @@ export default class SideBar extends Component {
   }
 }
 
-var styles = {
-  sideBar: {
+SideBar.contextTypes = {
+  router: React.PropTypes.object.isRequired,
+};
+
+const styles = {
+  base: {
+    borderRight: '1px dashed lightgrey',
+    padding: '10px',
     '@media (max-width: 767px)': {
       position: 'fixed',
       left: 0,
@@ -110,7 +101,6 @@ var styles = {
       zIndex: 11,
       ':hover': {
         cursor: 'pointer',
-        color: 'black'
       }
     }
   },
@@ -119,18 +109,7 @@ var styles = {
     textDecoration: 'none',
     color: 'darkgrey',
     ':hover': {
-      color: 'black'
-    }
-  },
-
-  sideBarItem: {
-    width: '100%',
-    padding: '25px',
-    textAlign: 'center',
-    background: 'none',
-    border: 'none',
-    '@media (max-width: 767px)': {
-      padding: '15px'
+      color: 'black',
     }
   },
 
@@ -141,8 +120,14 @@ var styles = {
   thumbnail: {
     border: '1px solid grey',
     color: 'grey',
-    width: '160px',
+    width: 'auto',
+    paddingTop: '7px',
     marginLeft: 'auto',
-    marginRight: 'auto'
+    marginRight: 'auto',
+    maxWidth: '200px'
+  },
+
+  image: {
+    width: '90%',
   }
 }

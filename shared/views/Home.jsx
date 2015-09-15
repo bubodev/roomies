@@ -10,8 +10,8 @@ import cookie from 'react-cookie';
 
 class Home extends Component {
 
-  constructor(props) {
-    super(props);
+  constructor(props,context) {
+    super(props,context);
   }
 
   componentDidMount() {
@@ -44,7 +44,7 @@ class Home extends Component {
 
 var styles = {
   base: {
-    paddingTop: '65px',
+    paddingTop: '5vh',
     backgroundColor: 'white'
   },
 
@@ -70,3 +70,4 @@ class HomeContainer {
     return <Home auth={auth} children={children} {...bindActionCreators(authActions, dispatch)} />;
   }
 }
+

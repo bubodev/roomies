@@ -42,6 +42,8 @@ var styles = {
   brand: {
     color: 'white',
     textShadow: '0px 1px 2px black',
+    position: 'relative',
+    right: '-6vw',
     ':hover': {
       color: accentColor,
       cursor: 'pointer'
