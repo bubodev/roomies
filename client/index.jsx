@@ -5,7 +5,7 @@ import routes                           from 'routes';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider }                     from 'react-redux';
 import * as reducers                    from 'reducers';
-import { fromJS }                       from 'Immutable';
+import { fromJS }                       from 'immutable';
 import promiseMiddleware from '../shared/lib/promiseMiddleware';
 import logger from '../shared/lib/promiseMiddleware';
 
