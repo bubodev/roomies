@@ -5,12 +5,15 @@ import { bindActionCreators } from 'redux';
 import * as AuthActions from '../actions/AuthActions';
 import * as HomeActions from '../actions/HomeActions';
 
+import UserInfoForm from '../components/UserInfoForm';
+
 @Radium
 class Settings extends Component {
   render() {
     return(
       <div style={styles.base}>
         <h1> Settings </h1>
+        <UserInfoForm />
       </div>
     )
   }
