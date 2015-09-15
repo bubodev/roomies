@@ -25,6 +25,8 @@ export default class Footer extends Component {
             <i className="fa fa-user fa-stack-1x"></i>
           </span>
         </a>
+        <br />
+        <span className="fa fa-copyright"> carl kim</span>
       </div>
     )
   }
