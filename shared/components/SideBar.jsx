@@ -38,9 +38,7 @@ export default class SideBar extends Component {
               </div>
             </div>
             <br />
-            <SideBarItem closeSideBar={::this.toggleSideBar} label="Dashboard" route="/home/dashboard" faGlyph="tachometer" currentRoute={currentRoute}>
-              <span className="badge alert-danger">4</span>
-            </SideBarItem>
+            <SideBarItem closeSideBar={::this.toggleSideBar} label="Dashboard" route="/home/dashboard" faGlyph="tachometer" currentRoute={currentRoute} />
             <SideBarItem closeSideBar={::this.toggleSideBar} label="Chores" route="/home/chores" faGlyph="tasks" currentRoute={currentRoute} />
             <SideBarItem closeSideBar={::this.toggleSideBar} label="Finances" route="/home/finances" faGlyph="money" currentRoute={currentRoute} />
             <SideBarItem closeSideBar={::this.toggleSideBar} label="Shopping List" route="/home/shopping" faGlyph="cart-arrow-down" currentRoute={currentRoute} />
@@ -114,6 +112,8 @@ const styles = {
   },
 
   logOutButton: {
+    width: '90%',
+    margin: 'auto',
     position: 'relative',
     bottom: '-20px',
     background: 'lightcoral',
@@ -139,10 +139,13 @@ const styles = {
   thumbnail: {
     color: 'white',
     width: 'auto',
-    paddingTop: '80px',
+    marginTop: '80px',
+    padding:'20px',
     marginLeft: 'auto',
     marginRight: 'auto',
     maxWidth: '200px',
+    border: '2px dotted white',
+    borderRadius: '3px'
   },
 
   image: {
