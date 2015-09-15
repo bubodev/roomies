@@ -5,6 +5,7 @@ export default class LoadingScreen extends Component {
     return(
       <div className="text-center" style={styles.base}>
         <span className="fa fa-3x fa-spinner fa-spin" />
+        {this.props.children}
       </div>
     )
   }

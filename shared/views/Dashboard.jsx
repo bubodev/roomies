@@ -51,11 +51,12 @@ class Dashboard extends Component {
       comp = <FindNewHome />
     } else {
       comp = (
-      <div className="text-center" >
-        <LoadingScreen />
-        <br />
-        <a href="/login">Stuck? Log in here</a>
-      </div>
+        <div style={styles.loadingScreen}>
+          <LoadingScreen>
+            <h2>Taking long? You probably shouldnt be here</h2>
+            <a href="/login">Try logging in here</a>
+          </LoadingScreen>
+        </div>
       )
     }
 
@@ -64,6 +65,15 @@ class Dashboard extends Component {
         { comp }
       </div>
     )
+  }
+}
+
+const styles = {
+  loadingScreen: {
+    position: 'fixed',
+    width: '100vw',
+    left: 0,
+    top: '30vh',
   }
 }
 
