@@ -6,6 +6,7 @@ import SideBar from '../components/SideBar';
 import LoadingScreen from '../components/LoadingScreen';  
 
 import Dashboard from './Dashboard';
+import Footer from '../components/Footer';
 import cookie from 'react-cookie';
 
 class Home extends Component {
@@ -37,6 +38,7 @@ class Home extends Component {
         <div className="col-sm-9 col-lg-10">
           {this.props.children || <Dashboard />}
         </div>
+        <Footer />
       </div>
     )
   }

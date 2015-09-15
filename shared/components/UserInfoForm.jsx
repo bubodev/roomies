@@ -16,18 +16,18 @@ export default class UserInfoForm extends Component {
             </ColoredButton>
           </div>
           <div className="col-sm-4 text-center">
-            <ColoredButton color="muted" value="Leave this home">
+            <ColoredButton color="danger" value="Leave this home">
               <span className="fa-stack fa-3x">
                 <span className="fa fa-home fa-stack-1x"/>
-                <span className="fa fa-ban fa-stack-2x text-danger"/>
+                <span className="fa fa-ban fa-stack-2x"/>
               </span>
             </ColoredButton>
           </div>
           <div className="col-sm-4 text-center">
-            <ColoredButton color="muted" value="Delete my account">
+            <ColoredButton color="danger" value="Delete my account">
               <span className="fa-stack fa-3x">
                 <span className="fa fa-user fa-stack-1x"/>
-                <span className="fa fa-ban fa-stack-2x text-danger"/>
+                <span className="fa fa-ban fa-stack-2x"/>
               </span>
             </ColoredButton>
           </div>
