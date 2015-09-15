@@ -50,13 +50,17 @@ class Dashboard extends Component {
     } else if(this.state.show === "NEW") {
       comp = <FindNewHome />
     } else {
-      comp = <LoadingScreen />
+      comp = (
+      <div className="text-center" >
+        <LoadingScreen />
+        <br />
+        <a href="/login">Stuck? Log in here</a>
+      </div>
+      )
     }
 
     return(
       <div>
-        <button onClick={::this.debug} />
-        <h1>Dashboard</h1>
         { comp }
       </div>
     )

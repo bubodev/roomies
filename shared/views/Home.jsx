@@ -24,9 +24,9 @@ class Home extends Component {
     if(this.props.auth.loading) {
       sideBarShow = <LoadingScreen />
     } else if(this.props.auth.user) {
-      sideBarShow = <SideBar />
+      sideBarShow = <SideBar status="enabled"/>
     } else {
-      sideBarShow = <SideBar disabled={true} />
+      sideBarShow = <SideBar status="disabled" />
     }
 
     return(

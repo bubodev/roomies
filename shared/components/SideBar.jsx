@@ -25,9 +25,8 @@ export default class SideBar extends Component {
   }
 
   render () {
-    let style;
     return (
-      <div style={[styles.sideBar, styles[this.state.sideBarShow]]} key="sideBar">
+      <div style={[styles.sideBar, styles[this.state.sideBarShow], styles[this.props.status]]} key="sideBar">
           <ul className="list-group text-center">
           <Link to="/home/dashboard" style={styles.linkItem}> 
             <li className="list-group-item" style={styles.sideBarItem}>
@@ -82,7 +81,7 @@ var styles = {
   },
 
   sideBarHide: {
-    top: '-400px'
+    top: '-600px'
   },
 
   sideBarShow: {
@@ -120,5 +119,9 @@ var styles = {
     textAlign: 'center',
     background: 'none',
     border: 'none'
+  },
+
+  disabled: {
+    display: 'none'
   }
 }
