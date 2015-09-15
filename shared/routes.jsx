@@ -7,7 +7,8 @@ import About from './views/About';
 import Chores from './views/Chores';
 import Finances from './views/Finances';
 import Dashboard from './views/Dashboard';
-
+import Settings from './views/Settings';
+import ShoppingList from './views/ShoppingList';
 
 export default (
   <Route name="app" component={App} path="/">
@@ -17,6 +18,8 @@ export default (
       <Route path="dashboard" component={Dashboard} />
       <Route path="chores" component={Chores} />
       <Route path="finances" component={Finances} />
+      <Route path="settings" component={Settings} />
+      <Route path="shopping" component={ShoppingList} />
     </Route>
   </Route>
 )

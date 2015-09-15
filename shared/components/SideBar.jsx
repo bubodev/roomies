@@ -76,14 +76,11 @@ const styles = {
     height: '100vh',
     overflowY: 'scroll',
     '@media (max-width: 767px)': {
-      position: 'fixed',
       padding: '10px',
       width: '100%',
       zIndex: 1,
-      background: '40474E',
       transition: 'top .5s ease',
       borderBottom: '1px solid lightgrey',
-      overflowY: 'scroll',
     },
     '@media (min-width: 1200px)': {
       width: '16.66667%',
