@@ -16,6 +16,5 @@ export default class Overview extends Component {
 
 const styles = {
   base: {
-    background: 'white'
   }
 }

@@ -4,7 +4,7 @@ export default class WeekChores extends Component {
   render() {
     return(
       <div>
-        This week's chores...
+        Coming up this week...
       </div>
     )
   }

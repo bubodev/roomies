@@ -31,10 +31,10 @@ class Home extends Component {
 
     return(
       <div className="container-fluid" style={styles.base}>
-        <div className="col-sm-3">
+        <div className="col-sm-3 col-lg-2">
           { sideBarShow }
         </div>
-        <div className="col-sm-9">
+        <div className="col-sm-9 col-lg-10">
           {this.props.children || <Dashboard />}
         </div>
       </div>
@@ -45,7 +45,6 @@ class Home extends Component {
 var styles = {
   base: {
     paddingTop: '5vh',
-    backgroundColor: 'white'
   },
 
   mainSection: {
