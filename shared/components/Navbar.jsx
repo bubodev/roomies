@@ -22,7 +22,7 @@ export default class Navbar extends React.Component {
 
   render() {
     return (
-      <nav className="navbar navbar-fixed-top" style={styles.navBar}>
+      <nav className="navbar navbar-fixed-top" style={styles.base}>
         <div className="container-fluid">
           <div className="navbar-header">
             <div onClick={this.handleClick.bind(this, '/home')} style={styles.brand} className="navbar-brand">
@@ -36,17 +36,16 @@ export default class Navbar extends React.Component {
 }
 
 var styles = {
+  base: {
+  },
+
   brand: {
     color: 'white',
+    textShadow: '0px 1px 2px black',
     ':hover': {
       color: accentColor,
       cursor: 'pointer'
     }
-  },
-
-  debug: {
-    position: 'fixed',
-    top: 0,
   }
 }
 

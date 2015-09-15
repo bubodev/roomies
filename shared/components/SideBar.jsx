@@ -27,41 +27,49 @@ export default class SideBar extends Component {
   render () {
     return (
       <div style={[styles.sideBar, styles[this.state.sideBarShow], styles[this.props.status]]} key="sideBar">
-          <ul className="list-group text-center">
-          <Link to="/home/dashboard" style={styles.linkItem}> 
-            <li className="list-group-item" style={styles.sideBarItem}>
-              <span className="fa fa-tachometer" /> Dashboard
-            </li> 
-          </Link>
-          <Link to="/home/chores" style={styles.linkItem}> 
-            <li className="list-group-item" style={styles.sideBarItem}>
-              <span className="fa fa-tasks" /> Chores
-            </li> 
-          </Link>
+        <ul className="list-group text-center">
+        <div style={styles.thumbnail} >
+          <img src="http://res.cloudinary.com/bitebox/image/upload/c_scale,w_150/v1434495985/default-avatar_oxtmnu.png" />
+          <div className="caption">
+            <h4> Example User </h4>
+          </div>
+        </div>
+        <Link to="/home/dashboard" style={styles.linkItem}> 
+          <li className="list-group-item" key="dashboard" style={styles.sideBarItem}>
+            <span className="fa fa-tachometer" /> Dashboard
+          </li> 
+        </Link>
+        <Link to="/home/chores" style={styles.linkItem}> 
+          <li className="list-group-item" key="chores" style={styles.sideBarItem}>
+            <span className="fa fa-tasks" /> Chores
+          </li> 
+        </Link>
+        <Link to="/home/finances" style={styles.linkItem}> 
+          <li className="list-group-item" key="finances" style={styles.sideBarItem}>
+            <span className="fa fa-money" /> Finances
+          </li> 
+        </Link>
+        <Link to="/home/shopping" style={styles.linkItem}> 
+          <li className="list-group-item" key="shopping" style={styles.sideBarItem}>
+            <span className="fa fa-cart-arrow-down" /> Shopping List
+          </li> 
+        </Link>
+        </ul>
+        <ul className="list-group text-center">
           <Link to="/home/finances" style={styles.linkItem}> 
-            <li className="list-group-item" style={styles.sideBarItem}>
-              <span className="fa fa-money" /> Finances
+            <li className="list-group-item" key="settings" style={styles.sideBarItem}>
+              <span className="fa fa-cog" /> Settings
             </li> 
           </Link>
-          <Link to="/home/shopping" style={styles.linkItem}> 
-            <li className="list-group-item" style={styles.sideBarItem}>
-              <span className="fa fa-cart-arrow-down" /> Shopping List
+          <a href="/logout" style={styles.linkItem}> 
+            <li className="list-group-item" key="signout" style={styles.sideBarItem}>
+              <span className="fa fa-sign-out" /> Logout
             </li> 
-          </Link>
-          </ul>
-          <ul className="list-group text-center">
-            <Link to="/home/finances" style={styles.linkItem}> 
-              <li className="list-group-item" style={styles.sideBarItem}>
-                <span className="fa fa-cog" /> Settings
-              </li> 
-            </Link>
-            <a href="/logout" style={styles.linkItem}> 
-              <li className="list-group-item" style={styles.sideBarItem}>
-                <span className="fa fa-sign-out" /> Logout
-              </li> 
-            </a>
-          </ul>
-        <span key="sideBarToggle" onClick={::this.toggleSideBar} className="fa fa-2x fa-bars" style={styles.sideBarToggle}/>  
+          </a>
+        </ul>
+        <button className="btn btn-default" style={styles.sideBarToggle} key="sideBarToggle" onClick={::this.toggleSideBar} >
+          <span className="fa fa-bars" />  
+        </button>
       </div>
     )
   }
@@ -75,13 +83,15 @@ var styles = {
       padding: '10px',
       width: '100%',
       zIndex: 1,
-      background: 'gainsboro',
+      background: 'white',
       transition: 'top .5s ease',
+      borderBottom: '1px solid lightgrey',
+      overflowY: 'scroll',
     }
   },
 
   sideBarHide: {
-    top: '-600px'
+    top: '-800px'
   },
 
   sideBarShow: {
@@ -95,8 +105,8 @@ var styles = {
       display: 'block',
       top: '30px',
       right: 0,
-      paddingRight: '10px',
-      paddingTop: '10px',
+      marginRight: '20px',
+      marginTop: '35px',
       zIndex: 11,
       ':hover': {
         cursor: 'pointer',
@@ -118,10 +128,21 @@ var styles = {
     padding: '25px',
     textAlign: 'center',
     background: 'none',
-    border: 'none'
+    border: 'none',
+    '@media (max-width: 767px)': {
+      padding: '15px'
+    }
   },
 
   disabled: {
     display: 'none'
+  },
+
+  thumbnail: {
+    border: '1px solid grey',
+    color: 'grey',
+    width: '160px',
+    marginLeft: 'auto',
+    marginRight: 'auto'
   }
 }
