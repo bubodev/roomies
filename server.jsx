@@ -17,9 +17,10 @@ const app = express();
 import Login from './shared/views/Login';
 
 import fs from 'fs';
-app.use('/bundle.js', function (req, res) {
-  return fs.createReadStream('./dist/bundle.js').pipe(res);
-});
+/** UNCOMMENT FOR DIST BUILD **/
+// app.use('/bundle.js', function (req, res) {
+//   return fs.createReadStream('./dist/bundle.js').pipe(res);
+// });
 
 var MongoStore = require('connect-mongo')(session);
 app.use(cookieParser());

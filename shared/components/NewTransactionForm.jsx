@@ -18,7 +18,7 @@ export default class NewTransactionForm extends Component {
     transParams.name = this.refs.name.getDOMNode().value;
     transParams.date = this.refs.date.getDOMNode().value;
     transParams.amount = parseInt(this.refs.amount.getDOMNode().value);
-    transParams.type = this.refs.type.getDOMNode().value;
+    transParams.type = this.props.type;
     this.props._submitNewTransaction(transParams);
     this.setState({
       hidden: true
@@ -40,18 +40,8 @@ export default class NewTransactionForm extends Component {
         <div>
           <form onSubmit={::this.submitForm} >
             <input ref="name" type="text" className="form-control" placeholder="description"/>
-            <div className="input-group">
-              <span className="input-group-addon">$</span>
-              <input ref="amount" type="text" className="form-control" />
-            </div>
-            <div className="input-group">
-              <span className="input-group-addon">type</span>
-              <input ref="type" type="text" className="form-control" />
-            </div>
-            <div className="input-group">
-              <span className="input-group-addon">date</span>
-              <input ref="date" type="date" className="form-control" />
-            </div>
+            <input ref="amount" type="text" className="form-control" placeholder="amount"/>
+            <input ref="date" type="date" className="form-control"/>
             <input onClick={::this.submitForm} type="submit">Submit</input>
           </form>
           <button className="btn btn-default btn-xs" onClick={::this.toggleShow}>

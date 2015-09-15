@@ -32,7 +32,7 @@ export default class SideBar extends Component {
         <div style={[styles.base, styles[this.state.sideBarShow], styles[this.props.status]]} key="sideBar">
           <ul className="list-group text-center">
             <div style={styles.thumbnail} >
-              <img style={styles.image} src="http://res.cloudinary.com/bitebox/image/upload/c_scale,w_150/v1434495985/default-avatar_oxtmnu.png" />
+              <span className="fa fa-5x icon-border fa-user" />
               <div className="caption">
                 <h4> Example User </h4>
               </div>
@@ -139,7 +139,7 @@ const styles = {
   thumbnail: {
     color: 'white',
     width: 'auto',
-    paddingTop: '60px',
+    paddingTop: '80px',
     marginLeft: 'auto',
     marginRight: 'auto',
     maxWidth: '200px',

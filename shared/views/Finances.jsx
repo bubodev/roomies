@@ -26,29 +26,13 @@ class Finances extends Component {
     return(
       <div style={styles.base}>
         <div style={styles.charts} className="row">
-          <div className="col-sm-4">
+          <div className="col-sm-12 text-center">
             <PieChart
                   data={data}
                   width={400}
                   height={200}
                   margin={{top: 0, bottom: 0, left: 100, right: 100}}
                   sort={sort}/>
-          </div>
-          <div className="col-sm-4">
-            <PieChart
-                data={data}
-                width={400}
-                height={200}
-                margin={{top: 0, bottom: 0, left: 100, right: 100}}
-                sort={sort}/>
-          </div>
-          <div className="col-sm-4">
-            <PieChart
-                data={data}
-                width={400}
-                height={200}
-                margin={{top: 0, bottom: 0, left: 100, right: 100}}
-                sort={sort}/>
           </div>
         </div>
 
@@ -62,7 +46,7 @@ class Finances extends Component {
                 return null
               }
             })}
-            <NewTransactionForm _submitNewTransaction={this.props.createTransaction} />
+            <NewTransactionForm type="HOUSE" _submitNewTransaction={this.props.createTransaction} />
           </div>
           <div className="col-sm-4">
             Lending
@@ -73,7 +57,7 @@ class Finances extends Component {
                 return null
               }
             })}
-            <NewTransactionForm _submitNewTransaction={this.props.createTransaction} />
+            <NewTransactionForm type="IN" _submitNewTransaction={this.props.createTransaction} />
           </div>
           <div className="col-sm-4">
             Borrowing
@@ -93,11 +77,9 @@ class Finances extends Component {
 
 var styles = {
   base: {
-    background: 'lightgrey'
   },
 
   charts: {
-    background: 'darkgrey'
   }
 }
 
