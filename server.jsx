@@ -14,8 +14,6 @@ import passport                                   from './server/passport';
 import mongoose from 'mongoose';
 const app = express();
 
-import Login from './shared/views/Login';
-
 import fs from 'fs';
 /** UNCOMMENT FOR DIST BUILD **/
 // app.use('/bundle.js', function (req, res) {
