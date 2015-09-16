@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import Radium from 'radium';
+
+@Radium
 
 export default class RadioButtons extends Component{
   constructor(props){
@@ -15,12 +18,22 @@ export default class RadioButtons extends Component{
     })
   }
 
+  setSelected(opt) {
+    this.props.setSelected(opt)
+  }
+
   render() {
-    let options = this.props.values.map((opt) => {
+    let options = this.props.values.map((opt, i) => {
+      let highlighted;
+      if(this.props.currentSelected === opt)
+        highlighted = {
+          color: 'white',
+          borderBottom: '4px dashed white'
+        }
       return (
-        <button>
+        <span onClick={this.setSelected.bind(this, opt)} key={i} style={[styles.buttonBase, highlighted]}>
           {opt}
-        </button>
+        </span>
       )
     })
     return (
@@ -28,5 +41,16 @@ export default class RadioButtons extends Component{
         {options}
       </div>
     )
+  }
+}
+
+const styles = {
+  buttonBase: {
+    background: 'none',
+    color: 'lightgrey',
+    marginRight: '20px',
+    ':hover': {
+      cursor: 'pointer',
+    }
   }
 }

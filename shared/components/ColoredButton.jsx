@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export default class ColoredButton extends Component {
   render() {
     return(
-      <button className={"btn btn-" + this.props.color} style={styles.base}>
+      <button onClick={this.props.handleClick} className={"btn btn-" + this.props.color} style={styles.base}>
         <span style={styles.value}>{this.props.value}</span>
         <br/>
         {this.props.children}

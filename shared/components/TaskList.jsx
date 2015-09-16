@@ -14,7 +14,7 @@ export default class TaskList extends React.Component {
     if(this.props.tasks){
       tasks = this.props.tasks.map(function(task) {
         return (
-          <div key={task._id} className="thumbnail">
+          <div key={task._id} className="col-sm-3 thumbnail">
             task: {task.taskName}
             <br />
             start: {task.startDate}
@@ -27,7 +27,7 @@ export default class TaskList extends React.Component {
     }
     
     return (
-      <div className="col-sm-3" style={styles.sideBar}>
+      <div className="col-sm-12" style={styles.sideBar}>
         { tasks }
       </div>
     )
