@@ -87,7 +87,7 @@ const styles = {
 
   sideBarHide: {
     '@media (max-width: 767px)': {
-      top: '-800px'
+      top: '-100vh'
     }
   },
 
