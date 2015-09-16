@@ -15,12 +15,15 @@ export default class TaskList extends React.Component {
       tasks = this.props.tasks.map(function(task) {
         return (
           <div key={task._id} className="col-sm-3 thumbnail">
-            task: {task.taskName}
+            task: {task.name}
             <br />
-            start: {task.startDate}
+            start: {task.startDate.slice(0,10)}
             <br />
-            end: {task.endDate}
+            end: {task.endDate.slice(0,10)}
             <br />
+            description: {task.description.join(', ')}
+            <br />
+            frequency: {task.frequency}
           </div>
         )
       })

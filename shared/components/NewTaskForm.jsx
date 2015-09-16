@@ -7,56 +7,56 @@ import * as taskActions from '../actions/TaskActions';
 import Modal from './Modal';
 import RadioButtons from './RadioButtons';
 
+const defaultState = { 
+        errors: [],
+        name: "",
+        description: [""],
+        startDate: null,
+        endDate: null,
+        number: 1,
+        frequency: 'days'
+      }
+
+const freqMap = {
+  days: 1,
+  weeks: 7,
+  months: 30,
+}
 
 @Radium
 class NewTaskForm extends Component {
   constructor(props) {
     super(props);
-    this.state = { 
-      errors: [],
-      name: "",
-      description: [""],
-      startDate: null,
-      endDate: null,
-      frequency: 'days'
-    }
+    this.state = defaultState
   }
 
   createTask(e) {
     e.preventDefault();
-    let name = this.refs.name.getDOMNode();
-    let description = this.refs.description.getDOMNode();
-    let startDate = this.refs.startDate.getDOMNode();
 
-    let errors = [];
-    if(!name.value.length)
-      errors.push('Must input a task name!');
-    if(!description.value.length)
-      errors.push('Must input a description!');
-    if(!startDate.value.length)
-      errors.push('Must input a start date!');
+    // let errors = [];
+    // if(!name.value.length)
+    //   errors.push('Must input a task name!');
+    // if(!description.value.length)
+    //   errors.push('Must input a description!');
+    // if(!startDate.value.length)
+    //   errors.push('Must input a start date!');
 
-    if(errors.length){
-      this.setState({
-        errors: errors
-      })
-      return;
-    }
-   
+    // if(errors.length){
+    //   this.setState({
+    //     errors: errors
+    //   })
+    //   return;
+    // }
+
     this.props.createTask({
-      name: name.value,
-      description: description.value,
-      startDate: startDate.value,
-      completed: false
-    });
+      name: this.state.name,
+      description: this.state.description,
+      startDate: this.state.startDate,
+      endDate: this.state.endDate,
+      frequency: freqMap[this.state.frequency] * this.state.number,
+    }, this.props.homeId);
 
-    name.value = "";
-    description.value = "";
-    startDate.value = "";
-    endDate.value = "";
-    this.setState({
-      errors: [],
-    })
+    this.setState(defaultState);
   }
 
   handleChange(target, e) {
@@ -129,7 +129,7 @@ class NewTaskForm extends Component {
         <label>until&nbsp;</label>
         <input onChange={this.handleChange.bind(this, 'endDate')} style={styles.baseInput} value={this.state.endDate} type='date' id="endDate" ref="endDate"/>
         <label>every&nbsp;</label>
-        <input onChange={this.handleChange.bind(this, 'frequency')} style={[styles.baseInput, styles.numberInput]} value={this.state.frequency} type='number' id="endDate" ref="endDate"/>
+        <input onChange={this.handleChange.bind(this, 'frequency')} style={[styles.baseInput, styles.numberInput, styles.textInput]} value={this.state.number} type='number' id="number" ref="number"/>
         <RadioButtons currentSelected={this.state.frequency} setSelected={::this.setFrequency} values={["days","weeks","months"]} />
         <br/>
         <input className="btn btn-lg" onSubmit={::this.createTask} type="submit"/>

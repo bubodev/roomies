@@ -17,7 +17,9 @@ class Home extends Component {
 
   componentDidMount() {
     let userId = cookie.load('userId')
-    userId && this.props.loadUser(userId.slice(3,-1));
+    if(userId)
+      this.props.loadUser(userId.slice(3,-1))
+    ;
   }
 
   render() {
@@ -55,7 +57,7 @@ var styles = {
 
 @connect(state => ({
   auth: state.auth,
-  tasks: state.tasks
+  tasks: state.tasks,
 }))
 
 export default 

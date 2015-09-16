@@ -29,7 +29,10 @@ class Chores extends Component {
   }
 
   componentDidMount() {
-    this.props.getTasks();
+    if(!this.props.homeId){
+      this.context.router.transitionTo('/home');
+    }
+    this.props.homeId && this.props.getTasks(this.props.homeId);
   }
 
   debug() {
@@ -39,18 +42,25 @@ class Chores extends Component {
   render() {
     return(
       <div className="row" style={styles.base}>
-        <ColoredButton value="create new task" handleClick={::this.toggleForm} color="primary">
-          <span className="fa fa-2x fa-plus"/>
-        </ColoredButton>
+        <button onClick={::this.debug}/>
+        <div className="col-sm-4 col-sm-offset-2">
+          <ColoredButton value="create new task" handleClick={::this.toggleForm} color="primary">
+            <span className="fa fa-2x fa-plus"/>
+          </ColoredButton>
+        </div>
         <TaskList tasks={this.props.tasks} />
         <Modal color="rgb(240, 128, 128)" show={this.state.showForm} close={::this.toggleForm}>
           <div className="container" style={styles.formContainer}>
-            <NewTaskForm />
+            <NewTaskForm homeId={this.props.homeId}/>
           </div>
         </Modal>
       </div>
     )
   }
+}
+
+Chores.contextTypes = {
+  router: React.PropTypes.object.isRequired
 }
 
 var styles = {
@@ -63,18 +73,20 @@ var styles = {
 }
 
 @connect(state => ({
-  tasks: state.tasks
+  tasks: state.tasks,
+  homeId: state.auth.user && state.auth.user.homeId
 }))
 
 export default
 class ChoresContainer {
   static propTypes = {
     tasks: PropTypes.object,
+    homeId: PropTypes.string,
     dispatch: PropTypes.func.isRequired
   }
 
   render() {
-    const { tasks, dispatch } = this.props;
-    return <Chores tasks={tasks} {...bindActionCreators(taskActions, dispatch)} />;
+    const { tasks, dispatch, homeId } = this.props;
+    return <Chores tasks={tasks} homeId={homeId} {...bindActionCreators(taskActions, dispatch)} />;
   }
 }

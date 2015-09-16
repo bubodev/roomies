@@ -62,6 +62,7 @@ class Dashboard extends Component {
 
     return(
       <div>
+        <button onClick={::this.debug}/>
         { comp }
       </div>
     )

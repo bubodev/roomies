@@ -16,7 +16,7 @@ const styles = {
   base: {
     padding: '10px',
     margin: '20px',
-    height: '150px',
+    height: '120px',
     width: '80%',
   },
 

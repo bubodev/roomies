@@ -67,11 +67,22 @@ router.put('/tasks/:id', function(req, res) {
 
 router.post('/tasks', function(req, res) {
   let newTask = new Task(req.body.taskParams);
+  let homeId = req.body.homeId;
 
-  newTask.save(function(err) {
+  Home.findById(homeId, function(err, home) {
     if(err)
-      res.json(err);
-    res.json(newTask);
+      res.send(err);
+    newTask.save(function(err) {
+      if(err)
+        res.json(err);
+
+      home.tasks.push(newTask);
+      home.save(function(err){
+        if(err)
+          res.json(err);
+        res.json(newTask);
+      })
+    })
   })
 })
 
