@@ -12,7 +12,7 @@ class Chores extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      showForm: 'show',
+      showForm: 'hide',
     }
   }
 
