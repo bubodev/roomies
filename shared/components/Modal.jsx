@@ -7,12 +7,17 @@ export default class Modal extends Component {
     super(props, context);
   }
 
+  handleEscape(e) {
+    if(e.keyCode === 27)
+      this.props.close();
+  }
+
   render() {
     let bgColor = {
       background: this.props.color || 'rgba(0,0,0,0.7)'
     }
     return(
-      <div style={[styles.base, bgColor, styles[this.props.show]]}>
+      <div onKeyDown={::this.handleEscape} style={[styles.base, bgColor, styles[this.props.show]]}>
         <span onClick={this.props.close} style={styles.closeButton} className="fa fa-2x fa-times"/>
         {this.props.children}
       </div>
@@ -31,6 +36,7 @@ const styles = {
     paddingTop: '100px',
     overflow: 'scroll',
     paddingBottom: '100px',
+    zIndex: 12,
   },
 
   closeButton: {
