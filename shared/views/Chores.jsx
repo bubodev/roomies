@@ -51,7 +51,7 @@ class Chores extends Component {
         <TaskList tasks={this.props.tasks} />
         <Modal color="rgba(240, 128, 128, 0.9)" show={this.state.showForm} close={::this.toggleForm}>
           <div className="container" style={styles.formContainer}>
-            <NewTaskForm homeId={this.props.homeId}/>
+            <NewTaskForm rendered={this.state.showForm} homeId={this.props.homeId}/>
           </div>
         </Modal>
       </div>

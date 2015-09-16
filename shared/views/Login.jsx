@@ -53,8 +53,7 @@ export default class Login extends Component {
             </div>
             <div className="col-sm-6" key="loginButton" style={styles.loginButton}>
               <span style={styles.loginLabel}>Sign in with: </span>
-              <GoogleSignInButton />
-              or
+              <br />
               <GoogleSignInButton />
             </div>
           </div>

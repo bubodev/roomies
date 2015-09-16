@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as taskActions from '../actions/TaskActions';
 
-import Modal from './Modal';
 import RadioButtons from './RadioButtons';
 
 const defaultState = { 
@@ -33,20 +32,22 @@ class NewTaskForm extends Component {
   createTask(e) {
     e.preventDefault();
 
-    // let errors = [];
-    // if(!name.value.length)
-    //   errors.push('Must input a task name!');
-    // if(!description.value.length)
-    //   errors.push('Must input a description!');
-    // if(!startDate.value.length)
-    //   errors.push('Must input a start date!');
+    let errors = [];
+    if(!this.state.name.length)
+      errors.push('Must input a task name!');
+    if(!this.state.description.length)
+      errors.push('Must input a description!');
+    if(!this.state.startDate)
+      errors.push('Must input a start date!');
+    if(!this.state.endDate)
+      errors.push('Must input an end date!')
 
-    // if(errors.length){
-    //   this.setState({
-    //     errors: errors
-    //   })
-    //   return;
-    // }
+    if(errors.length){
+      this.setState({
+        errors: errors
+      })
+      return;
+    }
 
     this.props.createTask({
       name: this.state.name,
@@ -99,7 +100,7 @@ class NewTaskForm extends Component {
 
   render() {
     let errorList = this.state.errors.map(function(err) {
-      return <li className="alert alert-danger">{err}</li>
+      return <h5><li className="alert alert-danger">{err}</li></h5>
     })
 
     let descriptionList = this.state.description.map(function(task, i) {
@@ -113,12 +114,12 @@ class NewTaskForm extends Component {
 
     return(
       <form onSubmit={::this.createTask} style={styles.base} className="form text-center">
-        <ul className="errors">
+        <ul className="errors text-alert">
           {errorList}
         </ul>
 
         <label>We need to&nbsp;</label>
-        <input onChange={this.handleChange.bind(this, 'name')} style={[styles.baseInput, styles.textInput]} placeholder="clean the living room..." value={this.state.name} className="" type='text' ref="name" id="name"/>
+        <input autoFocus onChange={this.handleChange.bind(this, 'name')} style={[styles.baseInput, styles.textInput]} placeholder="clean the living room..." value={this.state.name} className="" type='text' ref="name" id="name"/>
         <label>which consists of :</label>
         <ul style={{listStyle:'none'}}>
           { descriptionList }
@@ -183,11 +184,12 @@ export default
 class NewTaskFormContainer {
   static propTypes = {
     tasks: PropTypes.object,
-    show: PropTypes.bool
+    show: PropTypes.bool,
+    rendered: PropTypes.string
   }
 
   render() {
-    const { show, tasks, dispatch } = this.props;
-    return <NewTaskForm show={show} tasks={tasks} {...bindActionCreators(taskActions, dispatch)} />;
+    const { show, rendered, tasks, dispatch } = this.props;
+    return <NewTaskForm rendered={rendered} show={show} tasks={tasks} {...bindActionCreators(taskActions, dispatch)} />;
   }
 }
