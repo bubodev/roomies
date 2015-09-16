@@ -100,36 +100,41 @@ router.get('/homes/:id', function(req, res) {
 router.post('/homes', function(req, res) {
   let newHome = new Home(req.body.homeParams);
   User.findById(req.body.userId, function(err, user) {
-    if(err)
-      res.json(err);
-    newHome.users.push(user);
-    newHome.save(function(err) {
-      if(err)
-        res.json(err);
-      user.homeId = newHome._id;
-      user.save(function() {
-        res.json(newHome);
-      });
-    })
+    if(err) {
+      res.status(400).send("Sorry, couldn't find that user");
+    } else {
+      newHome.users.push(user);
+      newHome.save(function(err) {
+        if(err) {
+          res.status(400).send(err);
+        } else {
+          user.homeId = newHome._id;
+          user.save(function() {
+            res.json(newHome);
+          });
+        }
+      })
+    }
   })
 })
 
 
 router.put('/homes/:id', function(req,res) {
   Home.findById(req.params.id, function(err, home) {
-    if(err)
-      res.send(err);
+    if(err) {
+      res.status(400).send("Sorry, couldn't find that house...");
+    } else {
+      User.findById(req.body.userId, function(err, user) {
+        home.users.push(user)
+        user.homeId = home._id;
 
-    User.findById(req.body.userId, function(err, user) {
-      home.users.push(user)
-      user.homeId = home._id;
-
-      user.save(function(err) {
-        if(err)
-          res.json(err);
-        res.json(home);
-      })
-    })
+        user.save(function(err) {
+          if(err)
+            res.json(err);
+          res.json(home);
+        })
+     })
+    }
   })
 })
 

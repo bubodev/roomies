@@ -4,6 +4,7 @@ const defaultState = {
 }
 
 export default function homeReducer(state = defaultState, action = {}) {
+  console.log(action.type);
   switch(action.type) {
     case 'GET_HOME':
       return {

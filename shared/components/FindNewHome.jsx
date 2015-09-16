@@ -25,8 +25,9 @@ class FindNewHome extends Component {
 
     let userId = cookie.load('userId').slice(3,-1);
 
-    this.props.addUserToHome(this.refs.houseCode.getDOMNode().value, userId).then(home => {
-      this.props.loadUser(userId);
+    this.props.addUserToHome(this.refs.houseCode.getDOMNode().value, userId).then(res => {
+      if(!res.err)
+        this.props.loadUser(userId);
     })
   }
 
@@ -39,8 +40,9 @@ class FindNewHome extends Component {
 
     let userId = cookie.load('userId').slice(3,-1);
 
-    this.props.createHome(homeParams, userId).then(home => {
-      this.props.loadUser(userId);
+    this.props.createHome(homeParams, userId).then(res => {
+      if(!res.err)
+        this.props.loadUser(userId);
     });
   }
 
@@ -50,39 +52,65 @@ class FindNewHome extends Component {
     if(this.state.selected === "NEW") {
       showComponent = (
         <div>
-          <form onSubmit={::this.createNewHouse}>
-            <input type="text" ref="houseName" placeholder="House name" className="form-control" />
-            <input type="text" ref="houseDesc" placeholder="House description" className="form-control" />
-            <input type="submit" className="form-control" />
+          <form style={styles.newForm} onSubmit={::this.createNewHouse}>
+            <label>House name:</label>
+            <input type="text" ref="houseName" placeholder="The cool house" className="form-control" />
+            <label>House description:</label>
+            <input type="text" ref="houseDesc" placeholder="On the coolest street" className="form-control" />
+            <br/>
+            <button type="submit" className="btn btn-primary">Submit</button>
           </form>
-          <button onClick={this.chooseState.bind(this, null)}>Back</button>
+          <button className="btn btn-default" onClick={this.chooseState.bind(this, null)}>Back</button>
         </div>
       )
     } else if(this.state.selected === "EXISTING") {
       showComponent = (
         <div>
-          <form onSubmit={::this.submitExistingHouse}>
-            <input type="text" ref="houseCode" placeholder="enter house code" />
+          {this.props.home.err && 
+            <div className="alert alert-danger">
+              {this.props.home.err.data}
+            </div>
+          }
+          <form style={styles.newForm} onSubmit={::this.submitExistingHouse}>
+            <label>Existing code: </label>
+            <input className="form-control" type="text" ref="houseCode" placeholder="your code here" />
+            <br />
+            <button type="submit" className="btn btn-primary">Submit</button>
           </form>
-          <button onClick={this.chooseState.bind(this, null)}>Back</button>
+          <button className="btn btn-default" onClick={this.chooseState.bind(this, null)}>Back</button>
         </div>  
       )
     } else {
       showComponent = (
         <div>
-          <button onClick={this.chooseState.bind(this, "NEW")}>Create new home</button>
-          <button onClick={this.chooseState.bind(this, "EXISTING")}>I have a home</button>
+          <h3><span className="fa fa-commenting-o"/>What would you like to do?</h3>
+          <button className="btn btn-primary" onClick={this.chooseState.bind(this, "NEW")}>Create new home</button>
+          <button className="btn btn-primary" onClick={this.chooseState.bind(this, "EXISTING")}>I have a home</button>
         </div>
       )
     }
 
-
     return(
       <div>
-        {this.state.selected}
-        {showComponent}
+        <h1>Hello! Welcome to rooomies</h1>
+        I checked around a bit and it looks like you haven't added a home yet...
+        <br/>
+        Let's fix that now!
+        <div style={styles.compContainer}>
+          {showComponent}
+        </div>
       </div>
     )
+  }
+}
+
+const styles = {
+  compContainer: {
+    paddingTop: '15px'
+  },
+
+  newForm: {
+    paddingBottom: '15px'
   }
 }
 
