@@ -11,7 +11,9 @@ import { createStore, combineReducers }           from 'redux';
 import { Provider }                               from 'react-redux';
 import * as reducers                              from 'reducers';
 import passport                                   from './server/passport';
-import mongoose from 'mongoose';
+import mongoose                                   from 'mongoose';
+import { MONGO_URI }                              from './server/secrets';
+
 const app = express();
 
 import fs from 'fs';
@@ -27,7 +29,7 @@ app.use(session({ secret:'keyboard cat',
                     maxAge: new Date(Date.now() + 3600000),
                   },
                   store: new MongoStore({
-                    url: 'mongodb://localhost/test'
+                    url: MONGO_URI
                   }),
                   resave: false,
                   saveUnitialized: false

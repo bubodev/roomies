@@ -4,8 +4,9 @@ import User from '../config/models/User';
 import Task from '../config/models/Task';
 import Home from '../config/models/Home';
 import Transaction from '../config/models/Transaction';
+import { MONGO_URI } from './secrets';
 
-mongoose.connect('mongodb://localhost/test'); 
+mongoose.connect( MONGO_URI ); 
 
 let router = express.Router();
 
