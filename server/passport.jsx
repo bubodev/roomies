@@ -1,7 +1,7 @@
 import passport                                   from 'passport';
 import GoogleStrategy                             from 'passport-google-oauth';
 import { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } from './secrets';
-import User from '../config/models/Users';
+import User from '../config/models/User';
 
 passport.use(new GoogleStrategy.OAuth2Strategy({
   clientID: GOOGLE_CLIENT_ID,

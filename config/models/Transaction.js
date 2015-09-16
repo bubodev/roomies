@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import User from './Users';
 
 let Schema = mongoose.Schema;
 let transactionSchema = new Schema({

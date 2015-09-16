@@ -1,13 +1,13 @@
 import mongoose from 'mongoose';
-import Tasks    from './Tasks.js';
-import Users    from './Users.js';
+import Task    from './Task.js';
+import User    from './User.js';
 
 let Schema = mongoose.Schema;
 let homeSchema = new Schema({
   name: String,
   description: String,
-  tasks: [ Tasks.schema ],
-  users: [ Users.schema ],
+  tasks: [ Task.schema ],
+  users: [ User.schema ],
 });
 
 const Home = mongoose.model('Home', homeSchema); 

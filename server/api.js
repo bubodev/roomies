@@ -1,10 +1,9 @@
 import express  from 'express';
 import mongoose from 'mongoose';
-import User from '../config/models/Users';
-import Task from '../config/models/Tasks';
-import Home from '../config/models/Homes';
-import Transaction from '../config/models/Transactions';
-
+import User from '../config/models/User';
+import Task from '../config/models/Task';
+import Home from '../config/models/Home';
+import Transaction from '../config/models/Transaction';
 
 mongoose.connect('mongodb://localhost/test'); 
 
