@@ -37,11 +37,7 @@ class Dashboard extends Component {
       }
     }
   }
-
-  debug() {
-    debugger;
-  }
-
+  
   render() {
     let comp;
 
@@ -62,7 +58,6 @@ class Dashboard extends Component {
 
     return(
       <div>
-        <button onClick={::this.debug}/>
         { comp }
       </div>
     )

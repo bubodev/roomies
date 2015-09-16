@@ -1,14 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import Radium from 'radium';
 import SideBarItem from './SideBarItem';
 
+import { connect } from 'react-redux';
+
 @Radium
-export default class SideBar extends Component {
+class SideBar extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      sideBarShow: 'sideBarHide'
+      sideBarShow: 'sideBarHide',
     }
   }
 
@@ -27,6 +29,22 @@ export default class SideBar extends Component {
 
   render () {
     let currentRoute = this.context.router.state.location.pathname;
+    
+    let sideBarItems;
+    let settingsButton;
+
+    if(this.props.hasHome) {
+      sideBarItems = (
+        <div>
+          <SideBarItem closeSideBar={::this.toggleSideBar} label="Dashboard" route="/home/dashboard" faGlyph="tachometer" currentRoute={currentRoute} />
+          <SideBarItem closeSideBar={::this.toggleSideBar} label="Chores" route="/home/chores" faGlyph="tasks" currentRoute={currentRoute} />
+          <SideBarItem closeSideBar={::this.toggleSideBar} label="Finances" route="/home/finances" faGlyph="money" currentRoute={currentRoute} />
+          <SideBarItem closeSideBar={::this.toggleSideBar} label="Shopping List" route="/home/shopping" faGlyph="cart-arrow-down" currentRoute={currentRoute} />
+        </div>
+      )
+      settingsButton = <SideBarItem closeSideBar={::this.toggleSideBar} label="Settings" route="/home/settings" faGlyph="cog" currentRoute={currentRoute} />
+    }
+
     return (
       <div>
         <div style={[styles.base, styles[this.state.sideBarShow], styles[this.props.status]]} key="sideBar">
@@ -38,13 +56,10 @@ export default class SideBar extends Component {
               </div>
             </div>
             <br />
-            <SideBarItem closeSideBar={::this.toggleSideBar} label="Dashboard" route="/home/dashboard" faGlyph="tachometer" currentRoute={currentRoute} />
-            <SideBarItem closeSideBar={::this.toggleSideBar} label="Chores" route="/home/chores" faGlyph="tasks" currentRoute={currentRoute} />
-            <SideBarItem closeSideBar={::this.toggleSideBar} label="Finances" route="/home/finances" faGlyph="money" currentRoute={currentRoute} />
-            <SideBarItem closeSideBar={::this.toggleSideBar} label="Shopping List" route="/home/shopping" faGlyph="cart-arrow-down" currentRoute={currentRoute} />
+            { sideBarItems }
           </ul>
           <ul className="list-group text-center">
-            <SideBarItem closeSideBar={::this.toggleSideBar} label="Settings" route="/home/settings" faGlyph="cog" currentRoute={currentRoute} />
+            { settingsButton }
             <a href="/logout" style={styles.linkItem}> 
               <li className="list-group-item" key="signout" style={styles.logOutButton}>
                 <span className="fa fa-lg fa-sign-out" /> Logout
@@ -63,6 +78,23 @@ export default class SideBar extends Component {
 SideBar.contextTypes = {
   router: React.PropTypes.object.isRequired,
 };
+
+@connect(state => ({
+  user: state.auth.user,
+}))
+
+export default
+class SideBarContainer {
+  static propTypes = {
+    user: PropTypes.object,
+    hasHome: PropTypes.bool
+  }
+
+  render() {
+    const { user, hasHome } = this.props;
+    return <SideBar user={user} hasHome={hasHome} />
+  }
+}
 
 const styles = {
   base: {

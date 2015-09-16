@@ -17,19 +17,25 @@ class Home extends Component {
 
   componentDidMount() {
     let userId = cookie.load('userId')
-    if(userId)
+    if(userId){
       this.props.loadUser(userId.slice(3,-1))
-    ;
+    } else {
+      this.context.router.transitionTo('/login');
+    }
   }
 
   render() {
     let sideBarShow;
     if(this.props.auth.loading) {
       sideBarShow = <LoadingScreen />
-    } else if(this.props.auth.user) {
-      sideBarShow = <SideBar status="enabled"/>
+    } else if(this.props.auth.loaded) {
+      if(this.props.auth.user.homeId){
+        sideBarShow = <SideBar hasHome={true}/>
+      } else {
+        sideBarShow = <SideBar hasHome={false}/>
+      }
     } else {
-      sideBarShow = <SideBar status="disabled" />
+      sideBarShow = "";
     }
 
     return(
@@ -44,6 +50,10 @@ class Home extends Component {
       </div>
     )
   }
+}
+
+Home.contextTypes = {
+  router: React.PropTypes.object.isRequired
 }
 
 var styles = {

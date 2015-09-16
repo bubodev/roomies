@@ -27,12 +27,6 @@ class Finances extends Component {
       <div style={styles.base}>
         <div style={styles.charts} className="row">
           <div className="col-sm-12 text-center">
-            <PieChart
-                  data={data}
-                  width={400}
-                  height={200}
-                  margin={{top: 0, bottom: 0, left: 100, right: 100}}
-                  sort={sort}/>
           </div>
         </div>
 
