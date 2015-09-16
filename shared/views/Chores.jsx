@@ -42,7 +42,6 @@ class Chores extends Component {
   render() {
     return(
       <div className="row" style={styles.base}>
-        <button onClick={::this.debug}/>
         <div className="col-sm-4 col-sm-offset-2">
           <ColoredButton value="create new task" handleClick={::this.toggleForm} color="primary">
             <span className="fa fa-2x fa-plus"/>
