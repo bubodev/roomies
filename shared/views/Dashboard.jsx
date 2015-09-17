@@ -62,7 +62,7 @@ class Dashboard extends Component {
     return(
       <div style={layout.base}>
         <div style={layout.title}>
-          Dashboard
+          Dashboard 
         </div>
         <div key='dashboard' style={layout.mainContent}>
           { comp }

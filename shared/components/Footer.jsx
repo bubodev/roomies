@@ -36,8 +36,6 @@ const styles = {
   base: {
     width: '100%',
     color: 'darkgrey',
-    position: 'fixed',
-    bottom: 0
   },
 
   linkStyling: {

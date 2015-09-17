@@ -45,7 +45,6 @@ class Chores extends Component {
         <div style={layout.title}>
           Chores
         </div>
-
         <div key='chores' style={layout.mainContent}>
           <button onClick={::this.toggleForm} className="btn btn-primary btn-sm">
             <span className="fa fa-plus"/> new chore
@@ -54,7 +53,7 @@ class Chores extends Component {
             <TaskList tasks={this.props.tasks} />
           </div>
         </div>
-        <Modal color="rgba(240, 128, 128, 0.9)" show={this.state.showForm} close={::this.toggleForm}>
+        <Modal color="rgba(0, 0, 0, 0.9)" show={this.state.showForm} close={::this.toggleForm}>
           <div className="container" style={styles.formContainer}>
             <NewTaskForm rendered={this.state.showForm} homeId={this.props.homeId}/>
           </div>

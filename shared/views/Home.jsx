@@ -39,14 +39,16 @@ class Home extends Component {
     }
 
     return(
-      <div style={styles.base}>
+      <div style={baseStyle}>
         <div className="col-sm-3 col-lg-2">
           { sideBarShow }
         </div>
-        <div className="col-sm-9 col-lg-10 text-center" style={styles.mainSection}>
+        <div className="col-sm-9 col-lg-10">
           {this.props.children || <Dashboard />}
         </div>
-        <Footer />
+        <div style={footerStyle} className="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
+          <Footer />
+        </div>
       </div>
     )
   }
@@ -56,14 +58,17 @@ Home.contextTypes = {
   router: React.PropTypes.object.isRequired
 }
 
-var styles = {
-  base: {
-    marginRight: 'auto',
-    marginLeft: 'auto'
-  },
+const baseStyle = {
+  marginRight: 'auto',
+  marginLeft: 'auto',
+  height: '100vh',
+  background: 'url("http://res.cloudinary.com/bitebox/image/upload/c_scale,w_1200/v1442472575/ceystalhorizon_qwjsx3.png")',
+  backgroundSize: 'cover',
+}
 
-  mainSection: {
-  },
+const footerStyle = {
+  position: 'fixed',
+  bottom: 0
 }
 
 @connect(state => ({

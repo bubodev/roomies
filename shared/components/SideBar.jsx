@@ -45,6 +45,13 @@ class SideBar extends Component {
       settingsButton = <SideBarItem closeSideBar={::this.toggleSideBar} label="Settings" route="/home/settings" faGlyph="cog" currentRoute={currentRoute} />
     }
 
+    let loading;
+    let { authLoading, homeLoading, taskLoading } = this.props;
+    
+    if(authLoading || homeLoading) {
+      loading = <span className="fa fa-3x fa-spin fa-spinner"/>
+    }
+
     return (
       <div>
         <div style={[styles.base, styles[this.state.sideBarShow], styles[this.props.status]]} key="sideBar">
@@ -66,9 +73,12 @@ class SideBar extends Component {
               </li> 
             </a>
           </ul>
+          <div style={styles.statusContainer}>
+            { loading }
+          </div>
         </div>
         <button className="btn btn-default" style={styles.sideBarToggle} key="sideBarToggle" onClick={::this.toggleSideBar} >
-          <span className="fa fa-bars" />  
+          <span className="fa fa-bars" /> 
         </button>
       </div>
     )
@@ -81,23 +91,29 @@ SideBar.contextTypes = {
 
 @connect(state => ({
   user: state.auth.user,
+  authLoading: state.auth.loading,
+  homeLoading: state.home.loading,
+  taskLoading: state.tasks.loading
 }))
 
 export default
 class SideBarContainer {
   static propTypes = {
     user: PropTypes.object,
-    hasHome: PropTypes.bool
+    hasHome: PropTypes.bool,
+    authLoading: PropTypes.bool,
+    homeLoading: PropTypes.bool,
   }
 
   render() {
-    const { user, hasHome } = this.props;
-    return <SideBar user={user} hasHome={hasHome} />
+    const { user, hasHome, authLoading, homeLoading, taskLoading } = this.props;
+    return <SideBar authLoading={authLoading} homeLoading={homeLoading} user={user} hasHome={hasHome} />
   }
 }
 
 const styles = {
   base: {
+    fontWeight: 100,
     background: '#40474E',
     position: 'fixed',
     left: 0,
@@ -181,5 +197,13 @@ const styles = {
 
   image: {
     width: '90%',
+  },
+
+  statusContainer: {
+    color: 'white',
+    width: '100%',
+    textAlign: 'center',
+    bottom: 20,
+    position: 'absolute',
   }
 }

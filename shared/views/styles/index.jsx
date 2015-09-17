@@ -1,24 +1,32 @@
 export const layout = {
   base: {
+    fontWeight: 100,
+    color: 'white',
   },
 
   title: {
+    textAlign: 'center',
     position: 'absolute',
-    top: 0,
     left: 0,
-    borderBottom: '1px solid #E2E2E2',
-    width: '100%',
-    color: '#606060',
+    right: 0,
+    border: '2px solid #E2E2E2',
+    borderRadius: '10px',
+    color: '#E2E2E2',
     fontSize: '13pt',
-    paddingTop: 12,
-    paddingBottom: 12,
-    background: '#F8F8F8',
+    marginTop: 10,
+    marginLeft: '40%',
+    marginRight: '40%',
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 13,
+    paddingRight: 13,
     '@media (max-width: 767px)': {
       borderTop: '57px solid rgb(64, 71, 78)'
     }
   },
 
   mainContent: {
+    textAlign: 'center',
     paddingTop: 65,
     '@media (max-width: 767px)': {
       paddingTop: 130
