@@ -66,19 +66,24 @@ router.post('/tasks', function(req, res) {
   let homeId = req.body.homeId;
 
   Home.findById(homeId, function(err, home) {
-    if(err)
-      res.send(err);
-    newTask.save(function(err) {
-      if(err)
-        res.json(err);
-
-      home.tasks.push(newTask);
-      home.save(function(err){
-        if(err)
-          res.json(err);
-        res.json(newTask);
+    if(err) {
+      res.status(400).send("Sorry, couldn't find that home");
+    } else {
+      newTask.save(function(err) {
+        if(err) {
+          res.status(400).send("Sorry, an error has occured");
+        } else {
+          home.tasks.push(newTask);
+          home.save(function(err){
+            if(err){
+              res.status(400).send("Sorry, an error has occured");
+            } else {
+              res.json(newTask);
+            }
+          })
+        }
       })
-    })
+    }
   })
 })
 
