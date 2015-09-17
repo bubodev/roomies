@@ -68,6 +68,7 @@ router.post('/tasks', function(req, res) {
   newTask.save(function(err) {
     if(err) {
       res.status(400).send("sorry, an error has occured");
+      return;
     }
   })
 
