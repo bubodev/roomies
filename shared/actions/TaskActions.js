@@ -5,7 +5,7 @@ const BACKEND_URL = '/api/tasks'
 export function getTasks(homeId) {
   return {
     types: ['GET_TASKS', 'GET_TASKS_SUCCESS', 'GET_TASKS_FAILURE'],
-    promise: request.get(BACKEND_URL)
+    promise: request.get(BACKEND_URL + '/' + homeId)
   }
 }
 

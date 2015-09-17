@@ -33,20 +33,15 @@ router.delete('/users', function(req, res) {
 })
 
 /** TASKS **/
-router.get('/tasks', function(req, res) {
-  Task.find({}, function(err, tasks) {
-    if(err)
-      res.send(err);
-    res.json(tasks);
-  })
-})
-
 router.get('/tasks/:id', function(req, res) {
-  Task.findById(req.params.id, function(err, task) {
-    if(err)
-      res.send(err);
+  let homeId = req.params.id;
 
-    res.json(task);
+  Home.findById(homeId, function(err, home) {
+    if(err){
+      res.status(400).send("Error! Couldn't find that home")
+    } else {
+      res.json(home.tasks);
+    }
   })
 })
 
