@@ -85,13 +85,13 @@ class FindNewHome extends Component {
         <div >
           <h3>What would you like to do?</h3>
           <hr />
-          <div className="well">
+          <div style={styles.option} className="well">
             <button className="btn btn-primary" onClick={this.chooseState.bind(this, "NEW")}>Create new home</button>
             <hr />
             Use this option if none of your roommates have created a house yet
           </div>
 
-          <div className="well">
+          <div style={styles.option} className="well">
             <button className="btn btn-primary" onClick={this.chooseState.bind(this, "EXISTING")}>I have a home</button>
             <hr />
             Use this option if you have the house share code
@@ -123,6 +123,10 @@ const styles = {
 
   newForm: {
     paddingBottom: '15px'
+  },
+
+  option: {
+    color: 'black'
   }
 }
 
