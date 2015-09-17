@@ -18,9 +18,9 @@ const app = express();
 
 import fs from 'fs';
 /** UNCOMMENT FOR DIST BUILD **/
-// app.use('/bundle.js', function (req, res) {
-//   return fs.createReadStream('./dist/bundle.js').pipe(res);
-// });
+app.use('/bundle.js', function (req, res) {
+  return fs.createReadStream('./dist/bundle.js').pipe(res);
+});
 
 var MongoStore = require('connect-mongo')(session);
 app.use(cookieParser());
