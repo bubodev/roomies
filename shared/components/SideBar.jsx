@@ -52,7 +52,7 @@ class SideBar extends Component {
             <div style={styles.thumbnail} >
               <span className="fa fa-5x icon-border fa-user" />
               <div className="caption">
-                <h4> Example User </h4>
+                <h4> {this.props.user.name} </h4>
               </div>
             </div>
             <br />
