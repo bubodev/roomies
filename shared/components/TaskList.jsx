@@ -26,7 +26,7 @@ export default class TaskList extends React.Component {
     return (
       <div className="col-sm-12 panel panel-default" style={styles.sideBar}>
         <div className="panel-heading">house chore list</div>
-        <table className="table">
+        <table className="table" style={styles.table}>
           <tr>
             <th>Chore</th>
             <th>Description</th>
@@ -47,7 +47,10 @@ var styles = {
     margin: 5,
     padding: 5,
     float: 'left',
+  },
 
+  table: {
+    textAlign: 'left'
   },
 
   sideBar: {

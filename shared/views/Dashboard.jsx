@@ -57,7 +57,7 @@ class Dashboard extends Component {
     }
 
     return(
-      <div>
+      <div className="text-center">
         { comp }
       </div>
     )

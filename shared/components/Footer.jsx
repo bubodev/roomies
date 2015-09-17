@@ -34,7 +34,7 @@ export default class Footer extends Component {
 
 const styles = {
   base: {
-    width: '100vw',
+    width: '100%',
     color: 'darkgrey',
     position: 'fixed',
     bottom: 0

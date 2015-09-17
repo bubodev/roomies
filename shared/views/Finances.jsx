@@ -25,6 +25,7 @@ class Finances extends Component {
 
     return(
       <div style={styles.base}>
+        <h1> Finances </h1>
         <div style={styles.charts} className="row">
           <div className="col-sm-12 text-center">
           </div>

@@ -43,7 +43,7 @@ class Home extends Component {
         <div className="col-sm-3 col-lg-2">
           { sideBarShow }
         </div>
-        <div className="col-sm-9 col-lg-10">
+        <div className="col-sm-9 col-lg-10 text-center" style={styles.mainSection}>
           {this.props.children || <Dashboard />}
         </div>
         <Footer />
@@ -62,6 +62,7 @@ var styles = {
   },
 
   mainSection: {
+    maxWidth: 1000
   },
 }
 

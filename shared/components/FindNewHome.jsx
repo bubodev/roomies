@@ -82,10 +82,20 @@ class FindNewHome extends Component {
       )
     } else {
       showComponent = (
-        <div>
-          <h3><span className="fa fa-commenting-o"/>What would you like to do?</h3>
-          <button className="btn btn-primary" onClick={this.chooseState.bind(this, "NEW")}>Create new home</button>
-          <button className="btn btn-primary" onClick={this.chooseState.bind(this, "EXISTING")}>I have a home</button>
+        <div >
+          <h3>What would you like to do?</h3>
+          <hr />
+          <div className="well">
+            <button className="btn btn-primary" onClick={this.chooseState.bind(this, "NEW")}>Create new home</button>
+            <hr />
+            Use this option if none of your roommates have created a house yet
+          </div>
+
+          <div className="well">
+            <button className="btn btn-primary" onClick={this.chooseState.bind(this, "EXISTING")}>I have a home</button>
+            <hr />
+            Use this option if you have the house share code
+          </div>
         </div>
       )
     }
@@ -93,10 +103,12 @@ class FindNewHome extends Component {
     return(
       <div>
         <h1>Hello! Welcome to rooomies</h1>
-        I checked around a bit and it looks like you haven't added a home yet...
-        <br/>
-        Let's fix that now!
-        <div style={styles.compContainer}>
+        <div>
+          I checked around a bit and it looks like you haven't added a home yet...
+          <br />
+          Let's fix that now!
+        </div>
+        <div className="col-sm-6 col-sm-offset-3" style={styles.compContainer}>
           {showComponent}
         </div>
       </div>
