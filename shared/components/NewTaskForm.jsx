@@ -185,7 +185,7 @@ class NewTaskFormContainer {
   }
 
   render() {
-    const { show, rendered, tasks, dispatch } = this.props;
-    return <NewTaskForm rendered={rendered} show={show} tasks={tasks} {...bindActionCreators(taskActions, dispatch)} />;
+    const { show, rendered, dispatch, homeId } = this.props;
+    return <NewTaskForm rendered={rendered} show={show} homeId={homeId} {...bindActionCreators(taskActions, dispatch)} />;
   }
 }
