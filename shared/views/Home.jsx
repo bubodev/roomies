@@ -39,7 +39,7 @@ class Home extends Component {
     }
 
     return(
-      <div className="container-fluid" style={styles.base}>
+      <div style={styles.base}>
         <div className="col-sm-3 col-lg-2">
           { sideBarShow }
         </div>
@@ -58,11 +58,11 @@ Home.contextTypes = {
 
 var styles = {
   base: {
-    paddingTop: '5vh',
+    marginRight: 'auto',
+    marginLeft: 'auto'
   },
 
   mainSection: {
-    maxWidth: 1000
   },
 }
 

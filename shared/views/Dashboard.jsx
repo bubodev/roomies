@@ -3,10 +3,13 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as homeActions from '../actions/HomeActions';
 
-
 import Overview from '../components/Overview';
 import FindNewHome from '../components/FindNewHome';
 import LoadingScreen from '../components/LoadingScreen';
+
+import Radium from 'radium';
+import { layout } from './styles';
+@Radium
 
 class Dashboard extends Component {
   constructor(props) {
@@ -57,8 +60,13 @@ class Dashboard extends Component {
     }
 
     return(
-      <div className="text-center">
-        { comp }
+      <div style={layout.base}>
+        <div style={layout.title}>
+          Dashboard
+        </div>
+        <div key='dashboard' style={layout.mainContent}>
+          { comp }
+        </div>
       </div>
     )
   }

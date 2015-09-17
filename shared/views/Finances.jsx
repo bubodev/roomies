@@ -7,6 +7,10 @@ import NewTransactionForm from '../components/NewTransactionForm';
 let ReactD3 = require('react-d3-components');
 let PieChart = ReactD3.PieChart;
 
+import Radium from 'radium';
+import { layout } from './styles';
+@Radium
+
 class Finances extends Component {
   constructor(props) {
     super(props);
@@ -24,57 +28,50 @@ class Finances extends Component {
     let sort;
 
     return(
-      <div style={styles.base}>
-        <h1> Finances </h1>
-        <div style={styles.charts} className="row">
-          <div className="col-sm-12 text-center">
+      <div style={layout.base}>
+        <div style={layout.title}>
+          Finances 
+        </div>
+
+        <div key='finances' style={layout.mainContent}>
+          <div className="row">
+            <div className="col-sm-4">
+              Household costs
+              {this.props.transactions.map(function(transaction){
+                if(transaction.type === 'HOUSE'){
+                  return <div key={transaction._id}> {transaction.description} {transaction.amount} </div>
+                } else {
+                  return null
+                }
+              })}
+              <NewTransactionForm type="HOUSE" _submitNewTransaction={this.props.createTransaction} />
+            </div>
+            <div className="col-sm-4">
+              Lending
+              {this.props.transactions.map(function(transaction){
+                if(transaction.type === 'IN'){
+                  return <div key={transaction._id}> {transaction.description} {transaction.amount} </div>
+                } else {
+                  return null
+                }
+              })}
+              <NewTransactionForm type="IN" _submitNewTransaction={this.props.createTransaction} />
+            </div>
+            <div className="col-sm-4">
+              Borrowing
+              {this.props.transactions.map(function(transaction){
+                if(transaction.type === 'OUT'){
+                  return <div key={transaction._id}> {transaction.description} {transaction.amount} </div>
+                } else {
+                  return null
+                }
+              })}
+            </div>
           </div>
         </div>
 
-        <div className="row">
-          <div className="col-sm-4">
-            Household costs
-            {this.props.transactions.map(function(transaction){
-              if(transaction.type === 'HOUSE'){
-                return <div key={transaction._id}> {transaction.description} {transaction.amount} </div>
-              } else {
-                return null
-              }
-            })}
-            <NewTransactionForm type="HOUSE" _submitNewTransaction={this.props.createTransaction} />
-          </div>
-          <div className="col-sm-4">
-            Lending
-            {this.props.transactions.map(function(transaction){
-              if(transaction.type === 'IN'){
-                return <div key={transaction._id}> {transaction.description} {transaction.amount} </div>
-              } else {
-                return null
-              }
-            })}
-            <NewTransactionForm type="IN" _submitNewTransaction={this.props.createTransaction} />
-          </div>
-          <div className="col-sm-4">
-            Borrowing
-            {this.props.transactions.map(function(transaction){
-              if(transaction.type === 'OUT'){
-                return <div key={transaction._id}> {transaction.description} {transaction.amount} </div>
-              } else {
-                return null
-              }
-            })}
-          </div>
-        </div>
       </div>
     )
-  }
-}
-
-var styles = {
-  base: {
-  },
-
-  charts: {
   }
 }
 

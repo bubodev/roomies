@@ -4,17 +4,9 @@ import WeekChores from './WeekChores';
 export default class Overview extends Component {
   render() {
     return(
-      <div style={styles.base} className="container-fluid">
-        <h1>Overview</h1>
-        <div className="row">
-          <WeekChores />
-        </div>
+      <div>
+        Some content will go here
       </div>
     )
-  }
-}
-
-const styles = {
-  base: {
   }
 }

@@ -8,6 +8,10 @@ import NewTaskForm from '../components/NewTaskForm';
 import Modal from '../components/Modal';
 import ColoredButton from '../components/ColoredButton';
 
+import Radium from 'radium';
+import { layout } from './styles';
+
+@Radium
 class Chores extends Component {
   constructor(props, context) {
     super(props, context);
@@ -37,15 +41,18 @@ class Chores extends Component {
 
   render() {
     return(
-      <div>
-        <div className="header">
-          <h1> Chores </h1>
+      <div style={layout.base}>
+        <div style={layout.title}>
+          Chores
+        </div>
+
+        <div key='chores' style={layout.mainContent}>
           <button onClick={::this.toggleForm} className="btn btn-primary btn-sm">
             <span className="fa fa-plus"/> new chore
           </button>
-        </div>
-        <div style={styles.taskListContainer}>
-          <TaskList tasks={this.props.tasks} />
+          <div style={styles.taskListContainer}>
+            <TaskList tasks={this.props.tasks} />
+          </div>
         </div>
         <Modal color="rgba(240, 128, 128, 0.9)" show={this.state.showForm} close={::this.toggleForm}>
           <div className="container" style={styles.formContainer}>

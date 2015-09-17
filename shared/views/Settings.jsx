@@ -7,20 +7,20 @@ import * as HomeActions from '../actions/HomeActions';
 
 import UserInfoForm from '../components/UserInfoForm';
 
+import { layout } from './styles'
 @Radium
 class Settings extends Component {
   render() {
     return(
-      <div style={styles.base}>
-        <h1> Settings </h1>
-        <UserInfoForm />
+      <div style={layout.base}>
+        <div style={layout.title}>
+          Settings
+        </div> 
+        <div key='settings' style={layout.mainContent}>
+          <UserInfoForm />
+        </div>
       </div>
     )
-  }
-}
-
-const styles = {
-  base: {
   }
 }
 

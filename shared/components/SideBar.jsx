@@ -110,7 +110,6 @@ const styles = {
       width: '100%',
       zIndex: 1,
       transition: 'top .5s ease',
-      borderBottom: '1px solid lightgrey',
     },
     '@media (min-width: 1200px)': {
       width: '16.66667%',
