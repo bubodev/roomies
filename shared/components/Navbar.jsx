@@ -2,13 +2,7 @@ import React from 'react';
 import Radium from 'radium';
 import { Link } from 'react-router';
 
-const accentColor = '#00DFFF';
-
-var styles = {
-  navBar: {
-    color: 'white',
-  }
-}
+import { accentColor } from './styles'
 
 @Radium
 export default class Navbar extends React.Component {

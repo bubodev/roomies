@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
 import GoogleSignInButton from '../components/GoogleSignInButton';
-
-const accentColor = '#00DFFF';
+import { accentColor, outline, link } from '../components/styles'
 
 @Radium
 export default class Login extends Component {
@@ -49,7 +48,7 @@ export default class Login extends Component {
           <div className="row">
             <div className="col-sm-6" key="catchPhrase" style={styles.catchPhrase}>
               <h1>be better <span style={{color:accentColor}}>roomies</span></h1>
-              <button onClick={::this.handleClick} style={styles.button}> how it works </button>
+              <button onClick={::this.handleClick} style={[styles.button, outline, link]}> how it works </button>
             </div>
             <div className="col-sm-6" key="loginButton" style={styles.loginButton}>
               <span style={styles.loginLabel}>Sign in with: </span>
@@ -116,7 +115,7 @@ var styles = {
   },
 
   loginButton: {
-    paddingTop: '30vh',
+    paddingTop: '35vh',
     '@media (max-width: 768px)': {
       paddingTop: '15vh'
     }
@@ -129,12 +128,8 @@ var styles = {
   button: {
     padding: '10px',
     backgroundColor: 'rgba(0,0,0,0)',
-    color: 'rgba(255,255,255,0.8)',
-    border: '2px solid rgba(255,255,255,0.8)',
-    fontWeight: 'bold',
     transition: 'all .5s ease',
     ':hover': {
-      color: 'white',
       border: '2px solid ' + accentColor
     }
   }

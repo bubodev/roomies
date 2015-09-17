@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import * as taskActions from '../actions/TaskActions';
 
 import RadioButtons from './RadioButtons';
+import { colors } from './styles'
 
 const defaultState = { 
         errors: [],
@@ -123,7 +124,7 @@ class NewTaskForm extends Component {
         <label>which consists of :</label>
         <ul style={{listStyle:'none'}}>
           { descriptionList }
-          <span style={styles.addMoreButton} key="addMoreButton" onClick={::this.addDescription} className="fa fa-plus">add more descriptions</span>
+          <span style={[styles.addMoreButton, colors.link]} key="addMoreButton" onClick={::this.addDescription} className="fa fa-plus">add more descriptions</span>
         </ul>
         <label>starting on&nbsp;</label>
         <input onChange={this.handleChange.bind(this, 'startDate')} style={styles.baseInput} value={this.state.startDate} type='date' id="startDate" ref="startDate"/>
@@ -149,11 +150,6 @@ const styles = {
 
   addMoreButton: {
     fontSize: '16pt',
-    color: 'lightgrey',
-    ':hover': {
-      cursor: 'pointer',
-      color: 'white'
-    },
     '@media (max-width: 768px)': {
       fontSize: '10pt'
     }

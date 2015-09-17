@@ -21,7 +21,7 @@ export const layout = {
     paddingLeft: 13,
     paddingRight: 13,
     '@media (max-width: 767px)': {
-      borderTop: '57px solid rgb(64, 71, 78)'
+      marginTop: 60
     }
   },
 

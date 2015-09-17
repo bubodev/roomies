@@ -4,6 +4,7 @@ import Radium from 'radium';
 import SideBarItem from './SideBarItem';
 
 import { connect } from 'react-redux';
+import { outline, colors } from './styles'
 
 @Radium
 class SideBar extends Component {
@@ -56,7 +57,7 @@ class SideBar extends Component {
       <div>
         <div style={[styles.base, styles[this.state.sideBarShow], styles[this.props.status]]} key="sideBar">
           <ul className="list-group text-center">
-            <div style={styles.thumbnail} >
+            <div style={[styles.thumbnail, outline]} >
               <span className="fa fa-5x icon-border fa-user" />
               <div className="caption">
                 <h4> {this.props.user.name} </h4>
@@ -67,7 +68,7 @@ class SideBar extends Component {
           </ul>
           <ul className="list-group text-center">
             { settingsButton }
-            <a href="/logout" style={styles.linkItem}> 
+            <a href="/logout" style={colors.link}> 
               <li className="list-group-item" key="signout" style={styles.logOutButton}>
                 <span className="fa fa-lg fa-sign-out" /> Logout
               </li> 
@@ -171,14 +172,6 @@ const styles = {
     }
   },
 
-  linkItem: {
-    textDecoration: 'none',
-    color: 'darkgrey',
-    ':hover': {
-      color: 'black',
-    }
-  },
-
   disabled: {
     display: 'none'
   },
@@ -191,8 +184,6 @@ const styles = {
     marginLeft: 'auto',
     marginRight: 'auto',
     maxWidth: '200px',
-    border: '2px dotted white',
-    borderRadius: '3px'
   },
 
   image: {
