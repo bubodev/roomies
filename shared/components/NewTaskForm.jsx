@@ -130,7 +130,7 @@ class NewTaskForm extends Component {
         <label>until&nbsp;</label>
         <input onChange={this.handleChange.bind(this, 'endDate')} style={styles.baseInput} value={this.state.endDate} type='date' id="endDate" ref="endDate"/>
         <label>every&nbsp;</label>
-        <input onChange={this.handleChange.bind(this, 'frequency')} style={[styles.baseInput, styles.numberInput, styles.textInput]} value={this.state.number} type='number' id="number" ref="number"/>
+        <input onChange={this.handleChange.bind(this, 'number')} style={[styles.baseInput, styles.numberInput, styles.textInput]} value={this.state.number} type='number' id="number" ref="number"/>
         <RadioButtons currentSelected={this.state.frequency} setSelected={::this.setFrequency} values={["days","weeks","months"]} />
         <br/>
         <input className="btn btn-lg" onSubmit={::this.createTask} type="submit"/>
