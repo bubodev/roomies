@@ -179,9 +179,9 @@ const styles = {
 export default
 class NewTaskFormContainer {
   static propTypes = {
-    tasks: PropTypes.object,
     show: PropTypes.bool,
-    rendered: PropTypes.string
+    rendered: PropTypes.string,
+    homeId: PropTypes.string,
   }
 
   render() {
