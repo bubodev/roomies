@@ -10,34 +10,46 @@ export default class TaskList extends React.Component {
   }
 
   render() {
-    let tasks;
+    let tableItems;
     if(this.props.tasks){
-      tasks = this.props.tasks.map(function(task) {
+      tableItems = this.props.tasks.map(function(task) {
         return (
-          <div key={task._id} className="col-sm-3 thumbnail">
-            task: {task.name}
-            <br />
-            start: {task.startDate.slice(0,10)}
-            <br />
-            end: {task.endDate.slice(0,10)}
-            <br />
-            description: {task.description.join(', ')}
-            <br />
-            frequency: {task.frequency}
-          </div>
+          <tr key={task._id}>
+            <td>{task.name}</td>
+            <td>{task.description.join(', ')}</td>
+            <td>{task.frequency} days</td>
+          </tr>
         )
       })
     }
     
     return (
-      <div className="col-sm-12" style={styles.sideBar}>
-        { tasks }
+      <div className="col-sm-12 panel panel-default" style={styles.sideBar}>
+        <div className="panel-heading">house chore list</div>
+        <table className="table">
+          <tr>
+            <th>Chore</th>
+            <th>Description</th>
+            <th>Frequency</th>
+          </tr>
+          {tableItems}
+        </table>
       </div>
     )
   };
 }
 
 var styles = {
+  base: {
+    height: 150,
+    width: 150,
+    background: 'lightgrey',
+    margin: 5,
+    padding: 5,
+    float: 'left',
+
+  },
+
   sideBar: {
     paddingLeft: '0 !important',
     paddingRight: '0 !important',

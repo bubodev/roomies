@@ -35,19 +35,18 @@ class Chores extends Component {
     this.props.homeId && this.props.getTasks(this.props.homeId);
   }
 
-  debug() {
-    debugger;
-  }
-
   render() {
     return(
-      <div className="row" style={styles.base}>
-        <div className="col-sm-4 col-sm-offset-2">
-          <ColoredButton value="create new task" handleClick={::this.toggleForm} color="primary">
-            <span className="fa fa-2x fa-plus"/>
-          </ColoredButton>
+      <div>
+        <div className="header">
+          <h1> Chores </h1>
+          <button onClick={::this.toggleForm} className="btn btn-primary btn-sm">
+            <span className="fa fa-plus"/> new chore
+          </button>
         </div>
-        <TaskList tasks={this.props.tasks} />
+        <div style={styles.taskListContainer}>
+          <TaskList tasks={this.props.tasks} />
+        </div>
         <Modal color="rgba(240, 128, 128, 0.9)" show={this.state.showForm} close={::this.toggleForm}>
           <div className="container" style={styles.formContainer}>
             <NewTaskForm rendered={this.state.showForm} homeId={this.props.homeId}/>
@@ -63,11 +62,16 @@ Chores.contextTypes = {
 }
 
 var styles = {
-  base: {
+  formContainer: {
+    maxWidth: 900
   },
 
-  formContainer: {
-    maxWidth: '900px'
+  newTaskButtonContainer: {
+    maxWidth: 150
+  },
+
+  taskListContainer: {
+    padding: 15
   }
 }
 
