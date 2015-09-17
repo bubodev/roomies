@@ -65,27 +65,30 @@ router.post('/tasks', function(req, res) {
   let newTask = new Task(req.body.taskParams);
   let homeId = req.body.homeId;
 
+  newTask.save(function(err) {
+    if(err) {
+      res.status(400).send("sorry, an error has occured");
+    }
+  })
+
   Home.findById(homeId, function(err, home) {
     if(err) {
       res.status(400).send("Sorry, couldn't find that home");
+      return;
     } else {
-      newTask.save(function(err) {
-        if(err) {
+      home.tasks.push(newTask);
+      home.save(function(err) {
+        if(err){
           res.status(400).send("Sorry, an error has occured");
+          return;
         } else {
-          home.tasks.push(newTask);
-          home.save(function(err){
-            if(err){
-              res.status(400).send("Sorry, an error has occured");
-            } else {
-              res.json(newTask);
-            }
-          })
+          res.json(newTask);
         }
-      })
+      });
     }
   })
-})
+});
+
 
 /** HOMES **/
 router.get('/homes/:id', function(req, res) {
