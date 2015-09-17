@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
 import GoogleSignInButton from '../components/GoogleSignInButton';
-import { accentColor, outline, link } from '../components/styles'
+import { accentColor, outline, colors } from '../components/styles'
 
 @Radium
 export default class Login extends Component {
@@ -22,7 +22,7 @@ export default class Login extends Component {
   render() {
     return(
       <div>
-        <div key="howItWorks" style={styles.howItWorks}>
+        <div key="howItWorks" style={[styles.howItWorks, colors.bg]}>
           <div className="">
             <div className="row">
               <span 
@@ -48,7 +48,7 @@ export default class Login extends Component {
           <div className="row">
             <div className="col-sm-6" key="catchPhrase" style={styles.catchPhrase}>
               <h1>be better <span style={{color:accentColor}}>roomies</span></h1>
-              <button onClick={::this.handleClick} style={[styles.button, outline, link]}> how it works </button>
+              <button onClick={::this.handleClick} style={[styles.button, outline]}> how it works </button>
             </div>
             <div className="col-sm-6" key="loginButton" style={styles.loginButton}>
               <span style={styles.loginLabel}>Sign in with: </span>
@@ -65,7 +65,6 @@ export default class Login extends Component {
 var styles = {
   base: {
     paddingTop: '51px',
-    backgroundColor: 'grey',
     backgroundImage: 'url("http://res.cloudinary.com/bitebox/image/upload/c_scale,w_1200/v1442472575/ceystalhorizon_qwjsx3.png")',
     backgroundSize: 'cover',
     backgroundPositionX: 'center',
@@ -83,7 +82,6 @@ var styles = {
 
   howItWorks: {
     color: 'white',
-    backgroundColor: accentColor,
     paddingTop: '51px',
     position: 'fixed',
     width: '70vw',
