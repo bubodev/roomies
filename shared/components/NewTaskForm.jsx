@@ -59,6 +59,7 @@ class NewTaskForm extends Component {
     }, this.props.homeId);
 
     this.setState(defaultState);
+    this.props.closeModal();
   }
 
   handleChange(target, e) {
@@ -182,10 +183,11 @@ class NewTaskFormContainer {
     show: PropTypes.bool,
     rendered: PropTypes.string,
     homeId: PropTypes.string,
+    closeModal: PropTypes.func.isRequired
   }
 
   render() {
-    const { show, rendered, dispatch, homeId } = this.props;
-    return <NewTaskForm rendered={rendered} show={show} homeId={homeId} {...bindActionCreators(taskActions, dispatch)} />;
+    const { show, rendered, dispatch, homeId, closeModal } = this.props;
+    return <NewTaskForm closeModal={closeModal} rendered={rendered} show={show} homeId={homeId} {...bindActionCreators(taskActions, dispatch)} />;
   }
 }
