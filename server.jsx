@@ -51,6 +51,8 @@ app.use('/api', ensureAuthenticated, require('./server/api'));
 import promiseMiddleware from 'shared/lib/promiseMiddleware';
 
 app.use((req, res) => {
+  delete process.env.BROWSER;
+  
   const logger = store => next => action => {
     let result = next(action);
     return result;
@@ -80,6 +82,7 @@ app.use((req, res) => {
       <html>
         <head>
           <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
           <title>Chore Split App</title>
           <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">

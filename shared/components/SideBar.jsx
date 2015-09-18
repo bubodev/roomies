@@ -5,6 +5,10 @@ import SideBarItem from './SideBarItem';
 
 import { connect } from 'react-redux';
 import { outline, colors } from './styles'
+if (process.env.BROWSER) {
+  require("./SideBar.css");
+}
+import { Spring, presets } from 'react-motion';
 
 @Radium
 class SideBar extends Component {
@@ -32,18 +36,17 @@ class SideBar extends Component {
     let currentRoute = this.context.router.state.location.pathname;
     
     let sideBarItems;
-    let settingsButton;
 
     if(this.props.hasHome) {
       sideBarItems = (
-        <div>
+        <div className="relative">
           <SideBarItem closeSideBar={::this.toggleSideBar} label="Dashboard" route="/home/dashboard" faGlyph="tachometer" currentRoute={currentRoute} />
           <SideBarItem closeSideBar={::this.toggleSideBar} label="Chores" route="/home/chores" faGlyph="tasks" currentRoute={currentRoute} />
           <SideBarItem closeSideBar={::this.toggleSideBar} label="Finances" route="/home/finances" faGlyph="money" currentRoute={currentRoute} />
           <SideBarItem closeSideBar={::this.toggleSideBar} label="Shopping List" route="/home/shopping" faGlyph="cart-arrow-down" currentRoute={currentRoute} />
+          <SideBarItem closeSideBar={::this.toggleSideBar} label="Settings" route="/home/settings" faGlyph="cog" currentRoute={currentRoute} />
         </div>
       )
-      settingsButton = <SideBarItem closeSideBar={::this.toggleSideBar} label="Settings" route="/home/settings" faGlyph="cog" currentRoute={currentRoute} />
     }
 
     let loading;
@@ -54,34 +57,43 @@ class SideBar extends Component {
     }
 
     return (
-      <div>
-        <div style={[styles.base, styles[this.state.sideBarShow], styles[this.props.status]]} key="sideBar">
-          <ul className="list-group text-center">
-            <div style={[styles.thumbnail, outline]} >
-              <span className="fa fa-5x icon-border fa-user" />
-              <div className="caption">
-                <h4> {this.props.user.name} </h4>
+      <Spring defaultValue={{left: {val: -400}}} endValue={{left: {val: 0, config: [60, 14]}}}>
+        {t => {
+          let tween = {
+            left: t.left.val
+          }
+
+          return(
+            <div >
+              <div style={tween} className={"base " + this.state.sideBarShow + " " + this.props.status}>
+                <ul className="list-group text-center">
+                  <div className="profile-pic" style={outline} >
+                    <span className="fa fa-5x icon-border fa-user" />
+                    <div className="caption">
+                      <h4> {this.props.user.name} </h4>
+                    </div>
+                  </div>
+                  <br />
+                  { sideBarItems }
+                </ul>
+                <ul className="list-group text-center">
+                  <a href="/logout"> 
+                    <li className="list-group-item logOutButton">
+                      <span className="fa fa-lg fa-sign-out" /> Logout
+                    </li> 
+                  </a>
+                </ul>
+                <div style={styles.statusContainer}>
+                  { loading }
+                </div>
               </div>
+              <button className="btn btn-default sideBarToggle" onClick={::this.toggleSideBar} >
+                <span className="fa fa-bars" /> 
+              </button>
             </div>
-            <br />
-            { sideBarItems }
-          </ul>
-          <ul className="list-group text-center">
-            { settingsButton }
-            <a href="/logout" style={colors.link}> 
-              <li className="list-group-item" key="signout" style={styles.logOutButton}>
-                <span className="fa fa-lg fa-sign-out" /> Logout
-              </li> 
-            </a>
-          </ul>
-          <div style={styles.statusContainer}>
-            { loading }
-          </div>
-        </div>
-        <button className="btn btn-default" style={styles.sideBarToggle} key="sideBarToggle" onClick={::this.toggleSideBar} >
-          <span className="fa fa-bars" /> 
-        </button>
-      </div>
+          )
+        }}
+      </Spring>
     )
   }
 }
@@ -113,83 +125,14 @@ class SideBarContainer {
 }
 
 const styles = {
-  base: {
-    fontWeight: 100,
-    background: '#40474E',
-    position: 'fixed',
-    left: 0,
-    top: 0,
-    width: '25%',
-    height: '100vh',
-    overflowY: 'scroll',
-    '@media (max-width: 767px)': {
-      padding: '10px',
-      width: '100%',
-      zIndex: 1,
-      transition: 'top .5s ease',
-    },
-    '@media (min-width: 1200px)': {
-      width: '16.66667%',
-    },
-  },
-
-  sideBarHide: {
-    '@media (max-width: 767px)': {
-      top: '-100vh'
-    }
-  },
-
-  sideBarShow: {
-    top: '0px'
-  },
-
-  sideBarToggle: {
-    display: 'none',
-    '@media (max-width: 767px)': {
-      position: 'fixed',
-      display: 'block',
-      top: '30px',
-      right: 0,
-      marginRight: '20px',
-      marginTop: '35px',
-      zIndex: 11,
-      ':hover': {
-        cursor: 'pointer',
-      }
-    }
-  },
-
-  logOutButton: {
-    width: '90%',
-    margin: 'auto',
-    position: 'relative',
-    bottom: '-20px',
-    background: 'lightcoral',
-    color: 'white',
-    border: 'none',
-    ':hover': {
-      background: 'rgb(234, 89, 89)'
-    }
-  },
-
   disabled: {
     display: 'none'
-  },
-
-  thumbnail: {
-    color: 'white',
-    width: 'auto',
-    marginTop: '80px',
-    padding:'20px',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    maxWidth: '200px',
   },
 
   image: {
     width: '90%',
   },
-
+  
   statusContainer: {
     color: 'white',
     width: '100%',

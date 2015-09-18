@@ -27,7 +27,7 @@ class Home extends Component {
   render() {
     let sideBarShow;
     if(this.props.auth.loading) {
-      sideBarShow = <LoadingScreen />
+      sideBarShow = null;
     } else if(this.props.auth.loaded) {
       if(this.props.auth.user.homeId){
         sideBarShow = <SideBar hasHome={true}/>
@@ -35,7 +35,7 @@ class Home extends Component {
         sideBarShow = <SideBar hasHome={false}/>
       }
     } else {
-      sideBarShow = "";
+      sideBarShow = null;
     }
 
     return(
@@ -89,4 +89,3 @@ class HomeContainer {
     return <Home auth={auth} children={children} {...bindActionCreators(authActions, dispatch)} />;
   }
 }
-

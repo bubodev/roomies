@@ -33,9 +33,8 @@ router.delete('/users', function(req, res) {
 })
 
 /** TASKS **/
-router.get('/tasks/:id', function(req, res) {
-  let homeId = req.params.id;
-
+router.get('/tasks/:homeId', function(req, res) {
+  let homeId = req.params.homeId;
   Home.findById(homeId, function(err, home) {
     if(err){
       res.status(400).send("Error! Couldn't find that home")
@@ -64,13 +63,6 @@ router.put('/tasks/:id', function(req, res) {
 router.post('/tasks', function(req, res) {
   let newTask = new Task(req.body.taskParams);
   let homeId = req.body.homeId;
-
-  newTask.save(function(err) {
-    if(err) {
-      res.status(400).send("sorry, an error has occured");
-      return;
-    }
-  })
 
   Home.findById(homeId, function(err, home) {
     if(err) {
@@ -134,8 +126,15 @@ router.put('/homes/:id', function(req,res) {
 
         user.save(function(err) {
           if(err)
-            res.json(err);
-          res.json(home);
+            res.status(400).send("Hmm... something went wrong");
+        })
+
+        home.save(function(err) {
+          if(err) {
+            res.status(400).send("Hmm... something went wrong");
+          } else {
+            res.json(home);
+          }
         })
      })
     }
