@@ -18,9 +18,9 @@ const app = express();
 
 import fs from 'fs';
 /** UNCOMMENT FOR DIST BUILD **/
-// app.use('/bundle.js', function (req, res) {
-//   return fs.createReadStream('./dist/bundle.js').pipe(res);
-// });
+app.use('/bundle.js', function (req, res) {
+  return fs.createReadStream('./dist/bundle.js').pipe(res);
+});
 
 var MongoStore = require('connect-mongo')(session);
 app.use(cookieParser());
@@ -82,6 +82,7 @@ app.use((req, res) => {
       <html>
         <head>
           <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
           <title>Chore Split App</title>
           <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">

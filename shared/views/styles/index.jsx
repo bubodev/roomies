@@ -12,7 +12,7 @@ export const layout = {
     border: '2px solid #E2E2E2',
     borderRadius: '10px',
     color: '#E2E2E2',
-    fontSize: '13pt',
+    fontSize: '1em',
     marginTop: 10,
     marginLeft: '40%',
     marginRight: '40%',
@@ -21,7 +21,10 @@ export const layout = {
     paddingLeft: 13,
     paddingRight: 13,
     '@media (max-width: 767px)': {
-      marginTop: 60
+      marginTop: 60,
+      marginLeft: '35%',
+      marginRight: '35%',
+      fontSize: '.7em'
     }
   },
 

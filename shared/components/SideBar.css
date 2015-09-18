@@ -8,38 +8,6 @@
   overflow-y: scroll;
 }
 
-@media screen and (max-width: 767px) {
-  .base {
-    padding: 10px;
-    width: 100%;
-    z-index: 1;
-    transition: top .5s ease;
-  }
-
-  .sideBarHide {
-    top: -100vh
-  }
-
-  .sideBarToggle {
-    position: fixed;
-    display: block !important;
-    top: 30px;
-    right: 0;
-    margin-right: 20px;
-    margin-top: 35px;
-    z-index: 11;
-  }
-
-  .sideBarToggle:hover {
-    cursor: pointer;
-  }
-}
-@media screen and (min-width: 1200px) {
-  .base {
-    width: 16.66667%;
-  }
-}
-
 .sideBarShow {
   top: 0px;
 }
@@ -88,4 +56,44 @@ ul {
 
 .relative {
   position: relative;
+}
+
+@media screen and (max-width: 767px) {
+  .base {
+    padding: 10px;
+    width: 100%;
+    z-index: 1;
+    transition: top .5s ease;
+  }
+
+  .sideBarHide {
+    top: -100vh
+  }
+
+  .sideBarToggle {
+    position: fixed;
+    display: block !important;
+    top: 30px;
+    right: 0;
+    margin-right: 20px;
+    margin-top: 35px;
+    z-index: 11;
+  }
+
+  .sideBarToggle:hover {
+    cursor: pointer;
+  }
+
+  .profile-pic {
+    margin-top: 50px;
+    max-width: 50px;
+    max-height: 50px;
+    font-size: 10px;
+    overflow: hidden;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .base {
+    width: 16.66667%;
+  }
 }
