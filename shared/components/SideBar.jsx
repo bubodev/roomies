@@ -8,7 +8,7 @@ import { outline, colors } from './styles'
 if (process.env.BROWSER) {
   require("./SideBar.css");
 }
-import { Spring } from 'react-motion';
+import { Spring, presets } from 'react-motion';
 
 @Radium
 class SideBar extends Component {
@@ -36,18 +36,17 @@ class SideBar extends Component {
     let currentRoute = this.context.router.state.location.pathname;
     
     let sideBarItems;
-    let settingsButton;
 
     if(this.props.hasHome) {
       sideBarItems = (
-        <div>
+        <div className="relative">
           <SideBarItem closeSideBar={::this.toggleSideBar} label="Dashboard" route="/home/dashboard" faGlyph="tachometer" currentRoute={currentRoute} />
           <SideBarItem closeSideBar={::this.toggleSideBar} label="Chores" route="/home/chores" faGlyph="tasks" currentRoute={currentRoute} />
           <SideBarItem closeSideBar={::this.toggleSideBar} label="Finances" route="/home/finances" faGlyph="money" currentRoute={currentRoute} />
           <SideBarItem closeSideBar={::this.toggleSideBar} label="Shopping List" route="/home/shopping" faGlyph="cart-arrow-down" currentRoute={currentRoute} />
+          <SideBarItem closeSideBar={::this.toggleSideBar} label="Settings" route="/home/settings" faGlyph="cog" currentRoute={currentRoute} />
         </div>
       )
-      settingsButton = <SideBarItem closeSideBar={::this.toggleSideBar} label="Settings" route="/home/settings" faGlyph="cog" currentRoute={currentRoute} />
     }
 
     let loading;
@@ -58,7 +57,7 @@ class SideBar extends Component {
     }
 
     return (
-      <Spring defaultValue={{left: {val: -400}}} endValue={{left: {val: 0}}}>
+      <Spring defaultValue={{left: {val: -400}}} endValue={{left: {val: 0, config: [60, 14]}}}>
         {t => {
           let tween = {
             left: t.left.val
@@ -78,7 +77,6 @@ class SideBar extends Component {
                   { sideBarItems }
                 </ul>
                 <ul className="list-group text-center">
-                  { settingsButton }
                   <a href="/logout"> 
                     <li className="list-group-item logOutButton">
                       <span className="fa fa-lg fa-sign-out" /> Logout
@@ -93,7 +91,6 @@ class SideBar extends Component {
                 <span className="fa fa-bars" /> 
               </button>
             </div>
-
           )
         }}
       </Spring>
@@ -135,7 +132,7 @@ const styles = {
   image: {
     width: '90%',
   },
-
+  
   statusContainer: {
     color: 'white',
     width: '100%',

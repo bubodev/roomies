@@ -1,4 +1,5 @@
 var path = require('path');
+var webpack = require('webpack');
 
 var outDirectory = (process.env.NODE_ENV === 'production') ?
   'dist' :
@@ -22,7 +23,17 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         loaders: ['babel']
+      },{
+        test: /\.css$/,
+        loader: 'style!css'
       }
     ]
   },
+  plugins: [
+    new webpack.DefinePlugin({
+        "process.env": {
+            BROWSER: JSON.stringify(true)
+        }
+    })
+  ]
 };

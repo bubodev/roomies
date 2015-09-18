@@ -81,3 +81,11 @@ a:hover {
 .logOutButton:hover {
   background: rgb(234, 89, 89)
 }
+
+ul {
+  list-style: none;
+}
+
+.relative {
+  position: relative;
+}

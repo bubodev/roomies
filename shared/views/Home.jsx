@@ -89,4 +89,3 @@ class HomeContainer {
     return <Home auth={auth} children={children} {...bindActionCreators(authActions, dispatch)} />;
   }
 }
-
