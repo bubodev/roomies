@@ -16,17 +16,24 @@ module.exports = {
     extensions:         ['', '.js', '.jsx']
   },
   module: {
-    loaders: [
-      {
+    loaders: [{
         test:    /\.jsx?$/,
         exclude: /node_modules/,
         loaders: ['react-hot', 'babel']
+      },{
+        test: /\.css$/,
+        loader: 'style!css'
       }
     ]
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
+    new webpack.DefinePlugin({
+        "process.env": {
+            BROWSER: JSON.stringify(true)
+        }
+    })
   ],
   devtool: 'inline-source-map',
   devServer: {

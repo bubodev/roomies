@@ -38,9 +38,11 @@
     "babel": "^5.8.20",
     "babel-eslint": "^4.0.5",
     "babel-loader": "^5.3.2",
+    "css-loader": "^0.18.0",
     "eslint": "^1.0.0",
     "eslint-plugin-react": "^3.1.0",
     "react-hot-loader": "^1.2.8",
+    "style-loader": "^0.12.4",
     "webpack": "^1.10.5",
     "webpack-dev-server": "^1.10.1"
   }

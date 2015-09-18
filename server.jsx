@@ -51,6 +51,8 @@ app.use('/api', ensureAuthenticated, require('./server/api'));
 import promiseMiddleware from 'shared/lib/promiseMiddleware';
 
 app.use((req, res) => {
+  delete process.env.BROWSER;
+  
   const logger = store => next => action => {
     let result = next(action);
     return result;
