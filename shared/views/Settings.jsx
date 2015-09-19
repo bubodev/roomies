@@ -8,7 +8,7 @@ import * as HomeActions from '../actions/HomeActions';
 import UserInfoForm from '../components/UserInfoForm';
 
 import { layout } from './styles'
-@Radium
+
 class Settings extends Component {
   constructor(props, context) {
     super(props, context);
@@ -19,10 +19,6 @@ class Settings extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(!nextProps.home.home) {
-      this.props.loadUser(this.props.auth.user._id);
-      this.context.router.transitionTo('/home/');
-    }
   }
 
   deleteUser() {
@@ -32,7 +28,14 @@ class Settings extends Component {
   removeUser() {
     let homeId = this.props.auth.user.homeId;
     let userId = this.props.auth.user._id;
-    this.props.removeUserFromHome(homeId, userId);
+    let that = this;
+    homeId && userId && 
+      this.props.removeUserFromHome(homeId, userId)
+        .then(function(status){
+          if(status.type === "REMOVE_USER_SUCCESS"){
+            that.props.loadUser(userId);
+          }
+        })
   }
 
   debug() {
@@ -49,15 +52,22 @@ class Settings extends Component {
       )
     }
 
+    let hasHome;
+    if(this.props.auth && this.props.auth.user && this.props.auth.user.homeId) {
+      hasHome = true;
+    } else {
+      hasHome = false;
+    }
+
     return(
       <div style={layout.base}>
-        <div style={layout.title}>
+        <div className="title">
           Settings
         </div> 
-        <div key='settings' style={layout.mainContent}>
+        <div className="mainContent">
         <button onClick={::this.debug} />
           {err} 
-          <UserInfoForm removeUser={::this.removeUser} deleteUser={::this.deleteUser}/>
+          <UserInfoForm hasHome={hasHome} removeUser={::this.removeUser} deleteUser={::this.deleteUser}/>
         </div>
       </div>
     )

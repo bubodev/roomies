@@ -7,9 +7,7 @@ import NewTransactionForm from '../components/NewTransactionForm';
 let ReactD3 = require('react-d3-components');
 let PieChart = ReactD3.PieChart;
 
-import Radium from 'radium';
 import { layout } from './styles';
-@Radium
 
 class Finances extends Component {
   constructor(props) {
@@ -29,11 +27,11 @@ class Finances extends Component {
 
     return(
       <div style={layout.base}>
-        <div style={layout.title}>
+        <div className="title">
           Finances 
         </div>
 
-        <div key='finances' style={layout.mainContent}>
+        <div key='finances' className="mainContent">
           <div className="row">
             <div className="col-sm-4">
               Household costs

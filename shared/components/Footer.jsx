@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import Radium from 'radium';
-import { colors } from './styles';
 import { Spring } from 'react-motion';
 
 const defaultValue = {
@@ -23,8 +21,6 @@ const endValue = {
   }
 }
 
-@Radium
-
 export default class Footer extends Component {
   render() {
     return (
@@ -37,19 +33,19 @@ export default class Footer extends Component {
 
           return(
             <div className="text-center" style={[styles.base, fade]}>
-              <a key="github"href="https://github.com/cjhkim/roomies">
+              <a href="https://github.com/cjhkim/roomies">
                 <span className="fa-stack fa-lg">
                   <i className="fa fa-square-o fa-stack-2x"></i>
                   <i className="fa fa-github fa-stack-1x"></i>
                 </span>
               </a>
-              <a key="linkedin"href="https://www.linkedin.com/in/carljkim">
+              <a href="https://www.linkedin.com/in/carljkim">
                 <span className="fa-stack fa-lg">
                   <i className="fa fa-square-o fa-stack-2x"></i>
                   <i className="fa fa-linkedin fa-stack-1x"></i>
                 </span>
               </a>
-              <a key="user"href="http://cjhkim.github.io/">
+              <a href="http://cjhkim.github.io/">
                 <span className="fa-stack fa-lg">
                   <i className="fa fa-square-o fa-stack-2x"></i>
                   <i className="fa fa-user fa-stack-1x"></i>

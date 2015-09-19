@@ -7,9 +7,7 @@ import Overview from '../components/Overview';
 import FindNewHome from '../components/FindNewHome';
 import LoadingScreen from '../components/LoadingScreen';
 
-import Radium from 'radium';
 import { layout } from './styles';
-@Radium
 
 class Dashboard extends Component {
   constructor(props) {
@@ -28,7 +26,7 @@ class Dashboard extends Component {
   componentWillReceiveProps(nextProps) {
     if(nextProps.auth.loading){
       this.setState({
-        show: "LOADING"
+        show: "TESTING"
       })
     } else if(nextProps.auth.user) {
       if(nextProps.auth.user.homeId){
@@ -44,13 +42,24 @@ class Dashboard extends Component {
   }
   
   render() {
+    let show;
+    if(this.props.auth.loading){
+      show = "LOADING"
+    } else if(this.props.auth.user) {
+      if(this.props.auth.user.homeId){
+          show = "OVERVIEW"
+      } else {
+          show = "NEW"
+      }
+    }
+
     let comp;
 
-    if(this.state.show === "OVERVIEW") {
+    if(show === "OVERVIEW") {
       comp = <Overview auth={this.props.auth} home={this.props.home}/>
-    } else if(this.state.show === "NEW") {
+    } else if(show === "NEW") {
       comp = <FindNewHome />
-    } else if(this.state.show === "LOADING") {
+    } else if(show === "LOADING") {
       comp = (
         <div style={styles.loadingScreen}>
           <LoadingScreen>
@@ -63,10 +72,10 @@ class Dashboard extends Component {
 
     return(
       <div style={layout.base}>
-        <div style={layout.title}>
+        <div className="title">
           Dashboard 
         </div>
-        <div key='dashboard' style={layout.mainContent}>
+        <div className="mainContent">
           { comp }
         </div>
       </div>

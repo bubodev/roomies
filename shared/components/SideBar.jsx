@@ -44,7 +44,6 @@ class SideBar extends Component {
           <SideBarItem closeSideBar={::this.toggleSideBar} label="Chores" route="/home/chores" faGlyph="tasks" currentRoute={currentRoute} />
           <SideBarItem closeSideBar={::this.toggleSideBar} label="Finances" route="/home/finances" faGlyph="money" currentRoute={currentRoute} />
           <SideBarItem closeSideBar={::this.toggleSideBar} label="Shopping List" route="/home/shopping" faGlyph="cart-arrow-down" currentRoute={currentRoute} />
-          <SideBarItem closeSideBar={::this.toggleSideBar} label="Settings" route="/home/settings" faGlyph="cog" currentRoute={currentRoute} />
         </div>
       )
     }
@@ -75,6 +74,7 @@ class SideBar extends Component {
                   </div>
                   <br />
                   { sideBarItems }
+                  <SideBarItem closeSideBar={::this.toggleSideBar} label="Settings" route="/home/settings" faGlyph="cog" currentRoute={currentRoute} />
                 </ul>
                 <ul className="list-group text-center">
                   <a href="/logout"> 

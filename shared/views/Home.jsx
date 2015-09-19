@@ -12,6 +12,10 @@ import Dashboard from './Dashboard';
 import Footer from '../components/Footer';
 import cookie from 'react-cookie';
 
+if (process.env.BROWSER) {
+  require("./styles/main.css");
+}
+
 class Home extends Component {
 
   constructor(props,context) {
@@ -24,13 +28,22 @@ class Home extends Component {
       this.props.loadUser(userId.slice(3,-1))
     } else {
       this.context.router.transitionTo('/login');
+      return;
     }
 
     if(!this.props.auth.user){
-      this.context.router.transitionTo('/home');
+      this.context.router.transitionTo('/home/dashboard');
+      return;
     } else {
       let homeId = this.props.auth.user.homeId;
       homeId && this.props.getTasks(homeId) && this.props.getHome(homeId);
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.auth.deleted){
+      this.context.router.transitionTo('/login');
+      return;
     }
   }
 
@@ -46,7 +59,7 @@ class Home extends Component {
       }
     } else {
       sideBarShow = null;
-    }
+    } 
 
     return(
       <div style={baseStyle}>
@@ -54,7 +67,7 @@ class Home extends Component {
           { sideBarShow }
         </div>
         <div className="col-sm-9 col-lg-10">
-          {this.props.children || <Dashboard />}
+          {this.props.children}
         </div>
         <div style={footerStyle} className="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
           <Footer />

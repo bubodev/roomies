@@ -31,6 +31,7 @@ export default function authReducer(state = defaultState, action = {}) {
         ...state,
         user: null,
         err: null,
+        deleted: true
       }
     case 'DELETE_USER_FAIL':
       return {

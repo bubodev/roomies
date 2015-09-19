@@ -32,7 +32,7 @@ app.use(session({ secret:'keyboard cat',
                     url: MONGO_URI
                   }),
                   resave: false,
-                  saveUnitialized: false
+                  saveUninitialized: false
 }));
 app.use(passport.initialize());
 app.use(passport.session());

@@ -12,7 +12,7 @@ auth.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/auth/google' }),
   function(req, res) {
     res.cookie('userId', req.user._id, { maxAge: 2592000000 });
-    res.redirect('/home');
+    res.redirect('/home/dashboard');
   });
 
 auth.get('/logout', function(req, res){

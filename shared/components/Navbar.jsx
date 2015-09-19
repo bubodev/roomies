@@ -19,7 +19,7 @@ export default class Navbar extends React.Component {
       <nav className="navbar navbar-fixed-top" style={styles.base}>
         <div style={styles.base}>
           <div className="navbar-header col-sm-3 col-lg-2 text-center">
-            <div onClick={this.handleClick.bind(this, '/home')} style={styles.brand} className="navbar-brand">
+            <div onClick={this.handleClick.bind(this, '/home/dashboard')} style={styles.brand} className="navbar-brand">
               <h4><span className="fa fa-home"/> roomies</h4>
             </div>
           </div>

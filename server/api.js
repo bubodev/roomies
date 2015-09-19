@@ -23,23 +23,25 @@ router.get('/users/:id', function(req, res) {
   User.findById(id, function(err, user) {
     if(err)
       res.send(err);
-
     res.json(user);
   })
 })
 
 router.delete('/users', function(req, res) {
-  console.log(req.user)
-  if(req.user.homeId){
+  if(req.user.homeId) {
     res.status(400).send("You need to remove yourself from the home first!");
     return;
   }
 
   let id = req.user._id;
+  console.log(id);
   
   User.findByIdAndRemove(id, function(err) {
-    if(err)
-      res.status(400).send("Sorry, can't find that user");
+    if(err) {
+      res.status(400).send(err);
+    } else {
+      res.status(200).send("successful")
+    }
   })
 })
 

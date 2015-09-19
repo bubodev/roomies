@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 
 export default class ColoredButton extends Component {
+  handleClick() {
+    if(!this.props.disabled)
+      this.props.handleClick();
+  }
   render() {
     return(
-      <button onClick={this.props.handleClick} className={"btn btn-" + this.props.color} style={styles.base}>
+      <button onClick={::this.handleClick} className={"btn btn-" + this.props.color + " " + this.props.disabled} style={styles.base}>
         <span style={styles.value}>{this.props.value}</span>
         <br/>
         {this.props.children}

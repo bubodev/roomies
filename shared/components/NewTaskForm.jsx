@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import Radium from 'radium';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as taskActions from '../actions/TaskActions';
@@ -23,7 +22,6 @@ const freqMap = {
   months: 30,
 }
 
-@Radium
 class NewTaskForm extends Component {
   constructor(props) {
     super(props);
@@ -144,16 +142,10 @@ class NewTaskForm extends Component {
 const styles = {
   base: {
     fontSize: '30pt',
-    '@media (max-width: 768px)': {
-      fontSize: '20pt'
-    }
   },
 
   addMoreButton: {
     fontSize: '16pt',
-    '@media (max-width: 768px)': {
-      fontSize: '10pt'
-    }
   },
 
   baseInput: {
