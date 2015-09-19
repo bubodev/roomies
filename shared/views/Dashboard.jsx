@@ -15,7 +15,7 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      show: "loading"
+      show: "LOADING"
     }
   }
 
@@ -26,17 +26,19 @@ class Dashboard extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.auth){
-      if(nextProps.auth.user) {
-        if(nextProps.auth.user.homeId){
-          this.setState({
-            show: "OVERVIEW"
-          })
-        } else {
-          this.setState({
-            show: "NEW"
-          })
-        }
+    if(nextProps.auth.loading){
+      this.setState({
+        show: "LOADING"
+      })
+    } else if(nextProps.auth.user) {
+      if(nextProps.auth.user.homeId){
+        this.setState({
+          show: "OVERVIEW"
+        })
+      } else {
+        this.setState({
+          show: "NEW"
+        })
       }
     }
   }
@@ -48,7 +50,7 @@ class Dashboard extends Component {
       comp = <Overview auth={this.props.auth} home={this.props.home}/>
     } else if(this.state.show === "NEW") {
       comp = <FindNewHome />
-    } else {
+    } else if(this.state.show === "LOADING") {
       comp = (
         <div style={styles.loadingScreen}>
           <LoadingScreen>
@@ -85,6 +87,7 @@ const styles = {
   auth: state.auth,
   home: state.home
 }))
+
 export default class DashboardContainer {
   static propTypes = {
     auth: PropTypes.object,

@@ -18,6 +18,13 @@ export function addUserToHome(houseCode, userId) {
   }
 }
 
+export function removeUserFromHome(houseCode, userId) {
+  return {
+    types: ['REMOVE_USER', 'REMOVE_USER_SUCCESS', 'REMOVE_USER_FAILURE'],
+    promise: request.delete(BACKEND_URL + '/' + houseCode + '/' + userId)
+  }
+}
+
 export function createHome(homeParams, userId) {
   return {
     types: ['CREATE_HOME', 'CREATE_HOME_SUCCESS', 'CREATE_HOME_FAILURE'],

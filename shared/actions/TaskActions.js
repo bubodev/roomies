@@ -19,6 +19,13 @@ export function createTask(taskParams, homeId) {
   }
 }
 
+export function distributeTask(taskIda) {
+  return {
+    types: ['DISTRIBUTE_TASK', 'DISTRIBUTE_TASK_SUCCESS', 'DISTRIBUTE_TASK_FAILURE'],
+    promise: request.post(BACKEND_URL + '/' + taskId)
+  }
+}
+
 export function editTask(id, description, startDate, endDate, frequency, members) {
   return {
     type: 'EDIT_TASK',

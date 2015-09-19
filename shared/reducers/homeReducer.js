@@ -56,6 +56,26 @@ export default function homeReducer(state = defaultState, action = {}) {
         loading: false,
         err: action.err
       }
+    case 'REMOVE_USER':
+      return {
+        ...state,
+        loading: true,
+        loaded: false,
+      }
+    case 'REMOVE_USER_SUCCESS':
+      return {
+        ...state,
+        loaded: true,
+        loading: false,
+        home: null,
+      }
+    case 'REMOVE_USER_FAILURE':
+      return {
+        ...state,
+        loaded: false,
+        loading: false,
+        err: action.err
+      }
     default:
       return state;
   }

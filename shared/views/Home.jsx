@@ -1,7 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+
 import * as authActions from '../actions/AuthActions';
+import * as taskActions from '../actions/TaskActions';
+
 import SideBar from '../components/SideBar';  
 import LoadingScreen from '../components/LoadingScreen';  
 
@@ -22,17 +25,24 @@ class Home extends Component {
     } else {
       this.context.router.transitionTo('/login');
     }
+
+    if(!this.props.auth.user){
+      this.context.router.transitionTo('/home');
+    } else {
+      let homeId = this.props.auth.user.homeId;
+      homeId && this.props.getTasks(homeId) && this.props.getHome(homeId);
+    }
   }
 
   render() {
     let sideBarShow;
     if(this.props.auth.loading) {
-      sideBarShow = null;
+      sideBarShow = null
     } else if(this.props.auth.loaded) {
       if(this.props.auth.user.homeId){
-        sideBarShow = <SideBar hasHome={true}/>
+        sideBarShow = <SideBar hasHome={true} />
       } else {
-        sideBarShow = <SideBar hasHome={false}/>
+        sideBarShow = <SideBar hasHome={false} />
       }
     } else {
       sideBarShow = null;
@@ -74,6 +84,7 @@ const footerStyle = {
 @connect(state => ({
   auth: state.auth,
   tasks: state.tasks,
+  home: state.home,
 }))
 
 export default 
@@ -86,6 +97,6 @@ class HomeContainer {
 
   render() {
     const { auth, children, dispatch } = this.props;
-    return <Home auth={auth} children={children} {...bindActionCreators(authActions, dispatch)} />;
+    return <Home auth={auth} children={children} {...bindActionCreators(authActions, dispatch)} {...bindActionCreators(taskActions, dispatch)}/>;
   }
 }

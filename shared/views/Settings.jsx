@@ -10,18 +10,62 @@ import UserInfoForm from '../components/UserInfoForm';
 import { layout } from './styles'
 @Radium
 class Settings extends Component {
+  constructor(props, context) {
+    super(props, context);
+  }
+
+  componentDidMount() {
+
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(!nextProps.home.home) {
+      this.props.loadUser(this.props.auth.user._id);
+      this.context.router.transitionTo('/home/');
+    }
+  }
+
+  deleteUser() {
+    this.props.deleteUser()
+  }
+
+  removeUser() {
+    let homeId = this.props.auth.user.homeId;
+    let userId = this.props.auth.user._id;
+    this.props.removeUserFromHome(homeId, userId);
+  }
+
+  debug() {
+    debugger;
+  }
+
   render() {
+    let err;
+    if(this.props.auth.err){
+      err = (
+        <div className="alert alert-danger">
+          {this.props.auth.err.data}
+        </div>
+      )
+    }
+
     return(
       <div style={layout.base}>
         <div style={layout.title}>
           Settings
         </div> 
         <div key='settings' style={layout.mainContent}>
-          <UserInfoForm />
+        <button onClick={::this.debug} />
+          {err} 
+          <UserInfoForm removeUser={::this.removeUser} deleteUser={::this.deleteUser}/>
         </div>
       </div>
     )
   }
+}
+
+Settings.contextTypes = {
+  router: React.PropTypes.object.isRequired
 }
 
 @connect( state => ({

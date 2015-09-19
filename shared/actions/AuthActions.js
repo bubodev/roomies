@@ -20,3 +20,10 @@ export function loadUser(id) {
     promise: request.get('/api/users/' + id)
   }
 }
+
+export function deleteUser(id) {
+  return {
+    types: ['DELETE_USER', 'DELETE_USER_SUCCESS', 'DELETE_USER_FAIL'],
+    promise: request.delete('/api/users')
+  }
+}

@@ -1,7 +1,8 @@
 const defaultState = {
   loaded: false,
   user: null,
-  hasHome: false
+  hasHome: false,
+  err: null,
 }
 
 export default function authReducer(state = defaultState, action = {}) {
@@ -19,6 +20,26 @@ export default function authReducer(state = defaultState, action = {}) {
         user: action.res.data,
         hasHome: action.res.data.homeId
       }
+    case 'DELETE_USER':
+      return {
+        ...state,
+        loaded: true,
+        err: null,
+      }
+    case 'DELETE_USER_SUCCESS':
+      return {
+        ...state,
+        user: null,
+        err: null,
+      }
+    case 'DELETE_USER_FAIL':
+      return {
+        ...state,
+        loaded: true,
+        loading: false,
+        err: action.err
+      }
+      
     default:
       return state;
   }

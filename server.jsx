@@ -83,7 +83,7 @@ app.use((req, res) => {
         <head>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <title>Chore Split App</title>
+          <title>Rooomies</title>
           <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
           <script type="application/javascript">
@@ -110,11 +110,11 @@ app.use((req, res) => {
 });
 
 function ensureAuthenticated(req, res, next) {
-  // if (req.isAuthenticated() || req.session.username) { 
+  if (req.isAuthenticated() || req.session.username) { 
     next();
-  // } else {
-    // res.redirect('/login');
-  // }
+  } else {
+    res.redirect('/login');
+  }
 }
 
 export default app;

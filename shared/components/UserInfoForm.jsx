@@ -16,7 +16,7 @@ export default class UserInfoForm extends Component {
             </ColoredButton>
           </div>
           <div className="col-sm-4 text-center">
-            <ColoredButton color="danger" value="Leave this home">
+            <ColoredButton handleClick={::this.props.removeUser} color="danger" value="Leave this home">
               <span className="fa-stack fa-3x">
                 <span className="fa fa-home fa-stack-1x"/>
                 <span className="fa fa-ban fa-stack-2x"/>
@@ -24,7 +24,7 @@ export default class UserInfoForm extends Component {
             </ColoredButton>
           </div>
           <div className="col-sm-4 text-center">
-            <ColoredButton color="danger" value="Delete my account">
+            <ColoredButton handleClick={::this.props.deleteUser} color="danger" value="Delete my account">
               <span className="fa-stack fa-3x">
                 <span className="fa fa-user fa-stack-1x"/>
                 <span className="fa fa-ban fa-stack-2x"/>

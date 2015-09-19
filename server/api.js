@@ -18,7 +18,9 @@ router.get('/', function(req, res) {
 
 /** USERS **/
 router.get('/users/:id', function(req, res) {
-  User.findById(req.params.id, function(err, user) {
+  let id = req.params.id;
+
+  User.findById(id, function(err, user) {
     if(err)
       res.send(err);
 
@@ -27,8 +29,17 @@ router.get('/users/:id', function(req, res) {
 })
 
 router.delete('/users', function(req, res) {
-  res.json({
-    message: "DELETE to users"
+  console.log(req.user)
+  if(req.user.homeId){
+    res.status(400).send("You need to remove yourself from the home first!");
+    return;
+  }
+
+  let id = req.user._id;
+  
+  User.findByIdAndRemove(id, function(err) {
+    if(err)
+      res.status(400).send("Sorry, can't find that user");
   })
 })
 
@@ -114,6 +125,34 @@ router.post('/homes', function(req, res) {
   })
 })
 
+/* REMOVE USER FROM HOME */
+router.delete('/homes/:id/:userId', function(req, res) {
+  let id = req.params.id;
+  let userId = req.params.userId;
+
+  Home.findById(id, function(err, home) {
+    if(err || !home)
+      res.status(400).send("Sorry, couldn't find that home");
+
+    home.users.id(userId).remove(); //remove out of embedded users doc
+
+    home.save(function(err) {
+      if(err) {
+        res.status(400).send("Couldn't find that user in the house")
+        return;
+      }
+    })
+
+    User.findById(userId, function(err, user) {
+      user.homeId = null;
+      user.save();
+    })
+
+    res.json({
+      message: "Successfully removed user!"
+    })
+  })
+})
 
 router.put('/homes/:id', function(req,res) {
   Home.findById(req.params.id, function(err, home) {
