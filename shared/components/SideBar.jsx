@@ -37,13 +37,31 @@ class SideBar extends Component {
     
     let sideBarItems;
 
+    let disabled = {
+      pointerEvents: 'none',
+      position: 'relative',
+      background: '#34393D'
+    }
+
+    let comingSoon = {
+      position: 'absolute',
+      top: 0,
+      right: 0,
+    }
+
     if(this.props.hasHome) {
       sideBarItems = (
         <div className="relative">
           <SideBarItem closeSideBar={::this.toggleSideBar} label="Dashboard" route="/home/dashboard" faGlyph="tachometer" currentRoute={currentRoute} />
           <SideBarItem closeSideBar={::this.toggleSideBar} label="Chores" route="/home/chores" faGlyph="tasks" currentRoute={currentRoute} />
-          <SideBarItem closeSideBar={::this.toggleSideBar} label="Finances" route="/home/finances" faGlyph="money" currentRoute={currentRoute} />
-          <SideBarItem closeSideBar={::this.toggleSideBar} label="Shopping List" route="/home/shopping" faGlyph="cart-arrow-down" currentRoute={currentRoute} />
+          <div style={disabled}>
+            <SideBarItem closeSideBar={::this.toggleSideBar} label="Finances" route="/home/finances" faGlyph="money" currentRoute={currentRoute} />
+            <span style={comingSoon} className="label label-primary">Coming soon!</span>
+          </div>
+          <div style={disabled}>
+            <SideBarItem closeSideBar={::this.toggleSideBar} label="Shopping List" route="/home/shopping" faGlyph="cart-arrow-down" currentRoute={currentRoute} />
+            <span style={comingSoon} className="label label-primary">Coming soon!</span>
+          </div>
         </div>
       )
     }
