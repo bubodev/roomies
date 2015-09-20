@@ -48,7 +48,7 @@ app.use('/api', ensureAuthenticated, require('./server/api'));
 
 /** REACT ROUTER **/
 
-import promiseMiddleware from 'shared/lib/promiseMiddleware';
+import promiseMiddleware from './shared/lib/promiseMiddleware';
 
 app.use((req, res) => {
   delete process.env.BROWSER;
