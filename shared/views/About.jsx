@@ -10,7 +10,7 @@ export default class About extends Component {
   }
 }
 
-var styles = {
+const styles = {
   base: {
     background: 'lightgrey'
   }

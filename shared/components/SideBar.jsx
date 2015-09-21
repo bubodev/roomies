@@ -6,7 +6,7 @@ import SideBarItem from './SideBarItem';
 import { connect } from 'react-redux';
 import { outline, colors } from './styles'
 if (process.env.BROWSER) {
-  require("./SideBar.css");
+  require("./styles/SideBar.css");
 }
 import { Spring, presets } from 'react-motion';
 

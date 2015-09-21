@@ -41,7 +41,7 @@ export default class TaskList extends React.Component {
   };
 }
 
-var styles = {
+const styles = {
   base: {
     height: 150,
     width: 150,

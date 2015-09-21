@@ -1,7 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import Radium from 'radium';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 import { layout } from './styles'
 
@@ -20,14 +18,8 @@ class ShoppingList extends Component {
   }
 }
 
-@connect( state => ({
-}))
-
 export default
 class ShoppingListContainer {
-  static propTypes = {
-  }
-
   render() {
     return (
       <ShoppingList />

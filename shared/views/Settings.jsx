@@ -14,13 +14,6 @@ class Settings extends Component {
     super(props, context);
   }
 
-  componentDidMount() {
-
-  }
-
-  componentWillReceiveProps(nextProps) {
-  }
-
   deleteUser() {
     this.props.deleteUser()
   }
@@ -32,14 +25,9 @@ class Settings extends Component {
     homeId && userId && 
       this.props.removeUserFromHome(homeId, userId)
         .then(function(status){
-          if(status.type === "REMOVE_USER_SUCCESS"){
+          if(status.type === "REMOVE_USER_SUCCESS")
             that.props.loadUser(userId);
-          }
         })
-  }
-
-  debug() {
-    debugger;
   }
 
   render() {

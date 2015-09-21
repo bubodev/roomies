@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Radium from 'radium';
 
 @Radium
-
 export default class RadioButtons extends Component{
   constructor(props){
     super(props);

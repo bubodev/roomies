@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Spring } from 'react-motion';
 
+/** SPRING STYLING **/
 const defaultValue = {
   opacity: {
     val: 0
