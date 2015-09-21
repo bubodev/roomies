@@ -6,6 +6,10 @@ import * as taskActions from '../actions/TaskActions';
 import RadioButtons from './RadioButtons';
 import { colors } from './styles'
 
+if (process.env.BROWSER) {
+  require("./styles/NewTaskForm.css");
+}
+
 const defaultState = { 
         errors: [],
         name: "",
@@ -119,18 +123,39 @@ class NewTaskForm extends Component {
         </ul>
 
         <label>We need to&nbsp;</label>
-        <input autoFocus onChange={this.handleChange.bind(this, 'name')} style={[styles.baseInput, styles.textInput]} placeholder="clean the living room..." value={this.state.name} className="" type='text' ref="name" id="name"/>
+        <input onChange={this.handleChange.bind(this, 'name')} 
+                style={styles.baseInput} 
+                placeholder="clean the living room..." 
+                value={this.state.name} 
+                className="text-input" 
+                type='text' ref="name" id="name" />
+
         <label>which consists of :</label>
+
         <ul style={{listStyle:'none'}}>
           { descriptionList }
           <span style={[styles.addMoreButton, colors.link]} key="addMoreButton" onClick={::this.addDescription} className="fa fa-plus">add more descriptions</span>
         </ul>
+
         <label>starting on&nbsp;</label>
-        <input onChange={this.handleChange.bind(this, 'startDate')} style={styles.baseInput} value={this.state.startDate} type='date' id="startDate" ref="startDate"/>
+        <input onChange={this.handleChange.bind(this, 'startDate')} 
+                style={styles.baseInput} 
+                value={this.state.startDate} 
+                type='date' id="startDate" ref="startDate"/>
+        
         <label>until&nbsp;</label>
-        <input onChange={this.handleChange.bind(this, 'endDate')} style={styles.baseInput} value={this.state.endDate} type='date' id="endDate" ref="endDate"/>
+        <input onChange={this.handleChange.bind(this, 'endDate')} 
+                style={styles.baseInput} 
+                value={this.state.endDate} 
+                type='date' id="endDate" ref="endDate"/>
+        
         <label>every&nbsp;</label>
-        <input onChange={this.handleChange.bind(this, 'number')} style={[styles.baseInput, styles.numberInput, styles.textInput]} value={this.state.number} type='number' id="number" ref="number"/>
+        <input onChange={this.handleChange.bind(this, 'number')} 
+                style={styles.baseInput} 
+                value={this.state.number} 
+                className="text-input num-input"
+                type='number' id="number" ref="number"/>
+        
         <RadioButtons currentSelected={this.state.frequency} setSelected={::this.setFrequency} values={["days","weeks","months"]} />
         <br/>
         <input className="btn btn-lg" onSubmit={::this.createTask} type="submit"/>
@@ -147,22 +172,6 @@ const styles = {
   addMoreButton: {
     fontSize: '16pt',
   },
-
-  baseInput: {
-    background: 'rgba(0,0,0,0)',
-    borderLeft: 0,
-    borderRight: 0,
-    borderTop: 0,
-    borderBottom: '5px dashed white',
-  },
-
-  textInput: {
-    textAlign: 'center',
-  },
-
-  numberInput: {
-    width: '50px'
-  }
 }
 
 @connect(state => ({
