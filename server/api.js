@@ -6,7 +6,10 @@ import Home from '../config/models/Home';
 import Transaction from '../config/models/Transaction';
 import { MONGO_URI } from './secrets';
 
-mongoose.connect( MONGO_URI ); 
+const options = { server:  { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 }}, 
+                  replset: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 }}};
+
+mongoose.connect( MONGO_URI, options ); 
 
 let router = express.Router();
 

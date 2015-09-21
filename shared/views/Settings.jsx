@@ -53,7 +53,6 @@ class Settings extends Component {
           Settings
         </div> 
         <div className="mainContent">
-        <button onClick={::this.debug} />
           {err} 
           <UserInfoForm hasHome={hasHome} removeUser={::this.removeUser} deleteUser={::this.deleteUser}/>
         </div>

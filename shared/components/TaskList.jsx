@@ -11,14 +11,22 @@ export default class TaskList extends React.Component {
 
   render() {
     let tableItems;
-    if(this.props.tasks){
-      tableItems = this.props.tasks.map(function(task) {
+    if(this.props.tasks && this.props.users){
+      tableItems = this.props.tasks.map((task) => {
+        const { users } = this.props;
+        let name;
+        users.forEach(function(user) {
+          if(user._id === task.currentUser) {
+            name = user.name;
+          }
+        })
+
         return (
           <tr key={task._id}>
-            <td>{task.name}</td>
-            <td>{task.description.join(', ')}</td>
-            <td>{task.frequency} days</td>
-            <td>{task.currentUser}</td>
+            <td>{ task.name }</td>
+            <td>{ task.description.join(', ') }</td>
+            <td>{ task.frequency } days</td>
+            <td>{ name }</td>
             <td> tbd </td>
           </tr>
         )
