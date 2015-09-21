@@ -132,18 +132,16 @@ const styles = {
 
 @connect(state => ({
   home: state.home,
-  auth: state.auth,
 }))
 
 export default class FindNewHomeContainer {
   static propTypes = {
     home: PropTypes.object,
-    auth: PropTypes.object,
     dispatch: PropTypes.func.isRequired
   }
 
   render() {
-    const { home, auth, dispatch } = this.props;
-    return <FindNewHome auth={auth} home={home} {...bindActionCreators(AuthActions, dispatch)} {...bindActionCreators(HomeActions, dispatch)}/>
+    const { home, dispatch } = this.props;
+    return <FindNewHome home={home} {...bindActionCreators(AuthActions, dispatch)} {...bindActionCreators(HomeActions, dispatch)}/>
   }
 }

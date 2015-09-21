@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import * as authActions from '../actions/AuthActions';
 import * as taskActions from '../actions/TaskActions';
+import * as homeActions from '../actions/HomeActions';
 
 import SideBar from '../components/SideBar';  
 import LoadingScreen from '../components/LoadingScreen';  
@@ -24,19 +25,21 @@ class Home extends Component {
 
   componentDidMount() {
     let userId = cookie.load('userId')
+    let that = this;
     if(userId){
       this.props.loadUser(userId.slice(3,-1))
+        .then(function(status) {
+          if(status.type === "GET_USER_SUCCESS"){
+            let homeId = status.res.data.homeId;
+            if(homeId){
+              that.props.getHome(homeId)
+              that.props.getTasks(homeId)
+            }
+          }
+        })
     } else {
       this.context.router.transitionTo('/login');
       return;
-    }
-
-    if(!this.props.auth.user){
-      this.context.router.transitionTo('/home/dashboard');
-      return;
-    } else {
-      let homeId = this.props.auth.user.homeId;
-      homeId && this.props.getTasks(homeId) && this.props.getHome(homeId);
     }
   }
 
@@ -110,6 +113,6 @@ class HomeContainer {
 
   render() {
     const { auth, children, dispatch } = this.props;
-    return <Home auth={auth} children={children} {...bindActionCreators(authActions, dispatch)} {...bindActionCreators(taskActions, dispatch)}/>;
+    return <Home auth={auth} children={children} {...bindActionCreators(authActions, dispatch)} {...bindActionCreators(homeActions, dispatch)}{...bindActionCreators(taskActions, dispatch)}/>;
   }
 }

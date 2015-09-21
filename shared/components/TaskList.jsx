@@ -18,6 +18,8 @@ export default class TaskList extends React.Component {
             <td>{task.name}</td>
             <td>{task.description.join(', ')}</td>
             <td>{task.frequency} days</td>
+            <td>{task.currentUser}</td>
+            <td> tbd </td>
           </tr>
         )
       })
@@ -32,6 +34,8 @@ export default class TaskList extends React.Component {
             <th>Chore</th>
             <th>Description</th>
             <th>Frequency</th>
+            <th>Assigned to</th>
+            <th>Finish by</th>
           </tr>
           {tableItems}
           </tbody>

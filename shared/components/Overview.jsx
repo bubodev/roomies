@@ -5,7 +5,7 @@ export default class Overview extends Component {
   render() {
     return(
       <div>
-        Some content will go here
+        <WeekChores {...this.props}/>
       </div>
     )
   }

@@ -48,7 +48,7 @@ class Chores extends Component {
             <span className="fa fa-plus"/> new chore
           </button>
           <div style={styles.taskListContainer}>
-            <TaskList tasks={this.props.tasks} />
+            <TaskList users={this.props.users} tasks={this.props.tasks} />
           </div>
         </div>
         <Modal color="rgba(0, 0, 0, 0.9)" show={this.state.showForm} close={::this.toggleForm}>
@@ -81,19 +81,21 @@ var styles = {
 
 @connect(state => ({
   tasks: state.tasks,
-  homeId: state.auth.user && state.auth.user.homeId
+  homeId: state.auth.user && state.auth.user.homeId,
+  users: state.home.home && state.home.home.users
 }))
 
 export default
 class ChoresContainer {
   static propTypes = {
     tasks: PropTypes.object,
+    users: PropTypes.array,
     homeId: PropTypes.string,
     dispatch: PropTypes.func.isRequired
   }
 
   render() {
-    const { tasks, dispatch, homeId } = this.props;
-    return <Chores tasks={tasks} homeId={homeId} {...bindActionCreators(taskActions, dispatch)} />;
+    const { tasks, dispatch, homeId, users } = this.props;
+    return <Chores tasks={tasks} users={users} homeId={homeId} {...bindActionCreators(taskActions, dispatch)} />;
   }
 }
