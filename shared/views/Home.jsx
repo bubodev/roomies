@@ -50,6 +50,10 @@ class Home extends Component {
     }
   }
 
+  debug() {
+    debugger;
+  }
+
   render() {
     let sideBarShow;
     if(this.props.auth.loading) {
@@ -73,6 +77,8 @@ class Home extends Component {
           {this.props.children}
         </div>
         <div style={footerStyle} className="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
+          <button onClick={::this.debug} style={{zIndex:1111111111}}/>
+          
           <Footer />
         </div>
       </div>
@@ -108,11 +114,12 @@ class HomeContainer {
   static propTypes = {
     auth: PropTypes.object,
     tasks: PropTypes.object,
+    home: PropTypes.object,
     dispatch: PropTypes.func.isRequired
   }
 
   render() {
-    const { auth, children, dispatch } = this.props;
-    return <Home auth={auth} children={children} {...bindActionCreators(authActions, dispatch)} {...bindActionCreators(homeActions, dispatch)}{...bindActionCreators(taskActions, dispatch)}/>;
+    const { auth, home, tasks, children, dispatch } = this.props;
+    return <Home auth={auth} tasks={tasks} home={home} children={children} {...bindActionCreators(authActions, dispatch)} {...bindActionCreators(homeActions, dispatch)}{...bindActionCreators(taskActions, dispatch)}/>;
   }
 }

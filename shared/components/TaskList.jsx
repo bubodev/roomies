@@ -3,7 +3,6 @@ import Radium from 'radium';
 
 const accentColor = '#00DFFF';
 
-@Radium
 export default class TaskList extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -11,6 +10,7 @@ export default class TaskList extends React.Component {
 
   render() {
     let tableItems;
+
     if(this.props.tasks && this.props.users){
       tableItems = this.props.tasks.map((task) => {
         const { users } = this.props;

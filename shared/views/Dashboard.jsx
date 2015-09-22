@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as homeActions from '../actions/HomeActions';
+import * as taskActions from '../actions/TaskActions';
 
 import Overview from '../components/Overview';
 import FindNewHome from '../components/FindNewHome';
@@ -56,7 +57,7 @@ class Dashboard extends Component {
     let comp;
 
     if(show === "OVERVIEW") {
-      comp = <Overview auth={this.props.auth} home={this.props.home}/>
+      comp = <Overview auth={this.props.auth} home={this.props.home} _completeTask={this.props.completeTask}/>
     } else if(show === "NEW") {
       comp = <FindNewHome />
     } else if(show === "LOADING") {
@@ -106,6 +107,6 @@ export default class DashboardContainer {
 
   render() {
     const { auth, home, dispatch } = this.props;
-    return <Dashboard auth={auth} home={home} {...bindActionCreators(homeActions, dispatch)}/>;
+    return <Dashboard auth={auth} home={home} {...bindActionCreators(homeActions, dispatch)} {...bindActionCreators(taskActions, dispatch)}/>;
   }
 }

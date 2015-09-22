@@ -19,10 +19,12 @@ export function createTask(taskParams, homeId) {
   }
 }
 
-export function distributeTask(taskId) {
+export function completeTask(homeId, taskId) {
   return {
-    types: ['DISTRIBUTE_TASK', 'DISTRIBUTE_TASK_SUCCESS', 'DISTRIBUTE_TASK_FAILURE'],
-    promise: request.post(BACKEND_URL + '/' + taskId)
+    types: ['COMPLETE_TASK', 'COMPLETE_TASK_SUCCESS', 'COMPLETE_TASK_FAILURE'],
+    promise: request.put(BACKEND_URL + '/' + taskId, {
+      homeId: homeId
+    })
   }
 }
 

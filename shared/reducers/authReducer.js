@@ -6,7 +6,6 @@ const defaultState = {
 }
 
 export default function authReducer(state = defaultState, action = {}) {
-  debugger;
   switch(action.type) {
     case 'GET_USER':
       return {

@@ -80,7 +80,7 @@ var styles = {
 }
 
 @connect(state => ({
-  tasks: state.tasks,
+  tasks: state.tasks.get('collection'),
   homeId: state.auth.user && state.auth.user.homeId,
   users: state.home.home && state.home.home.users
 }))

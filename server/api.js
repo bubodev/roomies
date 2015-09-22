@@ -20,6 +20,8 @@ router.get('/', function(req, res) {
 });
 
 /** USERS **/
+
+// loadUser()
 router.get('/users/:id', function(req, res) {
   let id = req.params.id;
   User.findById(id, function(err, user) {
@@ -31,6 +33,7 @@ router.get('/users/:id', function(req, res) {
   })
 })
 
+// deleteUser()
 router.delete('/users', function(req, res) {
   if(req.user.homeId) {
     res.status(400).send("You need to remove yourself from the home first!");
@@ -50,6 +53,8 @@ router.delete('/users', function(req, res) {
 })
 
 /** TASKS **/
+
+// getTasks()
 router.get('/tasks/:homeId', function(req, res) {
   let homeId = req.params.homeId;
   Home.findById(homeId, function(err, home) {
@@ -61,6 +66,7 @@ router.get('/tasks/:homeId', function(req, res) {
   })
 })
 
+// completeTask()
 router.put('/tasks/:id', function(req, res) {
   let homeId = req.body.homeId;
   if(!homeId) {
@@ -76,10 +82,15 @@ router.put('/tasks/:id', function(req, res) {
 
       const users = home.users;
       let oldUser = task.currentUser;
-      let oldIdx = users.indexOf(oldUser);
-      let newIdx = (oldIdx + 1) % users.length;
+      let oldIdx;
+      users.forEach(function(user, i) {
+        if(user._id.equals(oldUser)){
+          oldIdx = i;
+        }
+      })
 
-      task.currentUser = users[newIx];
+      let newIdx = (oldIdx + 1) % users.length;
+      task.currentUser = users[newIdx];
       task.save(function(err) {
         if(err) {
           res.status(400).send("error saving");
@@ -92,6 +103,7 @@ router.put('/tasks/:id', function(req, res) {
   })
 })
 
+// createTask()
 router.post('/tasks', function(req, res) {
   let newTask = new Task(req.body.taskParams);
   let homeId = req.body.homeId;
@@ -118,6 +130,8 @@ router.post('/tasks', function(req, res) {
 
 
 /** HOMES **/
+
+// getHome()
 router.get('/homes/:id', function(req, res) {
   Home.findById(req.params.id, function(err, home) {
     if(err)
@@ -127,6 +141,7 @@ router.get('/homes/:id', function(req, res) {
   })
 })
 
+// createHome()
 router.post('/homes', function(req, res) {
   let newHome = new Home(req.body.homeParams);
   User.findById(req.body.userId, function(err, user) {
@@ -148,7 +163,7 @@ router.post('/homes', function(req, res) {
   })
 })
 
-/* REMOVE USER FROM HOME */
+// removeUserFromHome()
 router.delete('/homes/:id/:userId', function(req, res) {
   let id = req.params.id;
   let userId = req.params.userId;
@@ -177,6 +192,7 @@ router.delete('/homes/:id/:userId', function(req, res) {
   })
 })
 
+// addUserToHome()
 router.put('/homes/:id', function(req,res) {
   Home.findById(req.params.id, function(err, home) {
     if(err) {
