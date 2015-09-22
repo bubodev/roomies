@@ -77,7 +77,6 @@ class Home extends Component {
           {this.props.children || <Dashboard/>}
         </div>
         <div style={footerStyle} className="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
-          <button onClick={::this.debug} style={{zIndex:1111111111}}/>
           <Footer />
         </div>
       </div>
