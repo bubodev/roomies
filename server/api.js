@@ -57,73 +57,76 @@ router.delete('/users', function(req, res) {
 // getTasks()
 router.get('/tasks/:homeId', function(req, res) {
   let homeId = req.params.homeId;
-  Home.findById(homeId, function(err, home) {
-    if(err){
-      res.status(400).send("Error! Couldn't find that home")
+  Task.find({_homeId: homeId}, function(err, tasks) {
+    if(err) {
+      res.status(400).send("Sorry, couldn't process that request")
     } else {
-      res.json(home.tasks);
+      res.json(tasks);
     }
   })
 })
 
 // completeTask()
 router.put('/tasks/:id', function(req, res) {
-  let homeId = req.body.homeId;
+  let id = req.params.id
+  let homeId = req.body.homeId
+
   if(!homeId) {
-    res.status(400).send("Sorry, couldn't process that request");
-    return;
+    res.status(400).send("Need a homeId!")
+  } else {
+    Home.findById(homeId, function(err, home) {
+      if(err) {
+        res.status(400).send("Sorry, couldn't find that house")
+      } else {
+        Task.findById(id, function(err, task) {
+          if(err) {
+            res.status(400).send("Sorry, couldn't find that house")
+          } else {
+            const users = home.users;
+            let oldUser = task.currentUser;
+            let oldIdx;
+            users.forEach(function(user, i) {
+              if(user._id.equals(oldUser)){
+                oldIdx = i;
+              }
+            })
+
+            let newIdx = (oldIdx + 1) % users.length;
+
+            task.currentUser = users[newIdx];
+            task.save(function(err) {
+              if(err) {
+                res.status(400).send("error saving")
+              } else {
+                res.json(task);
+              }
+            })
+          }
+        })
+      }
+    })
   }
-  Home.findById(homeId, function(err, home) {
-    if(err) {
-      res.status(400).send("Sorry, couldn't find that house");
-      return;
-    } else {
-      let task = home.tasks.id(req.params.id);
-
-      const users = home.users;
-      let oldUser = task.currentUser;
-      let oldIdx;
-      users.forEach(function(user, i) {
-        if(user._id.equals(oldUser)){
-          oldIdx = i;
-        }
-      })
-
-      let newIdx = (oldIdx + 1) % users.length;
-      task.currentUser = users[newIdx];
-      task.save(function(err) {
-        if(err) {
-          res.status(400).send("error saving");
-          return;
-        } else {
-          res.json(task);
-        }
-      });
-    }
-  })
 })
+
 
 // createTask()
 router.post('/tasks', function(req, res) {
   let newTask = new Task(req.body.taskParams);
-  let homeId = req.body.homeId;
+  let homeId = req.body.taskParams._homeId;
 
   Home.findById(homeId, function(err, home) {
-    if(err) {
-      res.status(400).send("Sorry, couldn't find that home");
-      return;
+    if(err){
+      res.status(400).send("Need a house")
     } else {
       let index = Math.floor(Math.random() * home.users.length);
       newTask.currentUser = home.users[index];
-      home.tasks.push(newTask);
-      home.save(function(err) {
-        if(err){
-          res.status(400).send("Sorry, an error has occured");
-          return;
+      newTask.save(function(err) {
+        if(err) {
+          res.status(400).send("Error saving")
         } else {
           res.json(newTask);
         }
-      });
+      })
     }
   })
 });

@@ -57,8 +57,9 @@ class NewTaskForm extends Component {
       description: this.state.description,
       startDate: this.state.startDate,
       endDate: this.state.endDate,
+      _homeId: this.props.homeId,
       frequency: freqMap[this.state.frequency] * this.state.number,
-    }, this.props.homeId);
+    });
 
     this.setState(defaultState);
     this.props.closeModal();

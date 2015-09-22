@@ -57,7 +57,7 @@ class Dashboard extends Component {
     let comp;
 
     if(show === "OVERVIEW") {
-      comp = <Overview auth={this.props.auth} home={this.props.home} _completeTask={this.props.completeTask}/>
+      comp = <Overview />
     } else if(show === "NEW") {
       comp = <FindNewHome />
     } else if(show === "LOADING") {

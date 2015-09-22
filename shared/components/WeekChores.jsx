@@ -13,16 +13,18 @@ export default class WeekChores extends Component {
 
   handleClick(id) {
     const homeId = this.props.home.home._id
-    this.props._completeTask(homeId, id);
+    this.props.completeTask(homeId, id);
   }
 
   render() {
     let assignedTasks;
-    if(this.props.home.home && this.props.home.home.tasks) {
-      let allTasks = this.props.home.home.tasks
+    if(this.props.tasks) {
+      let allTasks = this.props.tasks
+      let userId = this.props.userId
       assignedTasks = allTasks.filter((task) => {
-        return task.currentUser === this.props.auth.user._id
+        return task.currentUser === userId
       })
+
       assignedTasks = assignedTasks.map((task) => {
         let id = task._id
         return (
@@ -34,6 +36,7 @@ export default class WeekChores extends Component {
           </div>
         )
       })
+      
     }
     return(
       <ul>

@@ -6,7 +6,6 @@ let Schema = mongoose.Schema;
 let homeSchema = new Schema({
   name: String,
   description: String,
-  tasks: [ Task.schema ],
   users: [ User.schema ],
 });
 

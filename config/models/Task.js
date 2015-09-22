@@ -7,7 +7,8 @@ let taskSchema = new Schema({
   startDate: Date,
   endDate: Date,
   frequency: Number,
-  currentUser: Schema.ObjectId
+  currentUser: Schema.ObjectId,
+  _homeId: Schema.ObjectId
 });
 
 const Task = mongoose.model('Task', taskSchema)

@@ -32,8 +32,6 @@ export default function taskReducer(state = defaultState, action) {
       let idx = collection.findIndex((task) => {
         return task._id === action.res.data._id
       })
-      console.log(collection.get(idx))
-      console.log(action.res.data);
 
       let completedCollection = collection.set(idx, action.res.data);
       return state.set('collection', completedCollection)

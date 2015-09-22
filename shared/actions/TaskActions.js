@@ -9,12 +9,11 @@ export function getTasks(homeId) {
   }
 }
 
-export function createTask(taskParams, homeId) {
+export function createTask(taskParams) {
   return {
     types: ['CREATE_TASK','CREATE_TASK_SUCCESS','CREATE_TASK_FAILURE'],
     promise: request.post(BACKEND_URL, {
       taskParams: taskParams,
-      homeId: homeId
     })
   }
 }
