@@ -26,7 +26,6 @@ class Home extends Component {
   componentDidMount() {
     let userId = cookie.load('userId')
     let that = this;
-    console.log(userId);
     if(userId){
       this.props.loadUser(userId.slice(3,-1))
         .then(function(status) {
