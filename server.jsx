@@ -11,16 +11,15 @@ import { createStore, combineReducers }           from 'redux';
 import { Provider }                               from 'react-redux';
 import * as reducers                              from 'reducers';
 import passport                                   from './server/passport';
-import mongoose                                   from 'mongoose';
 import { MONGO_URI }                              from './server/secrets';
 
 const app = express();
 
 import fs from 'fs';
 /** UNCOMMENT FOR DIST BUILD **/
-app.use('/bundle.js', function (req, res) {
-  return fs.createReadStream('./dist/bundle.js').pipe(res);
-});
+// app.use('/bundle.js', function (req, res) {
+//   return fs.createReadStream('./dist/bundle.js').pipe(res);
+// });
 
 var MongoStore = require('connect-mongo')(session);
 app.use(cookieParser());
@@ -110,11 +109,11 @@ app.use((req, res) => {
 });
 
 function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated() || req.session.username) { 
+  // if (req.isAuthenticated() || req.session.username) { 
     next();
-  } else {
-    res.redirect('/login');
-  }
+  // } else {
+    // res.redirect('/login');
+  // }
 }
 
 export default app;

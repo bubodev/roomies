@@ -22,10 +22,11 @@ router.get('/', function(req, res) {
 /** USERS **/
 router.get('/users/:id', function(req, res) {
   let id = req.params.id;
-
   User.findById(id, function(err, user) {
-    if(err)
-      res.send(err);
+    if(err){
+      res.status(400).send(err);
+      return;
+    }
     res.json(user);
   })
 })
