@@ -1,8 +1,8 @@
-import io from 'socket.io-client';
+var io = require('socket.io-client');
 import { getTasks } from '../actions/TaskActions';
 
 export function socketConnect (room, dispatch) {
-  var socket = io('localhost:3000', {
+  var socket = io('rooomies.herokuapp.com', {
     query: 'r_var='+room
   });
 

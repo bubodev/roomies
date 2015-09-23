@@ -113,7 +113,6 @@ app.use((req, res) => {
           <script type="application/javascript">
             window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
           </script>
-          <script src="/socket.io/socket.io.js"></script>
         </head>
         <body>
           <div id="react-view">${componentHTML}</div>
