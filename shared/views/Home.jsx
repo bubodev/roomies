@@ -36,7 +36,7 @@ class Home extends Component {
           if(status.type === "GET_USER_SUCCESS"){
             let homeId = status.res.data.homeId;
             if(homeId){
-              that.props.setSocket(homeId);
+              that.props.setSocket(homeId, that.props.dispatch);
               that.props.getHome(homeId);
               that.props.getTasks(homeId);
             }
@@ -82,7 +82,6 @@ class Home extends Component {
           {this.props.children || <Dashboard/>}
         </div>
         <div style={footerStyle} className="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
-          <button onClick={::this.debug} style={{zIndex:111111}}/>
           <Footer />
         </div>
       </div>
@@ -126,6 +125,6 @@ class HomeContainer {
 
   render() {
     const { auth, home, tasks, io, children, dispatch } = this.props;
-    return <Home auth={auth} io={io} tasks={tasks} home={home} children={children} {...bindActionCreators(authActions, dispatch)} {...bindActionCreators(homeActions, dispatch)} {...bindActionCreators(taskActions, dispatch)} {...bindActionCreators(socketActions, dispatch)}/>;
+    return <Home auth={auth} io={io} tasks={tasks} home={home} dispatch={dispatch} children={children} {...bindActionCreators(authActions, dispatch)} {...bindActionCreators(homeActions, dispatch)} {...bindActionCreators(taskActions, dispatch)} {...bindActionCreators(socketActions, dispatch)}/>;
   }
 }

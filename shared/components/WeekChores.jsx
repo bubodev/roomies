@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import LoadingScreen from './LoadingScreen';
-import * as taskActions from '../actions/TaskActions';
 
 export default class WeekChores extends Component {
   debug() {
@@ -14,7 +13,12 @@ export default class WeekChores extends Component {
   handleClick(id) {
     const homeId = this.props.home.home._id
     let completedTime = new Date();
-    this.props.completeTask(homeId, id, completedTime);
+    this.props.completeTask(homeId, id, completedTime)
+    .then(status => {
+      if(status.type === "COMPLETE_TASK_SUCCESS") {
+        this.props.emitChange(this.props.socket, homeId);
+      }
+    })
   }
 
   render() {

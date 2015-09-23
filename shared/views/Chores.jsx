@@ -34,7 +34,6 @@ class Chores extends Component {
     if(!this.props.homeId){
       this.context.router.transitionTo('/home/dashboard');
     }
-    this.props.homeId && this.props.getTasks(this.props.homeId);
   }
 
   render() {

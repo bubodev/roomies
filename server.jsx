@@ -34,8 +34,8 @@ io.on('connection', function(socket){
     console.log(msg);
   });
 
-  socket.on('task change', function() {
-    io.to(room).emit()
+  socket.on('change tasks', function(homeId) {
+    io.to(room).emit('refresh tasks', homeId)
   })
 
 });

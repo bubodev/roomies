@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as taskActions from '../actions/TaskActions';
+import * as socketActions from '../actions/SocketActions';
 
 import RadioButtons from './RadioButtons';
 import { colors } from './styles'
@@ -52,14 +53,22 @@ class NewTaskForm extends Component {
       return;
     }
 
-    this.props.createTask({
+    let taskParams = {
       name: this.state.name,
       description: this.state.description,
       startDate: this.state.startDate,
       endDate: this.state.endDate,
       _homeId: this.props.homeId,
       frequency: freqMap[this.state.frequency] * this.state.number,
-    });
+    }
+
+    this.props.createTask(taskParams)
+      .then(status => {
+        if(status.type === 'CREATE_TASK_SUCCESS') {
+          this.props.emitChange(this.props.socket, this.props.homeId)
+        }
+      })
+
 
     this.setState(defaultState);
     this.props.closeModal();
@@ -176,7 +185,8 @@ const styles = {
 }
 
 @connect(state => ({
-  tasks: state.tasks
+  tasks: state.tasks,
+  socket: state.io.socket
 }))
 
 export default
@@ -185,11 +195,12 @@ class NewTaskFormContainer {
     show: PropTypes.bool,
     rendered: PropTypes.string,
     homeId: PropTypes.string,
+    socket: PropTypes.object,
     closeModal: PropTypes.func.isRequired
   }
 
   render() {
-    const { show, rendered, dispatch, homeId, closeModal } = this.props;
-    return <NewTaskForm closeModal={closeModal} rendered={rendered} show={show} homeId={homeId} {...bindActionCreators(taskActions, dispatch)} />;
+    const { show, socket, rendered, dispatch, homeId, closeModal } = this.props;
+    return <NewTaskForm socket={socket} closeModal={closeModal} rendered={rendered} show={show} homeId={homeId} {...bindActionCreators(taskActions, dispatch)} {...bindActionCreators(socketActions, dispatch)}/>;
   }
 }

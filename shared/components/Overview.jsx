@@ -4,6 +4,7 @@ import WeekChores from './WeekChores';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as taskActions from '../actions/TaskActions';
+import * as socketActions from '../actions/SocketActions';
 
 class Overview extends Component {
   render() {
@@ -18,6 +19,7 @@ class Overview extends Component {
 @connect(state => ({
   tasks: state.tasks.get('collection'),
   home: state.home,
+  socket: state.io.socket,
   userId: state.auth.user._id,
 }))
 
@@ -27,11 +29,12 @@ class OverviewContainer {
     tasks: PropTypes.object,
     home: PropTypes.object,
     userId: PropTypes.string,
+    socket: PropTypes.object,
     dispatch: PropTypes.func.isRequired
   }
 
   render() {
-    const { home, tasks, userId, dispatch } = this.props;
-    return <Overview tasks={tasks} userId={userId} home={home} {...bindActionCreators(taskActions, dispatch)} />;
+    const { home, socket, tasks, userId, dispatch } = this.props;
+    return <Overview socket={socket} tasks={tasks} userId={userId} home={home} {...bindActionCreators(taskActions, dispatch)} {...bindActionCreators(socketActions, dispatch)} />;
   }
 }
