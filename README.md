@@ -28,6 +28,7 @@
 ###Misc
 - [Immutable.js](https://facebook.github.io/immutable-js/) for data structures
 - [React Router](https://github.com/rackt/react-router) for routing
+- [socket io](http://socket.io/) for websocket integration.
 
 ###To run
 You **will** need to configure with google oauth keys, or change/add passport strategies as you see fit.
