@@ -13,7 +13,32 @@ import * as reducers                              from 'reducers';
 import passport                                   from './server/passport';
 import { MONGO_URI }                              from './server/secrets';
 
+const socketIo = require( "socket.io" );
 const app = express();
+const io = socketIo();
+
+app.io = io;
+
+io.on('connection', function(socket){
+
+  var room = socket.handshake['query']['r_var'];
+
+  socket.join(room);
+
+  socket.on('disconnect', function() {
+    socket.leave(room)
+  });
+
+  socket.on('chat message', function(msg){
+    io.to(room).emit('chat message', msg);
+    console.log(msg);
+  });
+
+  socket.on('task change', function() {
+    io.to(room).emit()
+  })
+
+});
 
 import fs from 'fs';
 /** UNCOMMENT FOR DIST BUILD **/
@@ -88,6 +113,7 @@ app.use((req, res) => {
           <script type="application/javascript">
             window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
           </script>
+          <script src="/socket.io/socket.io.js"></script>
         </head>
         <body>
           <div id="react-view">${componentHTML}</div>
@@ -101,6 +127,7 @@ app.use((req, res) => {
             ga('create', 'UA-67725615-1', 'auto');
             ga('send', 'pageview');
           </script>
+          
         </body>
       </html>
     `

@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import * as authActions from '../actions/AuthActions';
 import * as taskActions from '../actions/TaskActions';
 import * as homeActions from '../actions/HomeActions';
+import * as socketActions from '../actions/SocketActions';
+
 
 import SideBar from '../components/SideBar';  
 import LoadingScreen from '../components/LoadingScreen';  
@@ -12,6 +14,8 @@ import LoadingScreen from '../components/LoadingScreen';
 import Dashboard from './Dashboard';
 import Footer from '../components/Footer';
 import cookie from 'react-cookie';
+
+import { socketConnect } from '../utils/socket';
 
 if (process.env.BROWSER) {
   require("./styles/main.css");
@@ -32,8 +36,9 @@ class Home extends Component {
           if(status.type === "GET_USER_SUCCESS"){
             let homeId = status.res.data.homeId;
             if(homeId){
-              that.props.getHome(homeId)
-              that.props.getTasks(homeId)
+              that.props.setSocket(homeId);
+              that.props.getHome(homeId);
+              that.props.getTasks(homeId);
             }
           }
         })
@@ -77,6 +82,7 @@ class Home extends Component {
           {this.props.children || <Dashboard/>}
         </div>
         <div style={footerStyle} className="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
+          <button onClick={::this.debug} style={{zIndex:111111}}/>
           <Footer />
         </div>
       </div>
@@ -105,6 +111,7 @@ const footerStyle = {
   auth: state.auth,
   tasks: state.tasks,
   home: state.home,
+  io: state.io,
 }))
 
 export default 
@@ -113,11 +120,12 @@ class HomeContainer {
     auth: PropTypes.object,
     tasks: PropTypes.object,
     home: PropTypes.object,
+    io: PropTypes.object,
     dispatch: PropTypes.func.isRequired
   }
 
   render() {
-    const { auth, home, tasks, children, dispatch } = this.props;
-    return <Home auth={auth} tasks={tasks} home={home} children={children} {...bindActionCreators(authActions, dispatch)} {...bindActionCreators(homeActions, dispatch)}{...bindActionCreators(taskActions, dispatch)}/>;
+    const { auth, home, tasks, io, children, dispatch } = this.props;
+    return <Home auth={auth} io={io} tasks={tasks} home={home} children={children} {...bindActionCreators(authActions, dispatch)} {...bindActionCreators(homeActions, dispatch)} {...bindActionCreators(taskActions, dispatch)} {...bindActionCreators(socketActions, dispatch)}/>;
   }
 }
