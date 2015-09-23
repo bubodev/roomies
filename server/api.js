@@ -94,6 +94,8 @@ router.put('/tasks/:id', function(req, res) {
             let newIdx = (oldIdx + 1) % users.length;
 
             task.currentUser = users[newIdx];
+            task.lastCompleted = req.body.completedTime;
+            console.log(req.body.completedTime);
             task.save(function(err) {
               if(err) {
                 res.status(400).send("error saving")
@@ -112,6 +114,7 @@ router.put('/tasks/:id', function(req, res) {
 // createTask()
 router.post('/tasks', function(req, res) {
   let newTask = new Task(req.body.taskParams);
+  newTask.lastCompleted = null;
   let homeId = req.body.taskParams._homeId;
 
   Home.findById(homeId, function(err, home) {

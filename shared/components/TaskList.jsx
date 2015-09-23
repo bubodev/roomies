@@ -21,13 +21,25 @@ export default class TaskList extends React.Component {
           }
         })
 
+        let completeBy, lastCompleted;
+
+        if(task.lastCompleted) {
+          completeBy = new Date(task.lastCompleted);
+          lastCompleted = task.lastCompleted.replace(/T/, ' ').replace(/\..+/, '').slice(0,10)
+        } else {
+          completeBy = new Date(task.startDate);
+          lastCompleted = "never"
+        }
+        completeBy.setDate(completeBy.getDate() + task.frequency);
+
+
         return (
           <tr key={task._id}>
             <td>{ task.name }</td>
             <td>{ task.description.join(', ') }</td>
-            <td>{ task.frequency } days</td>
             <td>{ name }</td>
-            <td> tbd </td>
+            <td>{ lastCompleted }</td>
+            <td>{ completeBy.toJSON().slice(0,10) } </td>
           </tr>
         )
       })
@@ -41,9 +53,9 @@ export default class TaskList extends React.Component {
           <tr>
             <th>Chore</th>
             <th>Description</th>
-            <th>Frequency</th>
             <th>Assigned to</th>
-            <th>Finish by</th>
+            <th>Last Completed</th>
+            <th>Due by</th>
           </tr>
           {tableItems}
           </tbody>

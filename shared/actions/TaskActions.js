@@ -18,11 +18,12 @@ export function createTask(taskParams) {
   }
 }
 
-export function completeTask(homeId, taskId) {
+export function completeTask(homeId, taskId, completedTime) {
   return {
     types: ['COMPLETE_TASK', 'COMPLETE_TASK_SUCCESS', 'COMPLETE_TASK_FAILURE'],
     promise: request.put(BACKEND_URL + '/' + taskId, {
-      homeId: homeId
+      homeId: homeId,
+      completedTime: completedTime.toDateString(),
     })
   }
 }

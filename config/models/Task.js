@@ -7,6 +7,7 @@ let taskSchema = new Schema({
   startDate: Date,
   endDate: Date,
   frequency: Number,
+  lastCompleted: Date,
   currentUser: Schema.ObjectId,
   _homeId: Schema.ObjectId
 });

@@ -13,7 +13,8 @@ export default class WeekChores extends Component {
 
   handleClick(id) {
     const homeId = this.props.home.home._id
-    this.props.completeTask(homeId, id);
+    let completedTime = new Date();
+    this.props.completeTask(homeId, id, completedTime);
   }
 
   render() {
@@ -26,7 +27,17 @@ export default class WeekChores extends Component {
       })
 
       assignedTasks = assignedTasks.map((task) => {
+        let completeBy;
+
+        if(task.lastCompleted) {
+          completeBy = new Date(task.lastCompleted);
+        } else {
+          completeBy = new Date(task.startDate);
+        }
+        completeBy.setDate(completeBy.getDate() + task.frequency);
+        
         let id = task._id
+
         return (
           <div key={task._id} style={styles.taskItem}>
             <div>
@@ -34,6 +45,9 @@ export default class WeekChores extends Component {
               <label>description</label>
               <br/>
                 {task.description.join(', ')}
+              <br/>
+              <label>Complete by: &nbsp;</label>
+                { completeBy.toJSON().slice(0,10) }
               <br/>
               <button onClick={this.handleClick.bind(this, id)} className="btn btn-sm btn-primary">mark as completed</button>
             </div> 

@@ -69,8 +69,19 @@ class SideBar extends Component {
     let loading;
     let { authLoading, homeLoading, taskLoading } = this.props;
     
-    if(authLoading || homeLoading) {
-      loading = <span className="fa fa-3x fa-spin fa-spinner"/>
+    if(authLoading || homeLoading || taskLoading) {
+      let authMessage = ""
+      let homeMessage = ""
+      let taskMessage = ""
+
+      if(authLoading)
+        authMessage = "User is loading...";
+      if(taskLoading)
+        taskMessage = "Tasks are loading...";
+
+      loading = (
+        <span className="fa fa-3x fa-spin fa-spinner" />
+      )
     }
 
     return (
