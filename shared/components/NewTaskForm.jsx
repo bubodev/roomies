@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+
 import * as taskActions from '../actions/TaskActions';
 import * as socketActions from '../actions/SocketActions';
 
@@ -185,7 +186,6 @@ const styles = {
 }
 
 @connect(state => ({
-  tasks: state.tasks,
   socket: state.io.socket
 }))
 
@@ -200,7 +200,7 @@ class NewTaskFormContainer {
   }
 
   render() {
-    const { show, socket, rendered, dispatch, homeId, closeModal } = this.props;
-    return <NewTaskForm socket={socket} closeModal={closeModal} rendered={rendered} show={show} homeId={homeId} {...bindActionCreators(taskActions, dispatch)} {...bindActionCreators(socketActions, dispatch)}/>;
+    let { dispatch } = this.props;
+    return <NewTaskForm {...this.props} {...bindActionCreators(taskActions, dispatch)} {...bindActionCreators(socketActions, dispatch)}/>;
   }
 }

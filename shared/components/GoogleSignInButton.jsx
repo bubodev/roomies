@@ -60,20 +60,17 @@ var styles = {
   }
 }
 
-@connect(state => ({
-  auth: state.auth,
-}))
+@connect(state => ({}))
 
 export default 
 class SearchFormContainer {
   static propTypes = {
-    auth: PropTypes.object,
     dispatch: PropTypes.func.isRequired
   }
 
   render() {
-    const { auth, dispatch } = this.props;
-    return <SignInButton auth={auth} {...bindActionCreators(authActions, dispatch)} />;
+    const { dispatch } = this.props;
+    return <SignInButton {...bindActionCreators(authActions, dispatch)} />;
   }
 }
 
