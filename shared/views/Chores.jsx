@@ -43,11 +43,13 @@ class Chores extends Component {
           Chores
         </div>
         <div key='chores' className="mainContent">
-          <button onClick={::this.toggleForm} className="btn btn-primary btn-sm">
-            <span className="fa fa-plus"/> new chore
-          </button>
-          <div style={styles.taskListContainer}>
-            <TaskList users={this.props.users} tasks={this.props.tasks} />
+          <div className="base-container scroll">
+            <button onClick={::this.toggleForm} className="btn btn-primary btn-sm">
+              <span className="fa fa-plus"/> new chore
+            </button>
+            <div style={styles.taskListContainer}>
+              <TaskList users={this.props.users} tasks={this.props.tasks} />
+            </div>
           </div>
         </div>
         <Modal color="rgba(0, 0, 0, 0.9)" show={this.state.showForm} close={::this.toggleForm}>

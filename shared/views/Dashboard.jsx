@@ -77,7 +77,11 @@ class Dashboard extends Component {
           Dashboard 
         </div>
         <div className="mainContent">
-          { comp }
+          <div className="col-sm-12 base-container">
+            <div className="scroll">
+              { comp }
+            </div>
+          </div>
         </div>
       </div>
     )

@@ -46,11 +46,18 @@ class NewTaskForm extends Component {
       errors.push('Must input a start date!');
     if(!this.state.endDate)
       errors.push('Must input an end date!')
+    if((new Date(this.state.startDate)) > (new Date(this.state.endDate)))
+      errors.push("Start date must be before end date!")
 
     if(errors.length){
       this.setState({
         errors: errors
       })
+
+      let that = this;
+      setTimeout(function() {
+        that.setState(defaultState);
+      }, 3000)
       return;
     }
 
