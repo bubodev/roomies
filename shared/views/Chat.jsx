@@ -81,11 +81,9 @@ class Chat extends Component {
         </div>
         <div className="mainContent">
           <div style={{paddingBottom: 140}}className="col-md-8 col-md-offset-2 col-lg-10 col-lg-offset-1 base-container">
-
-              <ul ref="chatBox" className="scroll list-group">
-                {chatMessages}
-              </ul>
-
+            <ul ref="chatBox" className="scroll list-group">
+              {chatMessages}
+            </ul>
           </div>
           <div style={styles.pushBottom}>
             <form>
