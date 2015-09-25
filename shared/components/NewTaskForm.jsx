@@ -193,7 +193,7 @@ const styles = {
 }
 
 @connect(state => ({
-  socket: state.io.socket
+  socket: state.io.get('socket')
 }))
 
 export default

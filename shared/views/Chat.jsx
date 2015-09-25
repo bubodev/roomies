@@ -10,11 +10,24 @@ class Chat extends Component {
     super(props, context);
   }
 
+  scrollBottom() {
+    let chatBox = React.findDOMNode(this.refs.chatBox)
+    chatBox.scrollTop = chatBox.scrollHeight
+  }
+
   handleClick(e) {
     e.preventDefault()
     let message = React.findDOMNode(this.refs.message);
     this.props.sendChat(this.props.socket, this.props.homeId, this.props.userName, message.value)
     message.value = "";
+  }
+
+  componentDidMount() {
+    this.scrollBottom();
+  }
+
+  componentDidUpdate() {
+    this.scrollBottom();
   }
 
   render() {
@@ -67,12 +80,12 @@ class Chat extends Component {
           Chat
         </div>
         <div className="mainContent">
-          <div className="col-md-8 col-md-offset-2 col-lg-10 col-lg-offset-1 base-container">
-            <div className="base-container scroll">
-              <ul className="list-group">
+          <div style={{paddingBottom: 140}}className="col-md-8 col-md-offset-2 col-lg-10 col-lg-offset-1 base-container">
+
+              <ul ref="chatBox" className="scroll list-group">
                 {chatMessages}
               </ul>
-            </div>
+
           </div>
           <div style={styles.pushBottom}>
             <form>
@@ -81,7 +94,7 @@ class Chat extends Component {
             </form>
           </div>
         </div>
-      </div>
+      </div>  
     )
   }
 }
