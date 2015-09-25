@@ -1,6 +1,6 @@
 var io = require('socket.io-client');
 import { getTasks } from '../actions/TaskActions';
-import { receiveChat } from '../actions/TaskActions';
+import { receiveChat } from '../actions/SocketActions';
 
 export function socketConnect (room, dispatch) {
   var socket = io('rooomies.herokuapp.com', {
@@ -11,7 +11,7 @@ export function socketConnect (room, dispatch) {
 
   //future chat?
   socket.on('chat message', function(m) {
-    dispatch(receiveChatMessage(m))
+    dispatch(receiveChat(m))
   })
 
   //need to refresh tasks

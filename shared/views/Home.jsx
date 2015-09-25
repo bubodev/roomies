@@ -110,7 +110,6 @@ const footerStyle = {
   auth: state.auth,
   tasks: state.tasks,
   home: state.home,
-  io: state.io,
 }))
 
 export default 
@@ -119,12 +118,11 @@ class HomeContainer {
     auth: PropTypes.object,
     tasks: PropTypes.object,
     home: PropTypes.object,
-    io: PropTypes.object,
     dispatch: PropTypes.func.isRequired
   }
 
   render() {
     const { auth, home, tasks, io, children, dispatch } = this.props;
-    return <Home auth={auth} io={io} tasks={tasks} home={home} dispatch={dispatch} children={children} {...bindActionCreators(authActions, dispatch)} {...bindActionCreators(homeActions, dispatch)} {...bindActionCreators(taskActions, dispatch)} {...bindActionCreators(socketActions, dispatch)}/>;
+    return <Home auth={auth} tasks={tasks} home={home} dispatch={dispatch} children={children} {...bindActionCreators(authActions, dispatch)} {...bindActionCreators(homeActions, dispatch)} {...bindActionCreators(taskActions, dispatch)} {...bindActionCreators(socketActions, dispatch)}/>;
   }
 }

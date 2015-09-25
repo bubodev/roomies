@@ -26,3 +26,10 @@ export function sendChat(socket, homeId, name, message) {
     socket: socket
   }
 }
+
+export function receiveChat(message) {
+  return {
+    type: 'RECEIVE_CHAT_MESSAGE',
+    message: message
+  }
+}

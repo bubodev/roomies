@@ -19,7 +19,7 @@ class Overview extends Component {
 @connect(state => ({
   tasks: state.tasks.get('collection'),
   home: state.home,
-  socket: state.io.socket,
+  socket: state.io.get('socket'),
   userId: state.auth.user._id,
 }))
 

@@ -186,7 +186,7 @@ const styles = {
 
 @connect(state => ({
   tasks: state.tasks,
-  socket: state.io.socket
+  socket: state.io.get('socket')
 }))
 
 export default

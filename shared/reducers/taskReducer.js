@@ -9,7 +9,6 @@ const options = {
 let defaultState = new Immutable.Map(options);
 
 export default function taskReducer(state = defaultState, action) {
-  console.log(action.type);
   let collection = state.get('collection');
   switch(action.type) {
     case 'GET_TASKS':
