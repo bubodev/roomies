@@ -5,6 +5,9 @@ import cookie from 'react-cookie';
 
 import * as HomeActions from '../actions/HomeActions';
 import * as AuthActions from '../actions/AuthActions';
+import * as TaskActions from '../actions/TaskActions';
+import * as SocketActions from '../actions/SocketActions';
+
 
 class FindNewHome extends Component {
   constructor(props) {
@@ -24,10 +27,16 @@ class FindNewHome extends Component {
     e.preventDefault();
 
     let userId = cookie.load('userId').slice(3,-1);
-
-    this.props.addUserToHome(this.refs.houseCode.getDOMNode().value, userId).then(res => {
-      if(!res.err)
-        this.props.loadUser(userId);
+    let that = this;
+    this.props.addUserToHome(this.refs.houseCode.getDOMNode().value, userId).then(homeRes => {
+      let homeId = homeRes.res.data._id;
+      if(!homeRes.err)
+        that.props.loadUser(userId).then(res => {
+          if(res.type === 'GET_USER_SUCCESS')
+            that.props.setSocket(homeId, that.props.dispatch);
+            that.props.getHome(homeId);
+            that.props.getTasks(homeId);
+        })
     })
   }
 
@@ -39,10 +48,17 @@ class FindNewHome extends Component {
     }
 
     let userId = cookie.load('userId').slice(3,-1);
-
-    this.props.createHome(homeParams, userId).then(res => {
-      if(!res.err)
-        this.props.loadUser(userId);
+    let that = this;
+    this.props.createHome(homeParams, userId).then(homeRes => {
+      let homeId = homeRes.res.data._id;
+      debugger;
+      if(!homeRes.err)
+        that.props.loadUser(userId).then(res => {
+          if(res.type === 'GET_USER_SUCCESS')
+            that.props.setSocket(homeId, that.props.dispatch);
+            that.props.getHome(homeId);
+            that.props.getTasks(homeId);
+        })
     });
   }
 
@@ -142,6 +158,6 @@ export default class FindNewHomeContainer {
 
   render() {
     const { home, dispatch } = this.props;
-    return <FindNewHome home={home} {...bindActionCreators(AuthActions, dispatch)} {...bindActionCreators(HomeActions, dispatch)}/>
+    return <FindNewHome home={home} dispatch={dispatch} {...bindActionCreators(AuthActions, dispatch)} {...bindActionCreators(SocketActions, dispatch)} {...bindActionCreators(TaskActions, dispatch)} {...bindActionCreators(HomeActions, dispatch)}/>
   }
 }
