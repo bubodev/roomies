@@ -19,6 +19,8 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
+    if(this.props.socket)
+      return;
     if(this.props.auth && this.props.auth.user) {
       this.props.auth.user.homeId && this.props.getHome(this.props.auth.user.homeId);
     }
@@ -77,7 +79,11 @@ class Dashboard extends Component {
           Dashboard 
         </div>
         <div className="mainContent">
-          { comp }
+          <div className="col-sm-12 base-container">
+            <div className="scroll">
+              { comp }
+            </div>
+          </div>
         </div>
       </div>
     )
@@ -95,18 +101,20 @@ const styles = {
 
 @connect(state => ({
   auth: state.auth,
-  home: state.home
+  home: state.home,
+  socket: state.io.socket
 }))
 
 export default class DashboardContainer {
   static propTypes = {
     auth: PropTypes.object,
     home: PropTypes.object,
+    socket: PropTypes.object,
     dispatch: PropTypes.func.isRequired
   }
 
   render() {
-    const { auth, home, dispatch } = this.props;
-    return <Dashboard auth={auth} home={home} {...bindActionCreators(homeActions, dispatch)} {...bindActionCreators(taskActions, dispatch)}/>;
+    const { auth, home, socket, dispatch } = this.props;
+    return <Dashboard auth={auth} home={home} socket={socket} {...bindActionCreators(homeActions, dispatch)} {...bindActionCreators(taskActions, dispatch)}/>;
   }
 }

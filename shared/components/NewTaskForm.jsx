@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+
 import * as taskActions from '../actions/TaskActions';
 import * as socketActions from '../actions/SocketActions';
 
@@ -45,11 +46,18 @@ class NewTaskForm extends Component {
       errors.push('Must input a start date!');
     if(!this.state.endDate)
       errors.push('Must input an end date!')
+    if((new Date(this.state.startDate)) > (new Date(this.state.endDate)))
+      errors.push("Start date must be before end date!")
 
     if(errors.length){
       this.setState({
         errors: errors
       })
+
+      let that = this;
+      setTimeout(function() {
+        that.setState(defaultState);
+      }, 3000)
       return;
     }
 
@@ -185,8 +193,7 @@ const styles = {
 }
 
 @connect(state => ({
-  tasks: state.tasks,
-  socket: state.io.get('socket')
+  socket: state.io.socket
 }))
 
 export default
@@ -200,7 +207,7 @@ class NewTaskFormContainer {
   }
 
   render() {
-    const { show, socket, rendered, dispatch, homeId, closeModal } = this.props;
-    return <NewTaskForm socket={socket} closeModal={closeModal} rendered={rendered} show={show} homeId={homeId} {...bindActionCreators(taskActions, dispatch)} {...bindActionCreators(socketActions, dispatch)}/>;
+    let { dispatch } = this.props;
+    return <NewTaskForm {...this.props} {...bindActionCreators(taskActions, dispatch)} {...bindActionCreators(socketActions, dispatch)}/>;
   }
 }

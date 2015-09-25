@@ -28,9 +28,13 @@ class Home extends Component {
   }
 
   componentDidMount() {
+    console.log("mounted");
+    if(this.props.io && this.props.io.socket)
+      return;
+
     let userId = cookie.load('userId')
-    let that = this;
     if(userId){
+      let that = this;
       this.props.loadUser(userId.slice(3,-1))
         .then(function(status) {
           if(status.type === "GET_USER_SUCCESS"){

@@ -68,14 +68,10 @@ class Chat extends Component {
         </div>
         <div className="mainContent">
           <div className="col-md-8 col-md-offset-2 col-lg-10 col-lg-offset-1 base-container">
-            <div className="fixed">
-              <div className="scroll">
-                <br/>
-                <ul className="list-group">
-                  {chatMessages}
-                </ul>
-              
-              </div>
+            <div className="base-container scroll">
+              <ul className="list-group">
+                {chatMessages}
+              </ul>
             </div>
           </div>
           <div style={styles.pushBottom}>
@@ -92,8 +88,8 @@ class Chat extends Component {
 
 const styles = {
   pushBottom: {
-    position: 'absolute',
-    width: '100%',
+    position: 'fixed',
+    bottom: 65,
     paddingLeft: '5%',
     paddingRight: '10%'
   },

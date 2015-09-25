@@ -16,9 +16,24 @@
   padding-right: 13px;
 }
 
+.base-container {
+  height: 100vh;
+  padding-top: 65px;
+  padding-bottom: 65px;
+}
+
+.scroll {
+  overflow-y: scroll;
+  height: 100%;
+}
+
+.static {
+  overflow-y: none;
+  height: 100%;
+}
+
 .mainContent {
   text-align: center;
-  padding-top: 65px;
 }
 
 @media screen and (max-width: 767px) {
@@ -29,7 +44,7 @@
     font-size: .7em
   }
 
-  .mainContent {
-    padding-top: 130px !important;
+  .base-container{
+    padding-top: 110px !important;
   }
 }

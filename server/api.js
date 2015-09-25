@@ -41,7 +41,6 @@ router.delete('/users', function(req, res) {
   }
 
   let id = req.user._id;
-  console.log(id);
   
   User.findByIdAndRemove(id, function(err) {
     if(err) {
@@ -95,7 +94,6 @@ router.put('/tasks/:id', function(req, res) {
 
             task.currentUser = users[newIdx];
             task.lastCompleted = req.body.completedTime;
-            console.log(req.body.completedTime);
             task.save(function(err) {
               if(err) {
                 res.status(400).send("error saving")

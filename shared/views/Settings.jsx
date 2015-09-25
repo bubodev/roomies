@@ -53,8 +53,12 @@ class Settings extends Component {
           Settings
         </div> 
         <div className="mainContent">
-          {err} 
-          <UserInfoForm hasHome={hasHome} removeUser={::this.removeUser} deleteUser={::this.deleteUser}/>
+          <div className="base-container">
+            <div className="static">
+              {err} 
+              <UserInfoForm hasHome={hasHome} removeUser={::this.removeUser} deleteUser={::this.deleteUser}/>   
+            </div>
+          </div>
         </div>
       </div>
     )

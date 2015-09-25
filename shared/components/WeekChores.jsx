@@ -43,7 +43,7 @@ export default class WeekChores extends Component {
         let id = task._id
 
         return (
-          <div key={task._id} style={styles.taskItem}>
+          <div key={task._id} className="col-md-3 col-sm-4 col-lg-2" style={styles.taskItem}>
             <div>
               <h4> {task.name} </h4>
               <label>description</label>
@@ -64,7 +64,7 @@ export default class WeekChores extends Component {
       <div>
         Your assigned chores...
         <br/>
-        <div style={styles.listContainer} className="col-sm-8 col-sm-offset-2">
+        <div style={styles.listContainer} className="row">
           <div>
           { assignedTasks }
           </div>
