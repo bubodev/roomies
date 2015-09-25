@@ -54,6 +54,7 @@ class SideBar extends Component {
         <div className="relative">
           <SideBarItem closeSideBar={::this.toggleSideBar} label="Dashboard" route="/home/dashboard" faGlyph="tachometer" currentRoute={currentRoute} />
           <SideBarItem closeSideBar={::this.toggleSideBar} label="Chores" route="/home/chores" faGlyph="tasks" currentRoute={currentRoute} />
+          <SideBarItem closeSideBar={::this.toggleSideBar} label="Chat" route="/home/chat" faGlyph="comment" currentRoute={currentRoute} />
           <div style={disabled}>
             <SideBarItem closeSideBar={::this.toggleSideBar} label="Finances" route="/home/finances" faGlyph="money" currentRoute={currentRoute} />
             <span style={comingSoon} className="label label-primary">Coming soon!</span>
@@ -70,15 +71,6 @@ class SideBar extends Component {
     let { authLoading, homeLoading, taskLoading } = this.props;
     
     if(authLoading || homeLoading || taskLoading) {
-      let authMessage = ""
-      let homeMessage = ""
-      let taskMessage = ""
-
-      if(authLoading)
-        authMessage = "User is loading...";
-      if(taskLoading)
-        taskMessage = "Tasks are loading...";
-
       loading = (
         <span className="fa fa-3x fa-spin fa-spinner" />
       )

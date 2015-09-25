@@ -17,3 +17,12 @@ export function emitChange(socket, homeId) {
     socket: socket
   }
 }
+
+export function sendChat(socket, homeId, name, message) {
+  socket.emit('chat message', [name, message])
+
+  return {
+    type: 'SEND_CHAT',
+    socket: socket
+  }
+}

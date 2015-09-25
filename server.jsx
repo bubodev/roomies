@@ -31,7 +31,6 @@ io.on('connection', function(socket){
 
   socket.on('chat message', function(msg){
     io.to(room).emit('chat message', msg);
-    console.log(msg);
   });
 
   socket.on('change tasks', function(homeId) {
