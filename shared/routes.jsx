@@ -12,7 +12,7 @@ import Settings from './views/Settings';
 import ShoppingList from './views/ShoppingList';
 
 export default (
-  <Route name="app" component={App}>
+  <Route path="/" name="app" component={App}>
     <Route path="login" component={Login} />
     <Route path="about" component={About} />
     <Route path="home" component={Home} onEnter={checkAuth}>
@@ -23,7 +23,6 @@ export default (
       <Route path="settings" component={Settings} />
       <Route path="shopping" component={ShoppingList} />
     </Route>
-    <Redirect from="/" to="home/dashboard"/>
   </Route>
 )
 
