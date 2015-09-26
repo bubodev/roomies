@@ -102,7 +102,7 @@ const styles = {
 @connect(state => ({
   auth: state.auth,
   home: state.home,
-  socket: state.io.socket
+  socket: state.io.get('socket')
 }))
 
 export default class DashboardContainer {
