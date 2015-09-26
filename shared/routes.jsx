@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, IndexRoute } from 'react-router';
+import { Route, Redirect } from 'react-router';
 import App from 'views';
 import Login from './views/Login';
 import Home from './views/Home';
@@ -12,7 +12,7 @@ import Settings from './views/Settings';
 import ShoppingList from './views/ShoppingList';
 
 export default (
-  <Route name="app" component={App} path="/">
+  <Route name="app" component={App}>
     <Route path="login" component={Login} />
     <Route path="about" component={About} />
     <Route path="home" component={Home} onEnter={checkAuth}>
@@ -23,6 +23,7 @@ export default (
       <Route path="settings" component={Settings} />
       <Route path="shopping" component={ShoppingList} />
     </Route>
+    <Redirect from="/" to="home/dashboard"/>
   </Route>
 )
 
