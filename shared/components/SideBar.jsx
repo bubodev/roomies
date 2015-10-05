@@ -16,7 +16,14 @@ class SideBar extends Component {
     super(props, context);
     this.state = {
       sideBarShow: 'sideBarHide',
+      showHomeId: false,
     }
+  }
+
+  toggleShowHomeId() {
+    this.setState({
+      showHomeId: !this.state.showHomeId
+    })
   }
 
   toggleSideBar() {
@@ -76,6 +83,13 @@ class SideBar extends Component {
       )
     }
 
+    let homeId
+    if(this.state.showHomeId) {
+      homeId = this.props.user.homeId;
+    } else {
+      homeId = 'show share id';
+    }
+
     return (
       <Spring defaultValue={{left: {val: -400}}} endValue={{left: {val: 0, config: [60, 14]}}}>
         {t => {
@@ -91,6 +105,9 @@ class SideBar extends Component {
                     <span className="fa fa-5x icon-border fa-user" />
                     <div className="caption">
                       <h4> {this.props.user.name} </h4>
+                      <small style={{textDecoration: 'underline'}} onClick={::this.toggleShowHomeId}> 
+                        {homeId}
+                      </small>
                     </div>
                   </div>
                   <br />
